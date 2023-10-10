@@ -1,0 +1,87 @@
+{% load static %}
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+        <a href="{% url 'landing' %}" class="logo d-flex align-items-center">
+            <img src="{% static 'assets/landing/images/p1.png' %}" alt="DevStack Logo">
+        </a>
+
+        <nav id="navbar" class="navbar">
+            {% if request.path == '/' %}
+                <ul>
+{#                    <li>#}
+{#                        <a class="nav-link scrollto active custom-nav-item" href="/"#}
+{#                           style="color: #060606">Home</a>#}
+{#                    </li>#}
+                    <li><a class="nav-link scrollto custom-nav-item" href="#services" style="color: #060606">Stack Forum</a>
+                    </li>
+                    <!-- <li><a class="nav-link scrollto custom-nav-item" target="_blank"
+                           href="https://www.plumarschool.com/"
+                           style="color: #060606">Plumar School</a>
+                    </li> -->
+                    <li><a class="rounded-pill getstarted scrollto" href="{% url 'home' %}"
+                           style="background-color: #060606">Talents</a></li>
+                    <li><a class="rounded-pill getstarted scrollto" href="#contact-us"
+                           style="background-color: #060606">Company</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            {% else %}
+                <ul>
+                    {% if request.path == '/' %}
+                        <a class="nav-link scrollto active custom-nav-item" href="/"
+                           style="color: #106f47">Home</a>
+                    {% else %}
+                        <a class="nav-link scrollto active custom-nav-item" href="/"
+                           style="color: #060606">Home</a>
+                    {% endif %}
+
+                    {#                    {% if request.path == '/opportunities' or request.resolver_match.view_name == 'opp_details' %}#}
+                    {#                        <li><a class="nav-link scrollto custom-nav-item" href="{% url "opportunity" %}"#}
+                    {#                               style="color: #106f47">Opportunities</a>#}
+                    {#                        </li>#}
+                    {#                    {% else %}#}
+                    {#                        <li><a class="nav-link scrollto custom-nav-item" href="{% url "opportunity" %}"#}
+                    {#                               style="color: #060606">Opportunities</a>#}
+                    {#                        </li>#}
+                    {#                    {% endif %}#}
+                    {% if request.path == '/startups' or request.resolver_match.view_name == 'startup_details' %}
+                        <li><a class="nav-link scrollto custom-nav-item" href="{% url 'startups' %}"
+                               style="color: #106f47">Company</a>
+                        </li>
+                    {% else %}
+                        <li><a class="nav-link scrollto custom-nav-item" href="{% url 'startups' %}"
+                               style="color: #060606">Company</a>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <li>
+                            {% if request.user.profile.user_type == 'startup' %}
+                                <a class="rounded-pill getstarted scrollto" href="{% url 'dash' %}"
+                                   style="background-color: #060606">Dashboard</a>
+                            {% elif request.user.profile.user_type == 'talent' %}
+                                <a class="rounded-pill getstarted scrollto" href="{% url 'talent_dash' %}"
+                                   style="background-color: #060606">Dashboard</a>
+                            {% else %}
+                                <a class="rounded-pill getstarted scrollto" href="/admin/"
+                                   style="background-color: #060606">Dashboard</a>
+                            {% endif %}
+                        </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <li>
+                            <a class="rounded-pill getstarted scrollto" href="{% url 'logout' %}"
+                               style="background-color: #060606">Sign Out</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="rounded-pill getstarted scrollto" href="{% url 'login' %}"
+                               style="background-color: #060606">Sign In</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            {% endif %}
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->

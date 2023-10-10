@@ -1,0 +1,302 @@
+{% extends 'dash/main.html' %}
+
+{% load static %}
+
+{% block contents %}
+    <style>
+        details {
+            display: none;
+        }
+    </style>
+
+    <!-- Page-header end -->
+    <div class="pcoded-inner-content">
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-body start -->
+                <div class="page-body">
+                    <div class="row">
+                        <!--  sale analytics start -->
+                        <div class="col-xl-8 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Applicants Tracking </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                            <li><i class="fa fa-trash close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover m-b-0 without-header">
+                                            <tbody>
+                                            {% for data in match %}
+                                                {% if data.status != 'reviewing' %}
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-inline-block align-middle">
+                                                                <img src="{{ data.user.profile.image.url }}"
+                                                                     alt="user image"
+                                                                     class="img-radius img-40 align-top m-r-15">
+                                                                <div class="d-inline-block">
+                                                                    <h6>
+                                                                        {% if data.user.first_name and data.user.last_name %}
+                                                                            {{ data.user.first_name }}
+                                                                            {{ data.user.last_name }}
+                                                                            <i class="fa fa-check-circle text-success"></i>
+                                                                        {% else %}
+                                                                            {{ data.user.username }}
+                                                                        {% endif %}
+                                                                    </h6>
+                                                                    <p class="text-muted m-b-0">{{ data.talent.profession }}</p>
+                                                                    <p class="text-white m-b-0">
+                                                                    <span style="border-radius: 4px; padding: 1px"
+                                                                          class="badge-success">
+                                                                        {{ data.talent.profession_level.title }}
+                                                                    </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-left">
+                                                            {% if data.status == 'offergiven' %}
+                                                                <h6 class="f-w-700 text-center">Talents Status<i
+                                                                        class="fas fa-circle text-c-green m-l-10"></i>
+                                                                </h6>
+                                                            {% elif data.status == 'shortlisted' %}
+                                                                <h6 class="f-w-700 text-center">Talents Status<i
+                                                                        class="fas fa-circle text-c-yellow m-l-10"></i>
+                                                                </h6>
+                                                            {% elif data.status == 'interviewed' %}
+                                                                <h6 class="f-w-700 text-center">Talents Status<i
+                                                                        class="fas fa-circle text-c-yellow m-l-10"></i>
+                                                                </h6>
+                                                            {% elif data.status == 'rejected' %}
+                                                                <h6 class="f-w-700 text-center">Talents Status<i
+                                                                        class="fas fa-circle text-c-red m-l-10"></i>
+                                                                </h6>
+                                                            {% endif %}
+
+                                                            {% if data.status == 'offergiven' %}
+                                                                <div class="row bg-warning">
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-dark">Interviewed <i
+                                                                                class="fa fa-check text-success"></i></span>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-dark">Shortlisted <i
+                                                                                class="fa fa-check text-success"></i></span>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-dark">Offer Given <i
+                                                                                class="fa fa-check text-success"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            {% elif data.status == 'shortlisted' %}
+                                                                <div class="row bg-warning">
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-dark">Interviewed <i
+                                                                                class="fa fa-check text-success"></i></span>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-dark">Shortlisted <i
+                                                                                class="fa fa-check text-success"></i></span>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-muted">Offer Given <i
+                                                                                class=" text-muted"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            {% elif data.status == 'interviewed' %}
+                                                                <div class="row bg-warning">
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-dark">Interviewed <i
+                                                                                class="fa fa-check text-success"></i></span>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-muted">Shortlisted <i
+                                                                                class="ftext-muted"></i></span>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-muted">Offer Given <i
+                                                                                class=" text-muted"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            {% elif data.status == 'rejected' %}
+                                                                <div class="row bg-danger">
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-white">Interviewed <i
+                                                                                class=" text-white"></i></span>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-white">Shortlisted <i
+                                                                                class="ftext-white"></i></span>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <span class="text-white">Offer Given <i
+                                                                                class=" text-white"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <h6 class="f-w-700 text-center ">Action<i
+                                                                    class=" text-muted m-l-10"></i></h6>
+                                                            <div class="row bg-dark">
+                                                                <div class="col-md-12">
+                                                                    <span data-toggle="modal"
+                                                                          data-target="#ats{{ data.id }}"
+                                                                          class="fa fa-eye text-white"></span>
+                                                                </div>
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+
+                                                {% empty %}
+                                                <tr class="text-center font-weight-bold">
+                                                    <td colspan="12"> No Matches To Track Yet</td>
+                                                </tr>
+                                            {% endfor %}
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <nav aria-label="Page navigation example" class="ml-3">
+                                        {% if match.has_other_pages %}
+                                            <ul class="pagination">
+                                                {% if match.has_previous %}
+                                                    <li class="page-item">
+                                                        <a class="page-link text-dark"
+                                                           href="?page={{ match.previous_page_number }}"
+                                                           aria-label="Previous">
+                                                            <span aria-hidden="true">prev</span>
+                                                        </a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item disabled text-center"></li>
+                                                {% endif %}
+
+                                                {% for i in match.paginator.page_range %}
+                                                    {% if match.number == i %}
+                                                        <li class="page-item "><a class="page-link bg-warning text-dark"
+                                                                                  href="?page={{ i }}">{{ i }}</a></li>
+                                                    {% else %}
+                                                        <li class="page-item"><a class="page-link text-dark"
+                                                                                 href="?page={{ i }}">{{ i }}</a></li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if match.has_next %}
+                                                    <li class="page-item">
+                                                        <a class="page-link text-dark"
+                                                           href="?page={{ match.next_page_number }}" aria-label="Next">
+                                                            <span aria-hidden="true">Next</span>
+                                                        </a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item disabled text-center"></li>
+                                                {% endif %}
+                                            </ul>
+                                        {% endif %}
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-md-12">
+                            <div class="row">
+                                <!-- sale card start -->
+
+                                <div class="col-md-6">
+                                    <div class="card text-center order-visitor-card bg-warning">
+                                        <div class="card-block">
+                                            <h6 class="m-b-0 text-dark">Total Shortlisted</h6>
+                                            <h4 class="m-t-15 m-b-15 text-dark"><i
+                                                    class="fa fa-arrow-up m-r-15 text-dark font-weight-bold"></i>{{ shortlisted_number }}
+                                            </h4>
+                                            <p class="m-b-0 text-dark font-weight-bold">{{ shortlisted_pcnt }}% Of all
+                                                Matches</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card text-center order-visitor-card bg-dark">
+                                        <div class="card-block">
+                                            <h6 class="m-b-0 text-white">Total Interviewed</h6>
+                                            <h4 class="m-t-15 m-b-15 text-white font-weight-bold"><i
+                                                    class="fa fa-arrow-up m-r-15 text-white"></i>{{ interviewed_number }}
+                                            </h4>
+                                            <p class="m-b-0 text-white font-weight-bold">{{ interviewed_pcnt }}% Of all
+                                                matches</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-c-red total-card">
+                                        <div class="card-block">
+                                            <div class="text-left">
+                                                <h4 class=" font-weight-bold ">{{ rejected_number }}</h4>
+                                                <p class="m-0 font-weight-bold">Total Rejected</p>
+                                            </div>
+                                            <span class="label bg-c-red value-badges font-weight-bold">{{ rejected_pcnt }}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-c-green total-card">
+                                        <div class="card-block">
+                                            <div class="text-left">
+                                                <h4 class="font-weight-bold">{{ offer_number }}</h4>
+                                                <p class="m-0 font-weight-bold">Total Offer Given</p>
+                                            </div>
+                                            <span class="label bg-c-green value-badges font-weight-bold">{{ offer_pcnt }}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card text-center order-visitor-card bg-dark">
+                                        <div class="card-block">
+                                            <h6 class="m-b-0 text-white">Contacted</h6>
+                                            <h4 class="m-t-15 m-b-15 text-white"><i
+                                                    class="fa fa-arrow-up m-r-15 text-white"></i>{{ total_contacted }}
+                                            </h4>
+                                            <p class="m-b-0 text-white font-weight-bold">{{ contacted_pcnt }}% Of all
+                                                Matches</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card text-center order-visitor-card bg-warning">
+                                        <div class="card-block">
+                                            <h6 class="m-b-0 text-dark">Not Contacted</h6>
+                                            <h4 class="m-t-15 m-b-15 text-dark font-weight-bold"><i
+                                                    class="fa fa-arrow-down m-r-15 text-dark"></i>{{ not_contacted }}
+                                            </h4>
+                                            <p class="m-b-0 font-weight-bold text-dark">{{ not_contacted_pcnt }}% Of all
+                                                Matches</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- sale card end -->
+                            </div>
+                        </div>
+
+                        {% include 'dash/includes/modals.html' %}
+
+                    </div>
+                </div>
+                <!-- Page-body end -->
+            </div>
+            <div id="styleSelector"></div>
+        </div>
+    </div>
+{% endblock contents %}

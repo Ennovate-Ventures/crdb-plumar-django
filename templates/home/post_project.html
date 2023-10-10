@@ -1,0 +1,246 @@
+{% extends 'common/base.html' %}
+
+{% load static %}
+{% block css %}
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .services .service-box.red {
+            border-bottom: 3px solid #141414;
+        }
+
+        .services .service-box.red:hover {
+            background: #141414;
+        }
+
+        .services .service-box.purple {
+            border-bottom: 3px solid #41210C;
+        }
+
+        .services .service-box.purple:hover {
+            background: #41210C;
+        }
+
+        .services .service-box.pink {
+            border-bottom: 3px solid #106f47;
+        }
+
+        .services .service-box.pink:hover {
+            background: #106f47;
+        }
+
+        .features .feature-box:hover i {
+            background: #106f47;
+            color: #fff;
+        }
+
+
+        .clients .clients-slider .swiper-pagination .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            opacity: 1;
+            border: 1px solid #106f47;
+        }
+
+        .clients .clients-slider .swiper-pagination .swiper-pagination-bullet-active {
+            background-color: #106f47;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+        }
+
+        .hero h2 {
+            font-size: 22px;
+        }
+
+        .section-header p {
+            font-size: 29px;
+        }
+
+        .about h2 {
+            font-size: 22px;
+        }
+
+        .features .feature-icons h3 {
+            font-size: 29px;
+        }
+
+        @media (min-width: 800px) {
+            .gy-4 .zoom:hover {
+                transform: scale(1.1);
+                transition-delay: .1s;
+            }
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section id="hero" class="hero d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
+                    <h1 id="home-first-header" data-aos="fade-up" style="color: #060606">
+                        DevStack Crowdsource
+                    </h1>
+                    <h2 data-aos="fade-up" data-aos-delay="400"
+                        style="font-size: 19px; text-align: justify;text-justify: inter-word;">
+                        We understand that running a business is hard and its even harder when closing deals and
+                        acquiring customers becomes a luxury because of limited resources and tight schedules. <br> <br>
+                        With a global pool of tech talents, DevStack Crowdsource offers you a platform to get your project
+                        done within your budget and preferred timeline.
+                    </h2>
+                    <div data-aos="fade-up" data-aos-delay="600">
+                        <div class="text-center text-lg-start">
+                            <a id="post-projects-button" style="background-color: #106f47"
+                               href="#post-project"
+                               class="btn-get-started rounded-pill scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                <span>POST PROJECTS</span>
+                                <i class="bi bi-arrow-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+                    <img src="{% static 'assets/img/values-3.png' %}" class="img-fluid" alt="">
+                    {#                <img src="{% static 'assets/img/hero-img.png' %}" class="img-fluid" alt="">#}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services" style="margin-top: -100px">
+
+        <div class="container" data-aos="fade-up">
+
+            <header class="section-header">
+                <p style="color: #060606">How DevStack Crowdsource Works</p>
+            </header>
+
+            <div class="row gy-4">
+
+                <div class="col-lg-4 col-md-6 zoom" data-aos="zoom-in" data-aos-delay="100">
+                    <div style="background-color: #141414; color: #FFFFFF; border-radius: 4px; height: 100%"
+                         class="service-box red">
+                        <i style="padding: 20px 20px; color: #060606" class="bi bi-envelope-paper icon"></i>
+                        <h3 style="color: #FFFFFF">Post Project</h3>
+                        <p>
+                            Submit your project requirements and propose your budget. Agree to DevStack
+                            Crowdsource terms and conditions
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 zoom" data-aos="zoom-in" data-aos-delay="100">
+                    <div style="background-color: #106f47; color: #FFFFFF; border-radius: 4px; height: 100%"
+                         class="service-box pink">
+                        <i style="padding: 20px 20px; color: #106f47" class="bi bi-shield-check icon"></i>
+                        <h3 style="color: #FFFFFF">Get Matched</h3>
+                        <p>
+                            Your project will be matched to relevant team of tech talents to work on it within your
+                            stipulated timeline
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 zoom" data-aos="zoom-in" data-aos-delay="100">
+                    <div style="background-color: #41210C; color: #FFFFFF; border-radius: 4px; height: 100%"
+                         class="service-box purple">
+                        <i style="padding: 20px 20px; color: #41210C" class="bi bi-truck-flatbed icon"></i>
+                        <h3 style="color: #FFFFFF">Project Delivery</h3>
+                        <p>
+                            When the project is completed according to your requirements, you will be prompt for
+                            payment before final presentation and handover of the project to you
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section><!-- End Services Section -->
+
+    <!-- form Content Section start -->
+    <div class="about-content-section section mt-3" id="post-project">
+        <header class="section-header">
+            <p style="color: #060606">Post Your Project</p>
+        </header>
+        <div class="container">
+            <div class="row">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4 mb-50">
+                            <label for="full_name" class="mb-2">Full Name</label>
+                            <input style="height: 50px; border-radius: 20px" type="text" name="full_name"
+                                   class="form-control" required>
+                        </div>
+                        <div class="col-md-4 mb-50">
+                            <label for="company" class="mb-2">Company</label>
+                            <input style="height: 50px; border-radius: 20px" type="text" name="company"
+                                   class="form-control" required>
+                        </div>
+                        <div class="col-md-4 mb-50">
+                            <label for="company" class="mb-2">Your Position</label>
+                            <input style="height: 50px; border-radius: 20px" type="text" name="position"
+                                   class="form-control" required>
+                        </div>
+                        <div class="col-md-4 mb-50 ">
+                            <label for="phone_number" class="mb-2 mt-3">Phone Number</label>
+                            <input style="height: 50px; border-radius: 20px" type="number" name="phone"
+                                   class="form-control" required>
+                        </div>
+                        <div class="col-md-4 mb-50 ">
+                            <label for="email_address" class="mb-2 mt-3">Email Address</label>
+                            <input style="height: 50px; border-radius: 20px" type="email" name="email"
+                                   class="form-control" required>
+                        </div>
+                        <div class="col-md-4 mb-50">
+                            <label for="country" class="mb-2 mt-3">Country/City</label>
+                            <input style="height: 50px; border-radius: 20px" type="text" name="country"
+                                   class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6 mb-50 ">
+                            <label for="description" class="mb-2 mt-3">Project Description</label>
+                            <textarea style="border-radius: 20px" class="form-control" name="description"
+                                      id="description" cols="30" rows="5" required></textarea>
+                        </div>
+                        <div class="col-md-6 mb-50">
+                            <label for="expectations" class="mb-2 mt-3">Project Expectations</label>
+                            <textarea style="border-radius: 20px" class="form-control" name="expectations"
+                                      id="expectations" cols="30" rows="5" required></textarea>
+                        </div>
+                        <div class="col-md-6 mb-50">
+                            <label for="design" class="mb-2 mt-3">Project Designs</label>
+                            <input style="border-radius: 50px;" id="design" class="form-control"
+                                   type="file" name="design" required
+                                   accept="image/jpeg, application/pdf, image/png">
+                        </div>
+                        <div class="col-md-6 mb-50">
+                            <label for="mockups" class="mb-2 mt-3">Project Mockups</label>
+                            <input style="border-radius: 50px;" id="mockups" class="form-control"
+                                   type="file" name="mockups" required
+                                   accept="image/jpeg, application/pdf, image/png">
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px">
+                        <button style="width:55%; background-color: #106f47" type="submit"
+                                class="btn btn-lg rounded-pill text-white">Submit
+                        </button>
+                        <p class="mt-20 mb-30 mt-3">By submitting, you agree to the terms and conditions of DevStack
+                            Crowdsource</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- form Content Section End -->
+{% endblock content %}

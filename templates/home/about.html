@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>DevStack | About</title>
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block contents %}
+{% include 'includes/nav.html' %}
+        <!-- Breadcrumb Section Start -->
+        <div class="breadcrumb-section section pt-60 pt-sm-50 pt-xs-40 pb-60 pb-sm-50 pb-xs-40">
+            <div class="container">
+                <div class="row mb-n4">
+                    <div class="col-12">
+                        <div class="page-breadcrumb-content">
+                            <ul class="page-breadcrumb">
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li>About us</li>
+                            </ul>
+                            <h1>About DevStack</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb Section Start -->
+
+        <!-- About Content Section Start -->
+        <div class="about-content-section section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <b>DevStack gives you wings to fly.</b>
+                        </div>
+                        <b>This is a safe space for startups to find talents that are eager to help them reach the sky.</b>
+                        <div class="about-content">
+                           <p> 
+                            DevStack is revolutionizing the talent space for startups by building exciting and productive teams to scale their businesses. We are driven by the vision of democratizing the hiring process to give startups an edge in finding top talents according to their terms, budget, and growth plan. 
+                            DevStack is offering startups an opportunity to tell their stories to a global pool of talent that is looking for exciting and impactful companies to join. We understand that startups do not have deep pockets for hiring a workforce and may not be able to compete in talent acquisition with big corporations. This is why we have created DevStack, a safe space for startups to find talent that is eager to work with them in bringing their dreams to life. Startups can use an open source talent platform to find volunteers, full-timers, remote talents, advisors, consultants, or co-founders.We make hiring easy, affordable, and decentralized, to enable startups to find and work with talent from any part of the world. Through DevStack, we have opened up a world of possibilities for early-stage companies.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="about-content-section section mt-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <b>DevStack is creating magic for startups to scale! Here’s how we do it:</b>
+                        </div>
+                        <div class="about-content">
+                           <p> 
+                            Startups share their stories and opportunities they are looking to fill, and they get matched with interested startups.
+                            Through our talent vetting feature, startups can choose to onboard only verified talents or be open to working with any talent of their choice.
+                            Talents can also gain access to professional masterclasses on DevStack in order to expand their domain knowledge, advance their career, and become more competitive in the workplace.
+                            Start your hiring or career journey now with DevStack.
+                            </p>
+                        </div>
+                        <div>
+                            <a class="text-warning font-weight-bold"  href="{% url 'auth' %}">Sign up here!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About Content Section End -->
+
+        <!-- Funfact Section Start  -->
+        <div class="funfact-section section pt-110 pt-lg-90 pt-md-70 pt-sm-50 pt-xs-40 pb-85 pb-lg-65 pb-md-45 pb-sm-25 pb-xs-15">
+            <div class="container">
+                <div class="row row-five-column justify-content-lg-between">
+
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
+                        <!-- Single Funfact Start -->
+                        <div class="single-funfact funfact-style-two text-center justify-content-center width-100 mb-30">
+                            <div class="funfact-content">
+                                <span class="counter theme-color">30,124</span>
+                                <span class="text">Total registed users</span>
+                            </div>
+                        </div>
+                        <!-- Single Funfact End -->
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
+                        <!-- Single Funfact Start -->
+                        <div class="single-funfact funfact-style-two text-center justify-content-center width-100 mb-30">
+                            <div class="funfact-content">
+                                <span class="counter theme-color">11,112</span>
+                                <span class="text">Total Jobs</span>
+                            </div>
+                        </div>
+                        <!-- Single Funfact End -->
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
+                        <!-- Single Funfact Start -->
+                        <div class="single-funfact funfact-style-two text-center justify-content-center width-100 mb-30">
+                            <div class="funfact-content">
+                                <span class="counter theme-color">5,251</span>
+                                <span class="text">Employers</span>
+                            </div>
+                        </div>
+                        <!-- Single Funfact End -->
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
+                        <!-- Single Funfact Start -->
+                        <div class="single-funfact funfact-style-two text-center justify-content-center width-100 mb-30">
+                            <div class="funfact-content">
+                                <span class="counter theme-color">25,514</span>
+                                <span class="text">Job applications</span>
+                            </div>
+                        </div>
+                        <!-- Single Funfact End -->
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
+                        <!-- Single Funfact Start -->
+                        <div class="single-funfact funfact-style-two text-center justify-content-center width-100 mb-30">
+                            <div class="funfact-content">
+                                <span class="counter theme-color">35</span>
+                                <span class="text">Global Branchs</span>
+                            </div>
+                        </div>
+                        <!-- Single Funfact End -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Funfact Section Start  -->
+
+        <!-- Personal Skill Section Start -->
+        <div class="personal-skill-section section bg-image-proparty bg_image--2 pt-120 pt-lg-100 pt-md-80 pt-sm-60 pt-xs-50 pb-120 pb-lg-100 pb-md-80 pb-sm-60 pb-xs-50">
+            <div class="container">
+                <h5 class="font-weight-bold" >How we are revolutionizing the talent sourcing space for startups</h5>
+                <div class="row no-gutters border-top-left">
+                    
+                    <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
+                        <!-- Single Personal Skill Start -->
+                        <div class="single-personal-skill">
+                            <!-- <div class="skill-icon">
+                                <img src="{% static 'assets/img/about1.png' %}" alt="">
+                            </div> -->
+                            <div class="personal-skill-content">
+                                <h4 class="title">Opportunity Package:</h4>
+                                <p>DevStack offers startups the platform to list their available opportunities and be in front of top talents globally. Businesses now have the opportunity to attract the right talent who want to support or collaborate with startup companies to help them realize their vision.</p>
+                            </div>
+                        </div>
+                        <!-- Single Personal Skill End -->
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
+                        <!-- Single Personal Skill Start -->
+                        <div class="single-personal-skill">
+                            <!-- <div class="skill-icon">
+                                <img src="{% static 'assets/img/about2.png' %}" alt="">
+                            </div> -->
+                            <div class="personal-skill-content">
+                                <h4 class="title">Due Diligence:</h4>
+                                <p>To help startups recruit right on the first try, we offer an extra layer of vetting of talent through due diligence to validate their experience, skillset, passion, competencies, and domain knowledge. We present the due diligence report to the startup recruiter for better hiring decision-making. Startups review initial talents that match their opportunity, and then provide the top 3 candidates to DevStack for due diligence. Startups</p>
+                            </div>
+                        </div>
+                        <!-- Single Personal Skill End -->
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
+                        <!-- Single Personal Skill Start -->
+                        <div class="single-personal-skill">
+                            <!-- <div class="skill-icon">
+                                <img src="{% static 'assets/img/about3.png' %}" alt="">
+                            </div> -->
+                            <div class="personal-skill-content">
+                                <h4 class="title">Legal and Payroll</h4>
+                                <p>
+                                     To enable startups to focus on their core business, DevStack offers legal and payroll services to startups. You choose your talents, while DevStack handles all the legal paperwork according to the talent's country of employment requirements. DevStack also manages payroll solutions and pays out wages in local currencies, freeing up startups and their employees to focus on growing the business.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Single Personal Skill End -->
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Personal Skill Section End -->
+
+        <!-- Sponsors Section Start -->
+        <div class="sponsors-section section bg-image-proparty bg_image--2 pt-120 pt-lg-100 pt-md-80 pt-sm-60 pt-xs-50 pb-120 pb-lg-100 pb-md-80 pb-sm-60 pb-xs-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title-four mb-40">
+                            <h3>Partners</h3>
+                            <p>The National Online Recruitment Awards are entirely dedicated to the continual improvement and evolution of the Candidate-Experience. we have seen the focus of progressive employers, recruitment firms and job boards change to recognise that.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sponsors-slider row">
+
+                    <div class="col-12">
+                        <!-- Single Company History Start -->
+                        <div class="single-sponsors">
+                            <div class="item-comment">
+                                <p>"I love DevStack Recruitment. I STRONGLY recommend DevStack Recruitment to EVERYONE interested in running a successful online business! I am completely blown away.</p>
+                            </div>
+                            <div class="item-meta">
+                                <p class="text">
+                                    <span class="name">Celestine F. </span>
+                                    <span class="company">Fotex Agency </span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Single Company History End -->
+                    </div>
+
+                    <div class="col-12">
+                        <!-- Single Company History Start -->
+                        <div class="single-sponsors">
+                            <div class="item-comment">
+                                <p>"Wow what great service, I love it! DevStack Recruitment is both attractive and highly adaptable. Not able to tell you how happy I am with DevStack Recruitment."</p>
+                            </div>
+                            <div class="item-meta">
+                                <p class="text">
+                                    <span class="name">Tamarah Z. </span>
+                                    <span class="company">Royal Group </span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Single Company History End -->
+                    </div>
+
+                    <div class="col-12">
+                        <!-- Single Company History Start -->
+                        <div class="single-sponsors">
+                            <div class="item-comment">
+                                <p>"DevStack IT Recruitment has got everything I need. The best on the net! I don't know what else to say. I would like to personally thank you for your outstanding product. They are all trully awesome for us to say that."</p>
+                            </div>
+                            <div class="item-meta">
+                                <p class="text">
+                                    <span class="name">Elicia H.</span>
+                                    <span class="company">iquid Design </span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Single Company History End -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Sponsors Section Start -->
+{% endblock contents %}

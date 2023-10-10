@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+
+    {% block title %}
+        <title>Plumar | {{ quiz.title }}</title>
+    {% endblock title %}
+
+    {% block header %}
+    {% endblock header %}
+    {% include 'includes/nav.html' %}
+
+    <!-- Dashboard Content Section Start -->
+    <div class="dashboard-content-section section bg_color--5">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-3">
+                    {% include 'talent_dash/includes/sidebar.html' %}
+                </div>
+                <div class="col-xl-10 col-lg-9">
+
+                    <div class="dashboard-main-inner">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-breadcrumb-content mb-40">
+                                    <h1>{{ quiz.title }}
+                                        <input type="hidden" id="quiz_timed_out"
+                                               value="{{ request.user.talent_set.first.started_talent_quiz.timed_out }}">
+                                        {% if not request.user.talent_set.first.started_talent_quiz.timed_out %}
+                                            <span id="timer" style="font-size: 18px" class="float-right"></span>
+                                        {% else %}
+                                            <span id="timer" style="font-size: 18px; color: red"
+                                                  class="float-right">Timeout</span>
+                                        {% endif %}
+                                        <span class="float-right" style="font-size: 18px"><i
+                                                class="lnr lnr-clock mr-2"></i></span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-overview">
+                            <div class="row" style="margin-bottom: 80px">
+                                <div class="col-xl-12 col-12">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" class="hidden" value="{{ quiz.id }}" name="quiz">
+                                        {% for quiz_question in quiz.questions.all %}
+                                            <div style="background-color: whitesmoke; padding: 10px" class="form-group">
+                                                <p style="font-size: 20px; text-decoration: underline">
+                                                    <span>{{ forloop.counter }}. </span>
+                                                    <span class="text-decoration-underline">{{ quiz_question.title }}</span>
+                                                </p>
+
+                                                {% for answer in quiz_question.answers.all %}
+                                                    <div class="form-check">
+                                                        {% if answer in request.user.talent_set.first.started_talent_quiz.answers.all %}
+                                                            {% if request.user.talent_set.first.started_talent_quiz.timed_out %}
+                                                                <input onchange="handleAnswerChange({{ quiz_question.id }}, {{ answer.id }})"
+                                                                       value="{{ answer.id }}"
+                                                                       checked
+                                                                       disabled
+                                                                       class="form-check-input" type="radio"
+                                                                       name="question-{{ quiz_question.id }}"
+                                                                       id="question-{{ answer.id }}-{{ quiz_question.id }}">
+                                                            {% else %}
+                                                                <input onchange="handleAnswerChange({{ quiz_question.id }}, {{ answer.id }})"
+                                                                       value="{{ answer.id }}"
+                                                                       checked
+                                                                       class="form-check-input" type="radio"
+                                                                       name="question-{{ quiz_question.id }}"
+                                                                       id="question-{{ answer.id }}-{{ quiz_question.id }}">
+                                                            {% endif %}
+
+                                                        {% else %}
+                                                            {% if request.user.talent_set.first.started_talent_quiz.timed_out %}
+                                                                <input onchange="handleAnswerChange({{ quiz_question.id }}, {{ answer.id }})"
+                                                                       value="{{ answer.id }}"
+                                                                       disabled
+                                                                       class="form-check-input" type="radio"
+                                                                       name="question-{{ quiz_question.id }}"
+                                                                       id="question-{{ answer.id }}-{{ quiz_question.id }}">
+                                                            {% else %}
+                                                                <input onchange="handleAnswerChange({{ quiz_question.id }}, {{ answer.id }})"
+                                                                       value="{{ answer.id }}"
+                                                                       class="form-check-input" type="radio"
+                                                                       name="question-{{ quiz_question.id }}"
+                                                                       id="question-{{ answer.id }}-{{ quiz_question.id }}">
+                                                            {% endif %}
+
+                                                        {% endif %}
+                                                        <label class="form-check-label"
+                                                               for="question-{{ answer.id }}-{{ quiz_question.id }}">
+                                                            {{ answer.title.title }}
+                                                        </label>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            <hr>
+                                        {% endfor %}
+                                        {% if talent_quiz and not talent_quiz.timed_out %}
+                                            <button type="submit"
+                                                    style="background-color: #EDA31d; color: #FFF; border: 1px solid #EDA31d"
+                                                    class="float-left btn btn-md btn-primary btn-block">Submit
+                                            </button>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contents %}
+{% block js %}
+    <script src="{% static 'assets/js/jquery-3.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-toast.js' %}"></script>
+    <script>
+        function handleAnswerChange(question_id, answer_id) {
+            let timer = document.getElementById("timer").innerText;
+            console.log(timer.innerText)
+            if (document.getElementById("quiz_timed_out").value === 'False') {
+                // submit answer
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "submit_quiz_answer" quiz.id %}',
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        question_id: question_id,
+                        answer_id: answer_id,
+                    },
+
+                    success: function (json) {
+                        console.log(json)
+                        $.toaster(
+                            {priority: 'success', title: 'Success', message: 'Submitted'}
+                        )
+                    },
+                    error: function (json) {
+                        console.log("error")
+                        $.toaster(
+                            {priority: 'danger', title: 'Error', message: 'Something went wrong'}
+                        )
+                    }
+                });
+            } else {
+                $.toaster(
+                    {priority: 'danger', title: 'Timeout', message: 'You are out of time'}
+                )
+            }
+        }
+
+        window.onbeforeunload = function () {
+            return "Are you sure you want to leave? Your answers will be lost";
+        }
+
+        function disableF5(e) {
+            if ((e.which || e.keyCode) === 116 || (e.which || e.keyCode) === 82) e.preventDefault();
+        }
+
+        $(document).ready(function () {
+            $(document).on("keydown", disableF5);
+        });
+
+        // handle quiz countdown
+        let timeoutHandle;
+
+        function countdown(minutes, seconds) {
+            function tick() {
+                let counter = document.getElementById("timer");
+                counter.innerHTML =
+                    minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds) + " mins";
+                seconds--;
+                if (seconds >= 0) {
+                    timeoutHandle = setTimeout(tick, 1000);
+                } else {
+                    if (minutes >= 1) {
+                        // countdown(mins-1);   never reach “00″ issue solved
+                        setTimeout(function () {
+                            countdown(minutes - 1, 59);
+                        }, 1000);
+                    }
+                }
+                if (minutes === 1 && seconds === 0) {
+                    $.toaster(
+                        {priority: 'danger', title: 'Countdown', message: 'Less than 1 minute remain'}
+                    )
+                }
+                // update time left on backend
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "update_quiz_timeleft" quiz.id %}',
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        timeleft: {
+                            minutes: minutes,
+                            seconds: seconds
+                        },
+                    },
+
+                    success: function (json) {
+                        console.log(json)
+                        console.log('updated')
+                    }
+                });
+
+            }
+
+            tick();
+        }
+
+        if (document.getElementById("quiz_timed_out").value === 'False') {
+            countdown(parseInt({{talent_quiz.get_minutes_left}}), parseInt({{talent_quiz.get_seconds_left}}));
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block footer %}
+{% endblock footer %}
+

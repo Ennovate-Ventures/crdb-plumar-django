@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>DevStack | how it works</title>
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block contents %}
+<style>
+    @media only screen and (max-width:575px) {
+    .header span{
+        font-size: 8px;
+        margin:0;
+        padding:0;
+        height: 120px;
+    }
+    .header p{
+        margin-top: -50px;
+    }
+    .box{
+        margin-bottom: 20px;
+    }
+    .box2 {
+       text-align: center;
+    }
+    .box3 {
+       text-align: start;
+      
+    }
+    .box4{
+       text-align: start;
+    }
+    .signup{
+        margin-bottom: 100px;
+    }
+}
+</style>
+{% include 'includes/nav.html' %}
+        <!-- Breadcrumb Section Start -->
+        <div class="breadcrumb-section section pt-60 pt-sm-50 pt-xs-40 pb-60 pb-sm-50 pb-xs-40">
+            <div class="container">
+                <div class="row mb-n4">
+                    <div class="col-12">
+                        <div class="page-breadcrumb-content">
+                            <ul class="page-breadcrumb">
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li>How DevStack Works</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb Section Start -->
+
+        <div class="about-content-section section mt-3">
+            <div class="container">
+                <div class="header text-center">
+                    <h2 class="mt-2" style="height: 60px;" >
+                        <span style="border-radius: 10px; font-weight: bolder; padding-bottom: 10px; padding-top: 10px;
+                         border-bottom-left-radius: 50px; border-top-left-radius: 50px; border-bottom-right-radius: 50px; border-top-right-radius: 50px;" class="bg-warning font-weight-bolder">
+                        <span style="font-weight: bolder; margin-left: 20px; margin-right: 1px;"> Ready to start your</span>
+                        <span class="bg-dark text-white"  style=" padding-bottom: 10px; padding-top: 10px; padding-left: 10px; padding-right: 20px;  font-weight: bolder; border-bottom-right-radius: 50px; border-top-right-radius: 50px;"> <b class="ml-3 mr-3" >tech career journey</b></span>
+                    </span>
+                        
+                    </h2>
+                </div>
+                <!-- <div style="height:40px;" ></div> -->
+                <p class="text-max-800 text mb-4 text-center headline" style=" font-size:18px; margin-top:50px; letter-spacing: 1px 0px;">
+                    DevStack offers a tech talents platform to explore exciting jobs in tech. 
+                    If you are looking to start or grow your career in tech, then DevStack is your plug to a world of exciting tech opportunities.
+                    
+                </p>
+                <div class="row">
+                   
+                    <div class="col-md-6 mb-5 mt-4 box signup">
+                        <div style="border: 3px solid #106f47; border-top-color: black ; border-radius: 10px; ">
+                            <div class="bg-warning text-center " style=" margin-top: 20px; margin-bottom: 10px; margin-left: 40%; margin-right: 50%; height: 80px; width: 80px; border-radius: 50%;">
+                                <a href='{% url "auth" %}' > <i style="margin-top: 30px; font-size: 20px;" class="fas fa-sign-in-alt text-black" ></i></a>
+                            </div>
+                            <a class="box1"  style="margin-left:40%;" href="{% url 'auth' %}" > <h5 class="font-weight-bold text-dark text-center" ><b>SIGN UP</b></h5></a>
+                            <p   class=" mt-3 mb-3 text-center text-dark" > <b class=" text-dark" >Sign up here on our talent network. <br> Fill out the form and the required <br> attachments. </b></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-5 box mt-4">
+                        <div style="border: 3px solid #106f47; border-top-color: black ; border-radius: 10px; ">
+                            <div class="bg-warning text-center " style=" margin-top: 20px; margin-bottom: 10px; margin-left: 40%; margin-right: 50%; height: 80px; width: 80px; border-radius: 50%;">
+                                <a ><i style="margin-top: 30px; font-size: 20px;" class="fa fa-file text-black" ></i></a>
+                            </div>
+                            <a class="box2" style="margin-left:18%;" type="button"><h5 class="font-weight-bold text-dark " ><b>SKILLS AND EXPERIENCE REVIEW.</b></h5></a>
+                            <p class="mt-3 mb-3 text-center text-dark" ><b>Our team will review your skills and experience. <br> If you have the minimum requisite skills, then our team will send you a link, to create your talent account on DevStack</b></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-5 mt-4 box">
+                        <div style="border: 3px solid #106f47; border-top-color: black ; border-radius: 10px; ">
+                            <div class="bg-warning text-center " style=" margin-top: 20px; margin-bottom: 10px; margin-left: 40%; margin-right: 50%; height: 80px; width: 80px; border-radius: 50%;">
+                                <a  style="margin-left:18%;" type="button" ><i style="margin-top: 30px; font-size: 20px;" class="fa fa-briefcase text-black" ></i></a>
+                            </div>
+                            <a class="box3"  style="margin-left:35%;" type="button" ><h5 class="font-weight-bold text-dark" ><b>SIGN UP LINK</b></h5></a>
+                            <p class="mt-3 mb-3 text-center text-dark" ><b>Use the link to create your talent profile on DevStack and. <br> get started with exploring amazing. <br> tech job opportunities globally.</b></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-5 mt-4  box">
+                        <div style="border: 3px solid #106f47; border-top-color: black ; border-radius: 10px; ">
+                            <div class="bg-warning text-center " style=" margin-top: 20px; margin-bottom: 10px; margin-left: 40%; margin-right: 50%; height: 80px; width: 80px; border-radius: 50%;">
+                                <a  ><i style="margin-top: 30px; font-size: 20px;" class="fa fa-briefcase text-black" ></i></a>
+                            </div>
+                            <a class="box4"  style="margin-left:25%;" type="button" ><h5 class="font-weight-bold text-dark" ><b>IMPROVE YOUR SKILLS</b></h5></a>
+                            <p class="mt-3 mb-3 text-center text-dark" ><b>DevStack also offers upskilling support to all our network members. So from time to time, we help our network members to improve their skills and then help them qualify to create talent accounts on DevStack.</b></p>
+                        </div>
+                    </div>
+                
+                </div>
+
+                <center style="margin-top: 20px; margin-bottom: 50px;">
+                    <a data-toggle="modal" data-target="#tnet" class="btn btn-warning btn-lg text-dark rounded-pill text-center" ><b>Join our talent network here.</b></a>
+               </center>
+            </div>
+        </div>
+        <!-- About Content Section End -->
+
+
+
+
+          <!-- Modal -->
+    <div class="modal fade" id="tnet" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel"> Join our Talent Network </h5>
+              <a style="font-size: 25px; font-family: bolder;" type="button" class="close font-weight-bold" data-dismiss="modal" aria-label="Close">
+                <span style="font-weight: 900;" aria-hidden="true">&times;</span>
+              </a>
+            </div>
+            <div class="modal-body">
+                <span class="body" ></span>
+                <form  action="" role="form" method="post" id="watch">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="name">First Name</label>
+                            <input type="text" aria-required="true" required id="name" name="fname" class="form-control name" >
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="name">Other Name</label>
+                            <input type="text" aria-required="true" required id="name" name="oname" class="form-control name" >
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="name">Last Name</label>
+                            <input type="text" aria-required="true" required id="name" name="lname" class="form-control name" >
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="email">Email adress</label>
+                            <input type="email" aria-required="true" id="email" required name="email" class="form-control email" >
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="name">LinkedIn Profile </label>
+                            <input type="text" aria-required="true" id="prof" required name="linkedin" class="form-control name" >
+                        </div>
+                        
+                        <div class="form-group col-md-4">
+                            <label for="email">Twitter Profile</label>
+                            <input type="text" aria-required="true" id="loc" required name="twitter" class="form-control email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="subject">Phone Number</label>
+                            <input type="number" name="phone" id="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4>List Your Degree/certifications Below</h4>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Name of Institute</label>
+                            <input type="text" name="institute" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Course/Programme</label>
+                            <input type="text" name="institute" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Graduation Year</label>
+                            <input type="text" name="institute" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Type (Degree/Certification)</label>
+                            <input type="text" name="institute" class="form-control">
+                        </div>
+                        <button style="margin-left: 40% ;" class=" btn-sm btn btn-warning rounded-pill" ><i class="fa fa-add-crcle" ></i>Add More</button>
+                    </div>
+
+                    <div class="row">
+                        <h4>Other Projects</h4>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Name of Project</label>
+                            <input type="text" name="project_name" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Achievements</label>
+                            <input type="text" name="achievements" class="form-control">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="">Link to Projects</label>
+                            <input type="text" name="link" class="form-control">
+                        </div>
+                        <button style="margin-left: 40% ;" class=" btn-sm btn btn-warning rounded-pill mb-3" ><i class="fa fa-add" ></i>Add More</button>
+                    </div>
+
+                    <div class="row">
+                        <h4>Contact of 2 referees that have worked with you recently </h4>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Name </label>
+                            <input type="text" name="referee_name" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Role And Organization</label>
+                            <input type="text" name="role" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Email</label>
+                            <input type="email" name="ref_email" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Phone</label>
+                            <input type="number" name="ref_phone" class="form-control">
+                        </div>
+                         <button style="margin-left: 40% ;" class=" btn-sm btn btn-warning rounded-pill" ><i class="fa fa-plus-crcle" ></i>Add More</button>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="">Attach Cv/Professional Bio </label>
+                            <input type="file" name="cv" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="">Attach Cv/Professional Bio </label>
+                            <select name="details" id="" class="form-control" ></select>
+                        </div>
+                    </div>
+
+                    <button id="submit" style="width:100%;" class="btn btn-warning rounded-pill mt-3" type="submit" >
+                        <i class="fa fa-paper-plane"></i>&nbsp;Submit 
+                        <img id="img" style="height: 30px; border-radius:20px; margin-left: 20px; display: none;" src="{% static 'assets/img/balls.gif' %}" alt="">
+                    </button>
+                </form>
+            </div>
+            <div style="display: none;" class="modal-footer">
+              <button style="width: 50%; margin-right: 25%;" type="button" id="close" class="btn btn-dark rounded-pill" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+{% endblock contents %}

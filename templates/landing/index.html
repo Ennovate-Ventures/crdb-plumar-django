@@ -1,0 +1,402 @@
+{% extends "landing/../common/base.html" %}
+{% load static %}
+{% block css %}
+<style>
+    body {
+        overflow-x: hidden;
+    }
+
+    .services .service-box.red {
+        border-bottom: 3px solid #141414;
+    }
+
+    .services .service-box.red:hover {
+        background: #141414;
+    }
+
+    .services .service-box.purple {
+        border-bottom: 3px solid #57a554;
+    }
+
+    .services .service-box.purple:hover {
+        background: #57a554;
+    }
+
+    .services .service-box.pink {
+        border-bottom: 3px solid #106f47;
+    }
+
+    .services .service-box.pink:hover {
+        background: #106f47;
+    }
+
+    .features .feature-box:hover i {
+        background: #106f47;
+        color: #fff;
+    }
+
+
+    .clients .clients-slider .swiper-pagination .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background-color: #fff;
+        opacity: 1;
+        border: 1px solid #106f47;
+    }
+
+    .clients .clients-slider .swiper-pagination .swiper-pagination-bullet-active {
+        background-color: #106f47;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero h2 {
+        font-size: 22px;
+    }
+
+    .section-header p {
+        font-size: 29px;
+    }
+
+    .about h2 {
+        font-size: 22px;
+    }
+
+    .features .feature-icons h3 {
+        font-size: 29px;
+    }
+
+    @media (min-width: 800px) {
+        .gy-4 .zoom:hover {
+            transform: scale(1.1);
+            transition-delay: .1s;
+        }
+
+        .features .feature-icons .content .icon-box p {
+            text-align: left;
+        }
+
+        .section-header p {
+            font-size: 25px;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+<!-- ======= How we are changing the global economy ecosystem for emerging companies Section ======= -->
+<section id="services" class="services" style="margin-top: -100px">
+
+    <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+            <h2 style="color: #060606">Companies</h2>
+            <p style="color: #060606; font-size: 27px">How we are changing the global economy ecosystem for emerging
+                companies</p>
+        </header>
+
+        <div class="row gy-4">
+            <div class="col-lg-4 col-md-6 zoom" data-aos="fade-up" data-aos-delay="100">
+                <div style="background-color: #141414; color: #fff; border-radius: 4px" class="service-box red">
+                    <i style="padding: 20px 20px; color: #141414" class="bi bi-person-lines-fill icon"></i>
+                    <h3 style="color: #FFFFFF">Company Signup</h3>
+                    <p>Company set up account on the DevStack, complete profile and get ready to start accessing
+                        vetted tech
+                        talents globally.</p>
+                    {# <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>#}
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 zoom" data-aos="fade-up" data-aos-delay="100">
+                <div style="background-color: #57a554; color: #fff; border-radius: 4px" class="service-box purple">
+                    <i style="padding: 20px 20px; color: #57a554" class="bi bi-file-post-fill icon"></i>
+                    <h3 style="color: #FFFFFF">Post Jobs</h3>
+                    <p>Company post opportunity(s) at $0 upfront cost on DevStack. Post any kind of opportunity; full
+                        time, part
+                        time, interns, volunteers, advisors, and remote workers</p>
+                    {# <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>#}
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 zoom" data-aos="fade-up" data-aos-delay="100">
+                <div style="background-color: #106f47; color: #fff; border-radius: 4px" class="service-box pink">
+                    <i style="padding: 20px 20px; color: #106f47" class="bi bi-clipboard2-check icon"></i>
+                    <h3 style="color: #FFFFFF">Connect with Community</h3>
+                    <p>Connect with diverse community of tech talents, learn share and improve your competency</p>
+                    {# <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>#}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section><!-- End How we are changing the global economy ecosystem for emerging companies -->
+
+<!-- ======= How DevStack Crowdsource is helping startups get jobs done faster and on budget Section ======= -->
+<section id="services" class="services">
+
+    <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+            <h2 style="color: #060606">Crowdsource Projects</h2>
+            <p style="color: #060606; font-size: 27px">How DevStack Crowdsource is helping startups get jobs done
+                faster and on
+                budget</p>
+        </header>
+
+        <div class="row gy-4">
+            <div class="col-lg-4 col-md-6 zoom" data-aos="zoom-in" data-aos-delay="100">
+                <div style="background-color: #141414; color: #fff; border-radius: 4px" class="service-box red">
+                    <i style="padding: 20px 20px; color: #141414" class="bi bi-cursor icon"></i>
+                    <h3 style="color: #FFFFFF">Build Your Profile</h3>
+                    <p>Start by building attractive profile and showcase your skillset to attract relevant job or
+
+                        project opportunities</p>
+                    {# <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>#}
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 zoom" data-aos="zoom-in" data-aos-delay="100">
+                <div style="background-color: #57a554; color: #fff; border-radius: 4px" class="service-box purple">
+                    <i style="padding: 20px 20px; color: #57a554" class="bi bi-check2-all icon"></i>
+                    <h3 style="color: #FFFFFF">Take Professional Quiz</h3>
+                    <p>To stand out and get started with exploring opportunities, take relevant quiz to test
+
+                        your competency and receive pro badge.</p>
+                    {# <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>#}
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 zoom" data-aos="zoom-in" data-aos-delay="100">
+                <div style="background-color: #106f47; color: #fff; border-radius: 4px" class="service-box pink">
+                    <i style="padding: 20px 20px; color: #106f47" class="bi bi-truck icon"></i>
+                    <h3 style="color: #FFFFFF">Project Delivered</h3>
+                    <p>You have options to review the project with the team twice before the final sprint. Project
+                        is handed to
+                        you after completion.</p>
+                    {# <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>#}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section><!-- End How DevStack Crowdsource is helping startups get jobs done faster and on budget Section -->
+
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
+
+    <div class="container" data-aos="fade-up">
+        <div class="row gx-0">
+
+            <div class="col-lg-8 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="content">
+                    <h2 style="color: #060606; text-align: justify;text-justify: inter-word;">
+                        DevStack is redefining the future of work by offering
+                        open source resources to equip youths with tech skills
+                        for today’s workplace, and connecting them to the most
+                        exciting tech-driven companies globally.</h2>
+                    <p style="text-align: justify;text-justify: inter-word;">
+                        DevStack is revolutionizing the talent space for emerging companies to help them
+                        build exciting and productive teams to scale their businesses. The community
+                        playform is driven by the vision of democratizing the hiring process to give early
+                        stage companies an edge in finding top talents according to their terms, budget, and
+                        growth plan.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+                <img style="height: 105%" src="{% static 'assets/img/values-1.png' %}" class="img-fluid" alt="">
+            </div>
+
+        </div>
+    </div>
+
+</section><!-- End About Section -->
+
+<!-- ======= Features Section ======= -->
+<section id="features" class="features" style="margin-top: -90px">
+
+    <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+            {# <h2>Features</h2>#}
+            <p style="color: #141414; font-size: 27px">Explore Vetted Tech Talents on DevStack</p>
+        </header>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <img style="width: 85%" src="{% static 'assets/img/values-3.png' %}" class="img-fluid" alt="">
+            </div>
+
+            <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
+                <div class="row align-self-center gy-4">
+
+                    <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
+                        <div class="feature-box d-flex align-items-center">
+                            <i class="bi bi-check custom-check"></i>
+                            <h3 style="color: #141414">Software Engineers</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="zoom-out" data-aos-delay="400">
+                        <div class="feature-box d-flex align-items-center">
+                            <i class="bi bi-check"></i>
+                            <h3 style="color: #141414">UI/UX Designers</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="zoom-out" data-aos-delay="300">
+                        <div class="feature-box d-flex align-items-center">
+                            <i class="bi bi-check"></i>
+                            <h3 style="color: #141414">Tech Sales Engineers</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="zoom-out" data-aos-delay="500">
+                        <div class="feature-box d-flex align-items-center">
+                            <i class="bi bi-check"></i>
+                            <h3 style="color: #141414">Data Scientists</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
+                        <div class="feature-box d-flex align-items-center">
+                            <i class="bi bi-check"></i>
+                            <h3 style="color: #141414">Product Managers</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="zoom-out" data-aos-delay="700">
+                        <div class="feature-box d-flex align-items-center">
+                            <i class="bi bi-check"></i>
+                            <h3 style="color: #141414">Digital Marketing</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div> <!-- / row -->
+
+        <!-- Feature Icons -->
+        <div class="row feature-icons" data-aos="fade-up">
+            <h3 style="color: #141414; margin-bottom: 70px; font-size: 27px">Why Use DevStack for Your Talents
+                Needs</h3>
+
+            <div class="row" style="margin-top: -20px">
+
+                <div class="col-xl-4 text-center" data-aos="fade-right" data-aos-delay="100">
+                    <img src="{% static 'assets/img/features-3.png' %}" class="img-fluid p-4" alt="">
+                </div>
+
+                <div class="col-xl-8 d-flex content">
+                    <div class="row align-self-center gy-4">
+
+                        <div class="col-md-6 icon-box" data-aos="fade-up">
+                            <i style="color: #106f47" class="bi bi-binoculars icon"></i>
+                            <div>
+                                <h4 style="color: #060606">Find anything tech talent on DevStack</h4>
+                                <p style="text-align: justify;text-justify: inter-word;">DevStack is the first Tanzania tech platform that offers you the opportunity to find tech
+                                    professionals, co-founders, full time, part time, interns, volunteers and remote staff to
+                                    drive your business objectives and become a top choice for your market Plumar is your
+                                    safe space to find the right talents.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
+                            <i style="color: #106f47" class="ri-stack-line"></i>
+                            <div>
+                                <h4 style="color: #060606">All talents vetted on DevStack</h4>
+                                <p style="text-align: justify;text-justify: inter-word;"><p></p>All tech talents on DevStack have been thoroughly vetted and verified to have relevant
+                                    experience in their field. DevStack uses unique vetting processes to ascertain the
+                                    competency of talents on the platform.</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div><!-- End Feature Icons -->
+
+    </div>
+
+</section><!-- End Features Section -->
+
+
+
+<!-- ======= Pricing Section ======= -->
+{% include "landing/layouts/pricing.html" %}
+<!-- End Pricing Section -->
+
+<!-- ======= Clients Section ======= -->
+<!--  <section id="clients" class="clients" style="margin: -70px;">
+
+        <div class="container" data-aos="fade-up">
+
+            <header class="section-header">
+                <p style="color: #060606">Our Clients</p>
+            </header>
+
+            <div class="clients-slider swiper">
+                <div class="swiper-wrapper align-items-center">
+                    <div class="swiper-slide"><img src="{% static 'assets/img/logo-black-1.png' %}"
+                                                   class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="{% static 'assets/img/SBAN Logo.png' %}"
+                                                   class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="{% static 'assets/img/Farm Boksi Logo.png' %}"
+                                                   class="img-fluid" alt=""></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+
+    </section> -->
+<!-- End Clients Section -->
+
+<!-- ======= Contact Section ======= -->
+<!--  {% include "landing/layouts/contact-us.html" %} -->
+<!-- End Contact Section -->
+
+{% endblock %}
+{% block js %}
+<script>
+    $('#contact-form').on('submit', function (event) {
+        event.preventDefault();
+        console.log('Submitting the form');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "landing" %}',
+            data: {
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                name: $('#name').val(),
+                email: $('#email').val(),
+                company_name: $('#company_name').val(),
+                location: $('#location').val(),
+                profession: $('#profession').val(),
+                engage_as: $('#engage_as').val(),
+            },
+
+            success: function (json) {
+                console.log(json)
+                console.log('success')
+                swal({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Thanks for contacting us',
+                    buttons: false,
+                    timer: 3000,
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}

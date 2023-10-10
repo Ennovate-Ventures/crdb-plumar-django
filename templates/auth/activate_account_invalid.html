@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DevStack | Activate Account</title>
+    <link href="{% static 'assets/img/fav.png' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+    <style>
+        #id_email:active, #id_email:focus {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid #106f47;
+        }
+
+        .login-wrapper .login-btn {
+            padding: 13px 20px;
+            background-color: #106f47;
+            border-radius: 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .login-wrapper .login-btn:hover {
+            border: 1px solid #106f47;
+            background-color: #fff;
+            color: #106f47;
+        }
+
+        #id_email {
+            display: block;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 login-section-wrapper">
+                <div class="brand-wrapper">
+                    <a href="/">
+                        <img src="{% static 'assets/landing/images/p.png' %}" alt="logo" class="logo">
+                    </a>
+                </div>
+                <div class="mx-auto text-center mt-5">
+                    <h4>Fail to activate account</h4>
+                    <p>Link used seems to be invalid</p>
+                </div>
+            </div>
+            <div class="col-sm-6 px-0 d-none d-sm-block">
+                <img src="{% static 'assets/img/login.jpg' %}" alt="login image" class="login-img">
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

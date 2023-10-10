@@ -1,0 +1,65 @@
+{% load static %}
+{% load humanize %}
+{% if package_listings %}
+    <section id="pricing" class="pricing">
+        <div class="container mb-5" data-aos="fade-up">
+
+            <header class="section-header">
+                <h2 style="color: #060606">Check our Pricing</h2>
+                {#                <p style="color: #141414">Junior Pricing</p>#}
+            </header>
+
+            <div class="row gy-4" data-aos="fade-left">
+
+                {% for listing in package_listings %}
+                    <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="box">
+                            {% if listing.featured %}
+                                <span class="featured">Featured</span>
+                            {% endif %}
+                            <h3 style="color: #ff901c;">{{ listing.name }}</h3>
+                            <div class="price"><sup>USD</sup>{{ listing.charge|intcomma }}</div>
+                            {#                    <img src="{% static 'assets/img/pricing-free.png' %}" class="img-fluid" alt="">#}
+                            <ul>
+                                <li>{{ listing.get_category }}</li>
+                                {% if listing.opportunity_listing == 'Yes' %}
+                                    <li>Opportunity listing</li>
+                                {% else %}
+                                    <li class="na">Opportunity listing</li>
+                                {% endif %}
+                                {% if listing.talent_due_deligency == 'Yes' %}
+                                    <li>Talent Due Diligence</li>
+                                {% else %}
+                                    <li class="na">Talent Due Diligence</li>
+                                {% endif %}
+                                {% if listing.legal == 'Yes' %}
+                                    <li>Legal</li>
+                                {% else %}
+                                    <li class="na">Legal</li>
+                                {% endif %}
+                                {% if listing.payroll == 'Yes' %}
+                                    <li>Payroll</li>
+                                {% else %}
+                                    <li class="na">Payroll</li>
+                                {% endif %}
+                            </ul>
+                            {% if user.is_authenticated and request.user.profile.user_type == 'startup' %}
+                                {% if package.package_name_id == data.id and package.posted_opportunity != '0' and package.verified == True %}
+                                    <a data-toggle="modal" data-target="#pay{{ data.id }}" href="#" class="btn-buy">Pay
+                                        More</a>
+                                {% else %}
+                                    <a href="#" data-toggle="modal" data-target="#pay{{ data.id }}" class="btn-buy">Start
+                                        Now</a>
+                                {% endif %}
+                            {% else %}
+                                <a href="{% url 'home' %}" class="btn-buy">Start Now</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </section>
+{% endif %}

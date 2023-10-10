@@ -1,0 +1,104 @@
+{% load static %}
+<section id="contact-us" class="contact">
+
+    <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+            <h2 style="color: #060606">Contact</h2>
+            <p style="color: #141414">Contact Us</p>
+        </header>
+
+        <div class="row gy-4">
+
+            <div class="col-lg-6">
+
+                <div class="row gy-4">
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <i style="color: #141414" class="bi bi-geo-alt"></i>
+                            <h3 style="color: #141414">Address</h3>
+                            <p>74 Ally Sykes Road, Mbezi Beach</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <i style="color: #141414" class="bi bi-telephone"></i>
+                            <h3 style="color: #141414">Call Us</h3>
+                            <p>+255 752 817 723</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <i style="color: #141414" class="bi bi-envelope"></i>
+                            <h3 style="color: #141414">Email Us</h3>
+                            <p>info@plumar.co</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <i style="color: #141414" class="bi bi-clock"></i>
+                            <h3 style="color: #141414">Open Hours</h3>
+                            <p>Monday - Friday<br>9:00AM - 05:00PM</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+                <form id="contact-form" role="form" method="POST">
+                    {% csrf_token %}
+                    <div class="row gy-4">
+
+                        <div class="col-md-6">
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Your Name"
+                                   required style="border-radius: 20px">
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <input type="email" id="email" class="form-control" name="email" placeholder="Your Email"
+                                   required style="border-radius: 20px">
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="company_name" name="company"
+                                   placeholder="Company Name" style="border-radius: 20px">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="location" name="location" placeholder="Location"
+                                   required style="border-radius: 20px">
+                        </div>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="profession" name="profession"
+                                   placeholder="Profession" required style="border-radius: 20px">
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="message">How do you want to engage with Plumar?</label>
+                            <select required style="border-radius: 20px" name="engagement" id="engage_as"
+                                    class="form-control mt-2">
+                                <option value="0">Select your option</option>
+                                <option value="talent">As a talent</option>
+                                <option value="start-up">As a start-up</option>
+                                <option value="partner">As a partner</option>
+                                <option value="investor">As an Investor</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <button type="submit"
+                                    style="background-color: #EDA31D; border: none; color: #fff; padding: 10px 20px; transition: 0.3s;margin: 3px; border-radius: 4px; font-size: 16px">
+                                Request Demo
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

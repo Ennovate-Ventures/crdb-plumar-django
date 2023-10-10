@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>DevStack | Profile</title>
+{% endblock title %}
+
+{% block header %}
+    <style>
+        select {
+            width: 100%;
+            margin: 10px;
+        }
+
+        .form-control {
+            border-radius: 20px;
+        }
+
+        .bootstrap-select {
+            width: 100%;
+        }
+
+        /* select:focus {
+            min-width: 300px;
+            width: auto;
+        } */
+    </style>
+{% endblock header %}
+
+{% block contents %}
+    {% include 'includes/nav.html' %}
+
+    <!-- Dashboard Content Section Start -->
+    <div class="dashboard-content-section section bg_color--5">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-3">
+                    {% include 'talent_dash/includes/sidebar.html' %}
+                </div>
+                <div class="col-xl-10 col-lg-9">
+
+                    <div class="dashboard-main-inner">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="page-breadcrumb-content mb-40">
+                                    <h1>Profile</h1>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.tags == 'success' %}
+                                            <div id="noto" class="alert alert-success"><i
+                                                    class="bi bi-check-circle"></i>
+                                                {{ message }}
+                                            </div>
+                                        {% endif %}
+                                        {% if message.tags == 'error' %}
+                                            <div id="noto"
+                                                 class="alert alert-danger bg-danger alert-dismissible fade show ">
+                                                <span class="text-white">{{ message }}</span>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="dashboard-overview">
+                            <div class="row">
+                                <div class="col-xl-12 col-12">
+                                    <div class="profile-applications mb-50">
+                                        <div class="profile-applications-main-block">
+                                            <div class="profile-applications-form">
+                                                <form method="post" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    <div class="row mb-30">
+                                                        <div class="col-lg-2">
+                                                            <div style="text-align: center"
+                                                                 class="profile-avatar mb-30">
+                                                                <!-- <label class="d-block"><span>Avatar</span></label> -->
+                                                                <img src="{{ request.user.profile.image.url }}" alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-10">
+                                                            <div class="row">
+                                                                {% for field in uform %}
+                                                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                                        <br>
+                                                                        <p>
+                                                                            {{ field.label_tag }}<br>
+                                                                            {{ field }}
+                                                                            {% if field.errors %}
+                                                                                {% for error in field.errors %}
+                                                                                    <p style="color: red">{{ error }}</p>
+                                                                                {% endfor %}
+                                                                            {% endif %}
+                                                                        </p>
+                                                                        <!-- Single Input Start -->
+
+                                                                    </div>
+                                                                {% endfor %}
+
+                                                                {% for field in pform %}
+                                                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                                        <br>
+                                                                        <p>
+                                                                            {{ field.label_tag }}<br>
+                                                                            {{ field }}
+                                                                            {% if field.errors %}
+                                                                                {% for error in field.errors %}
+                                                                                    <p style="color: red">{{ error }}</p>
+                                                                                {% endfor %}
+                                                                            {% endif %}
+                                                                        </p>
+                                                                        <!-- Single Input Start -->
+
+                                                                    </div>
+                                                                {% endfor %}
+
+                                                                {% for field in tform %}
+                                                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                                        <br>
+                                                                        <p>
+                                                                            {{ field.label_tag }}<br>
+                                                                            {{ field }}
+                                                                            {% if field.errors %}
+                                                                                {% for error in field.errors %}
+                                                                                    <p style="color: red">{{ error }}</p>
+                                                                                {% endfor %}
+                                                                            {% endif %}
+                                                                        </p>
+                                                                        <!-- Single Input Start -->
+
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="float-right profile-action-btn d-flex flex-wrap align-content-center justify-content-between">
+                                                                <button style="border-radius: 50px" class="ht-btn theme-btn theme-btn-two mb-xs-20">
+                                                                    Update Profile
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard Content Section End -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $('#noto').delay(5000).fadeOut('slow');
+    </script>
+
+{% endblock contents %}
+
+
+{% block footer %}
+{% endblock footer %}
+    

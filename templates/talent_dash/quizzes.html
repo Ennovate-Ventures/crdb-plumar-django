@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+
+    {% block title %}
+        <title>Plumar | Quizzes</title>
+    {% endblock title %}
+
+    {% block header %}
+    {% endblock header %}
+    {% include 'includes/nav.html' %}
+
+    <!-- Dashboard Content Section Start -->
+    <div class="dashboard-content-section section bg_color--5">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-3">
+                    {% include 'talent_dash/includes/sidebar.html' %}
+                </div>
+                <div class="col-xl-10 col-lg-9">
+
+                    <div class="dashboard-main-inner">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-breadcrumb-content mb-40">
+                                    <h1>Quiz</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-overview">
+                            <div class="row">
+                                <div class="col-12">
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            {% if message.tags == 'success' %}
+                                                <div id="noto" class="alert alert-success"><i
+                                                        class="bi bi-check-circle"></i>
+                                                    {{ message }}
+                                                </div>
+                                            {% endif %}
+                                            {% if message.tags == 'error' %}
+                                                <div id="noto"
+                                                     class="alert alert-danger bg-danger alert-dismissible fade show ">
+                                                    <span class="text-white">{{ message }}</span>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-xl-12 col-12">
+                                    <div class="job-applications mb-50">
+                                        <div class="applications-heading d-flex">
+                                            <div class="message-fields-form p-0 border-0">
+                                                <form action="#">
+                                                    <div class="message-form review-from mt-0">
+                                                        <button class="search-btn"><i class="lnr lnr-magnifier"></i>
+                                                        </button>
+                                                        <input type="text" placeholder="Search in quizzes">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="job-applications-main-block">
+                                            <div class="job-applications-table">
+                                                <table style="width: 100%" class="table table-responsive w-100">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Category</th>
+                                                        <th>Level</th>
+                                                        <th>Time Duration</th>
+                                                        <th>Time Left</th>
+                                                        {% if talent_started_quiz.timed_out %}
+                                                            <th>Score</th>
+                                                        {% endif %}
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% if quiz %}
+                                                        <tr class="job-application-item">
+                                                            <td class="application-job">
+                                                                <h3>
+                                                                    <a href="javascript:void(0)"><span>{{ quiz.title }}</span></a>
+                                                                </h3>
+                                                            </td>
+
+                                                            <td class="application-job">
+                                                                <h3>
+                                                                    <a href="javascript:void(0)">
+                                                                        <span> {{ quiz.category.title }} </span>
+                                                                    </a>
+                                                                </h3>
+                                                            </td>
+
+                                                            <td class="application-job">
+                                                                <h3>
+                                                                    <a href="javascript:void(0)">
+                                                                        <span> {{ quiz.level.title }} </span>
+                                                                    </a>
+                                                                </h3>
+                                                            </td>
+                                                            <td class="application-job">
+                                                                <h3>
+                                                                    <a href="javascript:void(0)">
+                                                                        <span> {{ quiz.time_duration }} mins</span>
+                                                                    </a>
+                                                                </h3>
+                                                            </td>
+                                                            <td class="application-job">
+                                                                <h3>
+                                                                    <a href="javascript:void(0)">
+                                                                        {% if talent_started_quiz and not talent_started_quiz.timed_out %}
+                                                                            <span> {{ talent_started_quiz.time_left }} mins</span>
+                                                                        {% else %}
+                                                                            <span> {{ quiz.time_duration }} mins</span>
+                                                                        {% endif %}
+                                                                    </a>
+                                                                </h3>
+                                                            </td>
+                                                            {% if talent_started_quiz and talent_started_quiz.timed_out %}
+                                                                <td class="application-job">
+                                                                    <h3>
+                                                                        <a href="javascript:void(0)">
+                                                                            <span> {{ talent_started_quiz.score }} %</span>
+                                                                        </a>
+                                                                    </h3>
+                                                                </td>
+                                                            {% endif %}
+                                                            <td class="application-job">
+                                                                {% if talent_started_quiz and talent_started_quiz.timed_out %}
+                                                                    {% if talent_started_quiz.timed_out %}
+                                                                        {% if talent_started_quiz.passed %}
+                                                                            <span class="btn btn-outline-success btn-disabled">
+                                                                            <a href="javascript:void(0)">Passed</a>
+                                                                        </span>
+                                                                        {% else %}
+                                                                            <span class="btn btn-outline-danger btn-disabled">
+                                                                                <a href="{% url 'take_quiz' quiz.id %}">Failed</a>
+                                                                            </span>
+                                                                        {% endif %}
+                                                                    {% else %}
+                                                                        <span class="btn btn-outline-info">
+                                                                        <a href="{% url 'take_quiz' quiz.id %}">Continue</a>
+                                                                        </span>
+                                                                    {% endif %}
+
+                                                                {% else %}
+                                                                    <span class="btn btn-outline-info">
+                                                                        <a href="{% url 'take_quiz' quiz.id %}">Start</a>
+                                                                    </span>
+                                                                {% endif %}
+                                                            </td>
+                                                        </tr>
+                                                    {% else %}
+                                                        <td colspan="12" class="text-center"><h5
+                                                                class="font-weight-bold">No available quiz</h5></td>
+                                                    {% endif %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard Content Section End -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+{% endblock contents %}
+
+{% block footer %}
+{% endblock footer %}
+

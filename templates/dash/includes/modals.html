@@ -1,0 +1,655 @@
+{% load static %}
+{% load humanize %}
+<!-- Modal -->
+{% for data in matches %}
+    <div class="modal fade ats" id="ats{{ data.id }}" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-muted font-weight-bold" id="staticBackdropLabel">
+                        {% if data.user.first_name and data.user.last_name %}
+                            {{ data.user.first_name }} {{ data.user.last_name }}
+                            <i class="fa fa-check-circle text-success"></i>
+                        {% else %}
+                            {{ data.user.username }}
+                        {% endif %}
+
+                    </h5>
+                    {% if data.status == 'reviewing' %}
+                        <span class="badge badge-pill badge-secondary ml-3 mt-2">{{ data.status|capfirst }}</span>
+                    {% elif data.status == 'interviewed' %}
+                        <span class="badge badge-pill badge-warning ml-3 mt-2">{{ data.status|capfirst }}</span>
+                    {% elif data.status == 'shortlisted' %}
+                        <span class="badge badge-pill badge-warning ml-3 mt-2">{{ data.status|capfirst }}</span>
+                    {% elif data.status == 'offergiven' %}
+                        <span class="badge badge-pill badge-success ml-3 mt-2">{{ data.status|capfirst }}</span>
+                    {% else %}
+                        <span class="badge badge-pill badge-danger ml-3 mt-2">{{ data.status|capfirst }}</span>
+                    {% endif %}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5 class="text-muted font-weight-bold">Matched For</h5>
+
+                                {% for data in data.opportunity.all %}
+                                    <span class="font-weight-bold">{{ data.title }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4">
+                                <h5 class="text-muted font-weight-bold">Matched On</h5>
+                                <span class="font-weight-bold">{{ data.matched_on|date:"d, M, Y" }}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 class="text-muted font-weight-bold">Rating Average</h5>
+                                {% include 'includes/rating_for_list_view.html' %}
+                            </div>
+                            <div class="mb-3"></div>
+                            <hr>
+                        </div>
+                        <div class="row  mt-3">
+                            <div class="col-md-4">
+                                <div>
+                                    <h5 class="text-muted font-weight-bold">Experience</h5>
+                                    <span class="font-weight-bold text-dark">{{ data.talent.years_of_experience }}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <h5 class="text-muted font-weight-bold">Profession</h5>
+                                    <span class="font-weight-bold text-dark">{{ data.talent.profession }}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <h5 class="text-muted font-weight-bold">Salary Expectation</h5>
+                                    <span class="font-weight-bold text-dark">{{ data.talent.salary_expectation|intcomma }}/Month</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mt-3">
+                            {#                            <div class="col-md-4">#}
+                            {#                                <div>#}
+                            {#                                    <h5 class="text-muted font-weight-bold">Phone</h5>#}
+                            {#                                    <span class="font-weight-bold text-dark">{{ data.talent.phone }}</span>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            <div class="col-md-4">
+                                <div>
+                                    <h5 class="text-muted font-weight-bold">Location</h5>
+                                    <span class="font-weight-bold text-dark">{{ data.talent.location }}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <h5 class="text-muted font-weight-bold">LinkedIn Profile</h5>
+                                    <span class="font-weight-bold text-dark">
+                                <a href="{{ data.talent.linkedIn }}">{{ data.talent.linkedIn }}</a>
+                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3"></div>
+                        <div class="text-center">
+                            {% if data.status == 'reviewing' %}
+                                <details>
+                                    <summary>
+                                        <h5 class="open-summary">
+                                    <span class="badge badge-warning badge-lg">
+                                        Start Interviewing
+                                        {% if data.user.first_name and data.user.last_name %}
+                                            {{ data.user.first_name }} {{ data.user.last_name }}
+                                        {% else %}
+                                            {{ data.user.username }}
+                                        {% endif %}
+                                        <i id="open" class="fa fa-arrow-down"></i>
+                                    </span>
+                                        </h5>
+                                    </summary>
+                                    <p>
+                                    <div class="row">
+                                        {% if data.get_opportunity.active %}
+                                            <div class="col-md-12">
+                                                <div class="row text-center">
+                                                    <div class="col-md-12 text-center" style="height: 100px">
+                                                        <h6 class="font-weight-bold">Zoom Meeting</h6>
+                                                        <a class="text-center" data-toggle="modal"
+                                                           data-target=".zoom{{ data.id }}"><img
+                                                                style="width: 90px; height: 90px"
+                                                                src="{% static 'assets/img/zoom.png' %}" alt=""></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-md-12">
+                                                <p class="f-16">This opportunity is not paid. Please consider to pay for
+                                                    package in
+                                                    order
+                                                    to be able to proceed with interview process</p>
+                                                <a class="f-14" href="{% url "packs" %}">Click here to continue with
+                                                    payments</a>
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                    </p>
+                                </details>
+                            {% elif data.status == 'interviewed' %}
+                                <details>
+                                    <summary>
+                                        <h5 class="open-summary">
+                                    <span class="badge badge-warning badge-lg">
+                                        Shortlist or End Matching Process With
+                                        {% if data.user.first_name and data.user.last_name %}
+                                            {{ data.user.first_name }} {{ data.user.last_name }}
+                                        {% else %}
+                                            {{ data.user.username }}
+                                        {% endif %}
+                                        <i id="open" class="fa fa-arrow-down"></i>
+                                    </span>
+                                        </h5>
+                                    </summary>
+                                    <p>
+                                    <div class="row">
+
+                                        <div class="col-md-12 text-center">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <a data-toggle="modal" data-target=".shortlist{{ data.id }}"
+                                                       class="btn btn-warning text-dark font-weight-bold"> Shortlist A
+                                                        Talent</a>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <a data-toggle="modal" data-target=".reject{{ data.id }}"
+                                                       class="btn btn-danger text-white font-weight-bold">Reject A
+                                                        Talent</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    </p>
+                                </details>
+
+                            {% elif data.status == 'shortlisted' %}
+                                <details>
+                                    <summary>
+                                        <h5 class="open-summary">
+                                    <span class="badge badge-warning badge-lg">
+                                        Give An Offer or End Matching Process With
+                                        {% if data.user.first_name and data.user.last_name %}
+                                            {{ data.user.first_name }} {{ data.user.last_name }}
+                                        {% else %}
+                                            {{ data.user.username }}
+                                        {% endif %}
+                                        <i id="open" class="fa fa-arrow-down"></i>
+                                    </span>
+                                        </h5>
+                                    </summary>
+                                    <p>
+                                    <div class="row">
+
+                                        <div class="col-md-12 text-center">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <a data-toggle="modal" data-target=".offer{{ data.id }}"
+                                                       class="btn btn-success text-white font-weight-bold">Give An
+                                                        Offer</a>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <a data-toggle="modal" data-target=".reject{{ data.id }}"
+                                                       class="btn btn-danger text-white font-weight-bold">Reject A
+                                                        Talent</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    </p>
+                                </details>
+                            {% elif data.status == 'offergiven' %}
+                                <details>
+                                    <summary>
+                                        <h5 class="open-summary">
+                                    <span class="badge badge-warning badge-lg">
+                                        Send a congrats message to
+                                        {% if data.user.first_name and data.user.last_name %}
+                                            {{ data.user.first_name }} {{ data.user.last_name }}
+                                        {% else %}
+                                            {{ data.user.username }}
+                                        {% endif %}
+                                        <i id="open" class="fa fa-arrow-down"></i>
+                                    </span>
+                                        </h5>
+                                    </summary>
+                                    <p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <a data-toggle="modal" data-target=".congrats{{ data.id }}"><img
+                                                        style=" width: 10%;" src="{% static 'assets/img/mail.png' %}"
+                                                        alt=""></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </p>
+                                </details>
+                            {% endif %}
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-end">
+                    <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+
+<div class="modal fade rotate message{{ data.id }}" id="message">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-remove"></i>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">
+                <span>Message Comming soon..!</span>
+            </div>
+            <div class="modal-footer"><a href="#" data-dismiss="modal" class="btn">Close</a>
+                <a href="#" class="btn btn-dark font-weight-bold text-white">Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% for data in matches %}
+    <div class="modal fade rotate gmeet{{ data.id }}" id="gmeet">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark">You are about to start an Interview process on Google Meet
+                        with {{ data.user.first_name }} {{ data.user.last_name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                            class="fa fa-remove"></i></button>
+                </div>
+                <div class="container"></div>
+                <div class="modal-body">
+                    <h6 class="text-dark"> By clicking continue button the system will change talent's status from
+                        Reviewing to Interviewing</h6>
+                    <h6 class="text-dark">If that is not your intension you can click close button</h6>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+
+                    <form action="{% url 'update_match' data.id %}" method="post"
+                          {% if data.status == 'reviewing' %}target="_blank"{% endif %}>
+                        {% csrf_token %}
+                        <input type="hidden" name="user" value={{ data.user.id }}>
+                        <input type="hidden" name="status" value="interviewed">
+                        {% for data in data.opportunity.all %}
+                            <input type="hidden" name="opportunity" value={{ data.id }}>
+                        {% endfor %}
+                        <input type="hidden" name="talent" value="{{ data.talent_id }}">
+                        <input type="hidden" name="startup" value="{{ data.startup_id }}">
+
+                        <input type="hidden" name="via" value="gmeet">
+
+
+                        <button type="submit" class="btn btn-warning font-weight-bold rounded-pill text-dark">Continue
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+{% for data in matches %}
+    <div class="modal fade rotate zoom{{ data.id }}" id="zoom">
+        <div class="modal-dialog   modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary">Create Zoom Meeting
+                        with {{ data.user.first_name }} {{ data.user.last_name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                            class="fa fa-remove"></i></button>
+                </div>
+                <div class="container"></div>
+                <div class="modal-body">
+                    <form id="create_zoom_meeting_form" action="{% url 'create_zoom_meeting' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text" hidden value="{{ data.talent.id }}" name="talent_id">
+                        <input type="text" hidden value="{{ data.id }}" name="match_id">
+                        <p style="display: none" id="meeting_success" class="text-center f-16">
+                            <span class="text-success">Meeting created successfully. <a href="{% url 'zoom' %}">View Meetings</a></span>
+                        </p>
+                        <p style="display: none" id="meeting_error" class="text-center f-16">
+                            <span class="text-danger">Something went wrong</span>
+                        </p>
+                        <label style="width: 100%"> Your Zoom Email / ID
+                            <input type="text" name="host_email" required class="form-control">
+                        </label>
+                        <label style="width: 100%"> Agenda
+                            <input type="text" name="agenda" required class="form-control">
+                        </label>
+                        <label style="width: 100%"> Meeting Password
+                            <input type="password" maxlength="9" name="password" required class="form-control">
+                        </label>
+                        <label style="width: 100%"> Start Time
+                            <input type="datetime-local" required name="start_time" class="form-control">
+                        </label>
+                        <label style="width: 100%"> Contact Name
+                            <input type="text" required name="contact_name" class="form-control"
+                                   value="{{ data.user.first_name }} {{ data.user.last_name }}" disabled>
+                        </label>
+                        <em class="mt-3 text-bold">{{ data.user.first_name }} {{ data.user.last_name }} will receive a
+                            message notification
+                            with a meeting join link</em>
+                        <div class="float-right mt-3">
+                            <a href="#" data-dismiss="modal" class="btn">Close</a>
+                            <button id="create_zoom_meeting_button" type="submit"
+                                    class="btn btn-warning font-weight-bold rounded-pill text-dark">
+                                Create
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+{% for data in matches %}
+    <div class="modal fade rotate mail{{ data.id }}" id="mail">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success">You are about to start an Interview process
+                        with {{ data.user.first_name }} {{ data.user.last_name }} via Gmail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                            class="fa fa-remove"></i></button>
+                </div>
+                <div class="container"></div>
+                <div class="modal-body">
+                    <h6 class="text-dark"> By clicking continue button the system will change talent's status from
+                        Reviewing to Interviewing</h6>
+                    <h6 class="text-dark">If that is not your intention you can click close button</h6>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <form action="{% url 'update_match' data.id %}" method="post"
+                          {% if data.status == 'reviewing' %}target="_blank"{% endif %}>
+                        {% csrf_token %}
+                        <input type="hidden" name="user" value={{ data.user.id }}>
+                        <input type="hidden" name="status" value="interviewed">
+                        {% for data in data.opportunity.all %}
+                            <input type="hidden" name="opportunity" value={{ data.id }}>
+                        {% endfor %}
+                        <input type="hidden" name="talent" value="{{ data.talent_id }}">
+                        <input type="hidden" name="startup" value="{{ data.startup_id }}">
+
+                        <input type="hidden" name="via" value="mail">
+
+                        <button type="submit" class="btn btn-warning font-weight-bold rounded-pill text-dark">Continue
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+
+
+
+{% for data in matches %}
+    <div class="modal fade rotate shortlist{{ data.id }}" id="shortlist">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success">Proceed to shortlisting?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                            class="fa fa-remove"></i></button>
+                </div>
+                <div class="container"></div>
+                <div class="modal-body">
+                    <h6 class="text-dark"> By clicking Continue button the system will change talent's status from
+                        Interviewed to Shortlisted</h6>
+                    <h6 class="text-dark">If that is not your intension you can click close button</h6>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <form action="{% url 'update_match' data.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user" value={{ data.user.id }}>
+                        <input type="hidden" name="status" value="shortlisted">
+                        {% for data in data.opportunity.all %}
+                            <input type="hidden" name="opportunity" value={{ data.id }}>
+                        {% endfor %}
+                        <input type="hidden" name="talent" value="{{ data.talent_id }}">
+                        <input type="hidden" name="startup" value="{{ data.startup_id }}">
+
+                        <input type="hidden" name="via" value="shortlist">
+                        <button type="submit" class="btn btn-warning font-weight-bold rounded-pill text-dark">Continue
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% for data in matches %}
+    <div class="modal fade rotate reject{{ data.id }}" id="reject">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger">You are about to Reject
+                        a {{ data.user.first_name }} {{ data.user.last_name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                            class="fa fa-remove"></i></button>
+                </div>
+                <div class="container"></div>
+                <div class="modal-body">
+                    <h6 class="text-dark"> By clicking Continue button the system will change talent's status from
+                        Interviewed to Rejected</h6>
+                    <h6 class="text-dark">If that is not your intension you can click close button</h6>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <form action="{% url 'update_match' data.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user" value={{ data.user.id }}>
+                        <input type="hidden" name="status" value="rejected">
+                        {% for data in data.opportunity.all %}
+                            <input type="hidden" name="opportunity" value={{ data.id }}>
+                        {% endfor %}
+                        <input type="hidden" name="talent" value="{{ data.talent_id }}">
+                        <input type="hidden" name="startup" value="{{ data.startup_id }}">
+                        <input type="hidden" name="via" value="reject">
+                        <button type="submit" class="btn btn-danger font-weight-bold rounded-pill text-white">Continue
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+{% for data in matches %}
+    <div class="modal fade rotate offer{{ data.id }}" id="offer">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success">You are about to Give an offer to
+                        <br>{{ data.user.first_name }} {{ data.user.last_name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                            class="fa fa-remove"></i></button>
+                </div>
+                <div class="container"></div>
+                <div class="modal-body">
+                    <h6 class="text-dark"> By clicking Continue button the system will change talent's status from
+                        Shortlisted to Offer Given</h6>
+                    <h6 class="text-dark">If that is not your intension you can click close button</h6>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <form action="{% url 'update_match' data.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user" value={{ data.user.id }}>
+                        <input type="hidden" name="status" value="offergiven">
+                        {% for data in data.opportunity.all %}
+                            <input type="hidden" name="opportunity" value={{ data.id }}>
+                        {% endfor %}
+                        <input type="hidden" name="talent" value="{{ data.talent_id }}">
+                        <input type="hidden" name="startup" value="{{ data.startup_id }}">
+                        <input type="hidden" name="via" value="offer">
+                        <button type="submit" class="btn btn-success font-weight-bold rounded-pill text-white">
+                            Continue
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+{% for data in matches %}
+    <div class="modal fade rotate congrats{{ data.id }}" id="congrats">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title text-success text-center ml-5">Send a congrats message
+                        to<br>{{ data.user.first_name }} {{ data.user.last_name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                            class="fa fa-remove"></i></button>
+                </div>
+                <div class="container"></div>
+                <div class="modal-body">
+                    <h6 class="text-dark"> By clicking Continue button the system will change talent's status from
+                        Shortlisted to Offer Given</h6>
+                    <h6 class="text-dark">If that is not your intension you can click close button</h6>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <a class="btn btn-success font-weight-bold" href="http://mail.google.com">Send now <i
+                            class="fa fa-paper-plane"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+
+{% for data in listings %}
+    <div class="modal fade " id="pay{{ data.id }}">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class=" font-weight-bold modal-title text-dark text-center ml-5">Opportunity Package
+                        Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                            class="fa fa-remove"></i></button>
+                </div>
+                <div class="container"></div>
+                <div class="modal-body text-left">
+
+                    <form class="form1" method="POST" action="{% url 'packs' %}">
+                        {% csrf_token %}
+                        {% if package.inactive_opportunities > 0 %}
+                            <div class="alert alert-warning" role="alert">
+                                <span style="color: black; text-align: center" class="f-16 text-center text-black-50">
+                                    You have {{ package.inactive_opportunities }} unpaid
+                                    opportunities
+                                </span>
+                            </div>
+                        {% endif %}
+
+                        {% if package.inactive_opportunities %}
+                            <label for="">How Many Opportunities You Want To Pay?</label>
+                            <input id="opp" type="text" value="{{ package.inactive_opportunities }}"
+                                   name="posted_opportunity" class="form-control opp">
+                        {% else %}
+                            <label for="">How Many Opportunities You Want To Post?</label>
+                            <input id="opp" type="text" name="posted_opportunity" class="form-control opp">
+                        {% endif %}
+                        <input type="hidden" name="pack_name" value="{{ data.name }}">
+                        <input type="hidden" name="pack_id" value="{{ data.id }}">
+                        <input type="hidden" name="listing_name" value="{{ data.id }}">
+                        <input type="hidden" name="phone" value="{{ request.user.startup_set.first.phone_number }}">
+                        <input type="hidden" name="name" value=" {{ request.user }}"/>
+                        <input type="hidden" name="email" value="{{ request.user.email }}"/>
+                        <button class="btn btn-warning font-weight-bold mt-3 submit text-dark" type="submit">Proceed to
+                            Payment
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+<script src="{% static 'assets/js/jquery-3.js' %}"></script>
+<script src="{% static 'assets/js/jquery-toast.js' %}"></script>
+<script>
+    // this is the id of the form
+    $("#create_zoom_meeting_form").submit(function (e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        document.getElementById("create_zoom_meeting_button").setAttribute("disabled", "true");
+        document.getElementById("create_zoom_meeting_button").innerHTML = "Creating ..."
+
+        let form = $(this);
+        let actionUrl = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: form.serialize(), // serializes the form's elements.
+            success: function (response) {
+                console.log(response)
+                document.getElementById("create_zoom_meeting_button").removeAttribute("disabled");
+                document.getElementById("create_zoom_meeting_button").innerHTML = "Create";
+                document.getElementById("meeting_success").style.display = 'inline';
+                document.getElementById("meeting_error").style.display = 'none';
+            },
+            error: function (error) {
+                console.log(error)
+                document.getElementById("create_zoom_meeting_button").removeAttribute("disabled");
+                document.getElementById("create_zoom_meeting_button").innerHTML = "Create";
+                document.getElementById("meeting_success").style.display = 'none';
+                document.getElementById("meeting_error").style.display = 'inline';
+            }
+        });
+
+    });
+</script>
+
+
+
+

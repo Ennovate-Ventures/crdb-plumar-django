@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Plumar | Education</title>
+{% endblock title %}
+
+{% block header %}
+    <style>
+        .form-control {
+            border-radius: 20px;
+        }
+    </style>
+{% endblock header %}
+
+{% block contents %}
+    {% include 'includes/nav.html' %}
+    <style>
+        #id_still_working li {
+            display: inline-flex;
+            margin-left: 20px;
+
+            justify-content: space-between;
+        }
+
+        /* input[type="radio"]{margin: 0px 20px}; */
+    </style>
+
+    <!-- Dashboard Content Section Start -->
+    <div class="dashboard-content-section section bg_color--5">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-3">
+                    {% include 'talent_dash/includes/sidebar.html' %}
+                </div>
+                <div class="col-xl-10 col-lg-9">
+
+                    <div class="dashboard-main-inner">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-breadcrumb-content mb-40">
+                                    <h1>Education Information</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.tags == 'success' %}
+                                            <div id="noto" class="alert alert-success"><i
+                                                    class="bi bi-check-circle"></i>
+                                                {{ message }}
+                                            </div>
+                                        {% endif %}
+                                        {% if message.tags == 'error' %}
+                                            <div id="noto"
+                                                 class="alert alert-danger bg-danger alert-dismissible fade show ">
+                                                <span class="text-white">{{ message }}</span>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="dashboard-overview">
+                            <div class="row">
+                                <div class="col-xl-12 col-12">
+                                    <div class="profile-applications mb-50">
+                                        <div class="profile-applications-main-block">
+                                            <div class="profile-applications-form">
+                                                {% for data in education %}
+                                                    <div class="row mb-40">
+                                                        <div class="col-lg-5 col-md-5">
+                                                            <div class="content-left">
+                                                                <h5 class="company-name theme-color">
+                                                                    <i class="fas fa-school text-muted"></i> {{ data.school_name }}
+                                                                </h5>
+                                                                <span>
+                                                                    <i class="lnr lnr-graduation-hat text-muted"></i> {{ data.speciality }}
+                                                                </span>
+
+                                                            </div>
+                                                            <span class="date">
+                                                                <i class="lnr lnr-clock"></i> {{ data.start_date|date:'m/Y'}} - {{ data.end_date|date:"m/Y"}}
+                                                            </span>
+
+                                                        </div>
+                                                        <div class="col-lg-5 col-md-5">
+                                                            {{ data.details }}
+                                                        </div>
+                                                        <div class=" col-lg-2 col-md-2">
+                                                            <a data-bs-toggle="modal"
+                                                               data-bs-target=".edit{{ data.id }}"
+                                                               data-bs-placement="bottom" title="Edit"><i
+                                                                    class="lnr lnr-pencil"></i></a>
+                                                            <a data-bs-target="#delete{{ data.id }}"
+                                                               data-bs-toggle="modal" data-bs-placement="bottom"
+                                                               title="Delete"><i class="fa fa-trash ml-4"></i></a>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                <button class="btn btn-warning mt-3" data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdrop">Add Education Background
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard Content Section End -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Education Information</h5>
+                    <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#10006;</a>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'education' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row mb-20">
+                            <div class="col-md-6">
+                                <label for="">Programme/Speciality/Course</label>
+                                <input type="text" name="speciality" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">School/university/College Name</label>
+                                <input type="text" name="school_name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mb-20">
+                            <div class="col-md-6">
+                                <label for="">Start Date</label>
+                                <input type="date" name="start_date" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">End Date</label>
+                                <input type="date" name="end_date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mb-20">
+                            <div class="col-md-12">
+                                <label for="">Describe Your Experience During Your Studies</label>
+                                <textarea class="form-control" name="details" id="" cols="30" rows="5"></textarea>
+                            </div>
+
+                        </div>
+                </div>
+                <div class="row ml-2 mr-2">
+
+
+                </div>
+                <div class="ml-4 mt-3 mb-20">
+                    <button style="border-radius: 50px" type="submit" class="btn btn-warning">Submit Now</button>
+                    <button style="border-radius: 50px" type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    {% for data in education %}
+        <div class="modal fade edit{{ data.id }} " data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold" id="staticBackdropLabel">{{ data.school_name }}</h5>
+                        <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#10006;</a>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/edit-education/{{ data.id }}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row mb-20">
+                                <div class="col-md-6">
+                                    <label for="">Programme/Speciality/Course</label>
+                                    <input type="text" class="form-control" name="speciality"
+                                           value="{{ data.speciality }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">School/university/College Name</label>
+                                    <input type="text" class="form-control" name="school_name"
+                                           value="{{ data.school_name }}">
+                                </div>
+                            </div>
+                            <div class="row mb-20">
+                                <div class="col-md-6">
+                                    <label for="">Start Date</label>
+                                    <input type="date" class="form-control" name="start_date"
+                                           value="{{ data.start_date|date:'Y-m-d'}}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="">End Date</label>
+                                    <input id="fin" type="date" class="form-control" name="end_date"
+                                           value="{{ data.end_date|date:'Y-m-d'}}">
+                                </div>
+                            </div>
+                            <div class="row mb-20">
+                                <div class="col-md-12">
+                                    <label for="">Describe Your Experience During Your Studies</label>
+                                    <textarea class="form-control" cols="30" rows="5"
+                                              name="details">{{ data.details }}</textarea>
+                                </div>
+                            </div>
+
+
+                    </div>
+                    <div class="ml-4 mt-3 mb-20">
+                        <button type="submit" class="btn btn-warning text-white">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+    {% for data in education %}
+        <div class="modal fade" id="delete{{ data.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Delete Experince</h5>
+                        <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#10006;</a>
+                    </div>
+                    <div class="modal-body">
+                <span class="text-danger font-weight-bold">
+                    Are you sure you want to delete this data?
+                </span>
+                    </div>
+                    <div class="ml-4 mt-3 mb-20">
+                        <a href="{% url 'delete_education' data.id %}" class="btn btn-danger text-white">Delete</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script>
+        $('#noto').delay(5000).fadeOut('slow');
+    </script>
+
+{% endblock contents %}
+
+
+{% block footer %}
+{% endblock footer %}
+    

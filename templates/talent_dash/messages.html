@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>DevStack | Messages</title>
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block contents %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/css/message.css' %}">
+<!------ Include the above in your HEAD tag ---------->
+
+{% include 'includes/nav.html' %}
+        <!-- Dashboard Content Section Start -->
+        <div class="dashboard-content-section section bg_color--5">
+            <div class="container-fluid p-0">
+                <div class="row no-gutters">
+                    <div class="col-xl-2 col-lg-3">
+                        {% include 'talent_dash/includes/sidebar.html' %}
+                    </div>
+                    <div class="col-xl-10 col-lg-9">
+
+                        <div class="dashboard-main-inner">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="page-breadcrumb-content mb-40">
+                                        <h1>Messages</h1>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="messages-overview">
+                                <div class="container">
+                                    <div class="messaging">
+                                        <div class="inbox_msg">
+                                            <div class="inbox_people">
+                                                <div class="headind_srch">
+                                                <div class="recent_heading">
+                                                    <h4 class="font-weight-bolder text-warning">Recent</h4>
+                                                </div>
+                                                <div class="srch_bar">
+                                                    <div class="stylish-input-group">
+                                                    <input type="text" class="search-bar"  placeholder="Search" >
+                                                    <span class="input-group-addon">
+                                                    <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                                                    </span> </div>
+                                                </div>
+                                                </div>
+                                                <div class="inbox_chat">
+                                               
+                                                <div class="chat_list active_chat">
+                                                    {% for data in threads %}
+                                                    {% if request.user != data.sender  or request.user != data.receiver %}
+                                                    <div class="chat_people">
+                                                    <div class="chat_img">
+                                                        {% if data.sender.profile.image != request.user.profile.image %}
+                                                        <img style="height: 40px; width:40px; border-radius: 50%;" src="{{ data.sender.profile.image.url }}" alt="sunil">
+                                                        {% else %}
+                                                        <img style="height: 40px; width:40px; border-radius: 50%;" src="{{ data.receiver.profile.image.url }}" alt="sunil">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="chat_ib">
+                                                        <h5>
+                                                            {% if data.sender != request.user %}
+                                                            {{data.sender.username}}
+                                                            {% else %}
+                                                            {{data.receiver.username}}
+                                                            {% endif %}
+                                                            <span class="chat_date">Dec 25</span>
+                                                        </h5>
+                                                        <p>Test, which is a new approach to have all solutions 
+                                                        astrology under one roof.</p>
+                                                    </div>
+                                                    </div>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                   
+                                                </div>
+
+                                                
+                                                <!-- <div class="incoming_msg">
+                                                    <div class="incoming_msg_img"><img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                                    <div class="received_msg">
+                                                    <div class="received_withd_msg">
+                                                        <p>Test, which is a new approach to have</p>
+                                                        <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+                                                    </div>
+                                                </div>
+                                         -->
+                                               
+                                             
+                                                </div>
+                                            </div>
+                                           <div class="mesgs" id="mesgs">
+                                            <div class="msg_history mb-40" id="scroller">
+                                           
+
+                                            </div>
+                                            <!-- <ul id="test" ></ul> -->
+                                            <div class="type_msg">
+                                            <div class="input_msg_write">
+                                                <form action="" id="chat_form" method="post">
+                                                    <input type="hidden" name="thread"  value="4" id="thread">
+                                                    <input type="text" class="write_msg" name="text" placeholder="Type a message" />
+                                                    <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                                </form>
+                                              
+                                            </div>
+                                            </div>
+                                            
+                                        </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Content Section End -->
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    
+    function send_text(){
+        console.log('send_text works')
+        $.ajax({
+            method:'post',
+            url: "{% url 'user_message' %}",
+            data:{
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                text :$('.write_msg').val(),
+                thread:$('#thread').val()
+            },
+
+            success:function(data){
+                console.log(data)
+            },
+            error:function(error){
+                console.log(error)
+            }
+        });
+    }
+
+    $("#chat_form").on('submit', function(e){
+        e.preventDefault();
+        console.log('submit event works')
+        send_text()
+        $("#chat_form")[0].reset()
+
+         
+    });
+
+
+    function refresh() {
+    $.ajax({
+      url:"{% url 'user_message'%}" ,
+      success: function(data) {
+          $('.msg_history').empty()
+          $('#test').append(data);
+          console.log(data)
+          for( var i in data){
+            console.log(data[i].the_message)
+                var monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"];
+                var date = new Date(data[i].sent_on);
+                var day  = date.getDate();
+                var mnth = monthNames[date.getMonth()];
+                var year = date.getFullYear();
+                var hrs  = date.getHours();
+                var mnts = date.getMinutes();
+                var hhh = hrs > 12 ? "PM" : "AM"
+            if(data[i].user_id == "{{ request.user.id }}"){
+                $('#test').append('<li class="right" >'+data[i].the_message+'</li>');
+                $('.msg_history').append(
+                    '<div class="outgoing_msg"><div class="sent_msg"><p>'+data[i].the_message+'</p><span class="time_date">'+hrs+':'+mnts+' '+hhh+' '+' | '+mnth+' '+day+' </span></div></div>')
+            }
+            else{
+                
+                $('.msg_history').append('<div class="received_msg"><div class="received_withd_msg"><p>'+data[i].the_message+'</p><span class="time_date">'+hrs+':'+mnts+' '+hhh+' '+' | '+mnth+' '+day+' </span></div></div>');
+            }
+            
+          }
+
+
+         
+        
+      }
+    });
+};
+$(function(){
+    refresh();
+    var int = setInterval("refresh()", 1000);
+  
+});
+
+
+var div = $('#scroller')
+        var o = div.offset().top; //gets the top position of the div
+        var h = div.outerHeight(); // gets the height of the div
+
+        div.scrollTop( o - h );
+
+</script>
+
+
+{% endblock contents %}
+
+{% block footer %}
+{% endblock footer %}
+

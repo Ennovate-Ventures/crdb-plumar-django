@@ -1,0 +1,263 @@
+{% extends 'dash/main.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block contents %}
+    <div class="pcoded-inner-content">
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-body start -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6 float-right">
+                            <div class="row">
+                                <!-- sale card start -->
+
+                                <div class="col-md-6">
+                                    <div class="card bg-c-red total-card bg-dark">
+                                        <div class="card-block">
+                                            <div class="text-left">
+                                                <h4 class="text-warning font-weight-bold">{{ is_expired }}</h4>
+                                                <p class="m-0 text-warning font-weight-bold">Attended Meeting</p>
+                                            </div>
+                                            <span class="label bg-c-red value-badges">{{ attended_meetings_count }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-c-green total-card bg-warning">
+                                        <div class="card-block">
+                                            <div class="text-left text-dark font-weight-bold">
+                                                <h4 class="text-dark font-weight-bold">{{ active }}</h4>
+                                                <p class="m-0 text-dark font-weight-bold">On-Hold Meetings</p>
+                                            </div>
+                                            <span class="label bg-c-green value-badges">{{ waiting_meetings_count }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  sale analytics start -->
+                        <div class="col-xl-12 col-md-12">
+
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Zoom Meetings <span
+                                            class="badge badge-pill badge-warning">{{ meetings_count }}</span></h5>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover m-b-0 without-header">
+                                            <thead>
+                                            <th>Meeting ID</th>
+                                            <th>Host Email</th>
+                                            <th>Agenda</th>
+                                            <th>Duration</th>
+                                            <th>Status</th>
+                                            <th>Password</th>
+                                            <th>Start Time</th>
+                                            <th>Interviewee</th>
+                                            <th>Actions</th>
+                                            </thead>
+                                            <tbody>
+                                            {% for data in meeting %}
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-inline-block align-middle">
+                                                            <div class="d-inline-block">
+                                                                <h6>
+                                                                    <a href="javascript:void(0)">{{ data.meeting_id }}</a>
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="f-w-700 mr-2">{{ data.host_email }}</h6>
+                                                    </td>
+                                                    <td>{{ data.agenda }}</td>
+                                                    <td>{{ data.duration }} mins</td>
+                                                    <td>
+                                                        {% if data.status == 'waiting' %}
+                                                            <span class="badge bg-secondary text-white">Waiting</span>
+                                                        {% else %}
+                                                            <span class="badge bg-success text-white">Attended</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ data.password }}</td>
+                                                    <td>{{ data.start_time }}</td>
+                                                    <td>{{ data.interviewee.user.first_name }} {{ data.interviewee.user.last_name }}</td>
+                                                    <td>
+                                                        <h6 class="f-w-700">
+                                                            <p title="Launch Meeting" style="cursor: pointer"
+                                                               class="text-success">
+                                                                <span class="badge bg-success">
+                                                                    <a onclick="launchZoomMeeting({{ data.id }})"
+                                                                       id="launch_zoom_meeting" target="_blank"
+                                                                       class="text-white"
+                                                                       href="{{ data.start_url }}">Launch</a>
+                                                                </span>
+                                                            </p>
+                                                            <p data-toggle="modal"
+                                                               data-target="#delete-meeting{{ data.id }}"
+                                                               title="Delete Meeting" style="cursor: pointer"
+                                                               class="text-white badge bg-danger">
+                                                                Delete
+                                                            </p>
+                                                        </h6>
+                                                    </td>
+                                                </tr>
+
+                                                <div class="modal fade" id="delete-meeting{{ data.id }}"
+                                                     data-backdrop="static"
+                                                     data-keyboard="false" tabindex="-1"
+                                                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticBackdropLabel">Delete
+                                                                    A Meeting</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="card-block">
+                                                                    <p style="display: none" class="text-danger"
+                                                                       id="delete_error">
+                                                                        Something went wrong
+                                                                    </p>
+                                                                    <p class="text-center" style="font-size: 22px">
+                                                                        Are you sure you want to delete a meeting
+                                                                        with {{ data.interviewee.user.first_name }} {{ data.interviewee.user.last_name }}?
+                                                                    </p>
+                                                                    <form id="delete_zoom_form" class="form-group"
+                                                                          action="{% url 'delete_zoom_meeting' data.meeting_id %}"
+                                                                          method="POST">
+                                                                        {% csrf_token %}
+                                                                        <div class="modal-footer justify-content-start float-right">
+                                                                            <button type="button"
+                                                                                    class="btn btn-secondary rounded-pill"
+                                                                                    data-dismiss="modal">
+                                                                                Close
+                                                                            </button>
+                                                                            <button id="delete_zoom_meeting_button"
+                                                                                    type="submit"
+                                                                                    class="btn btn-danger rounded-pill">
+                                                                                Delete
+                                                                            </button>
+                                                                        </div>
+                                                                    </form>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <nav aria-label="Page navigation example">
+                                        {% if meeting.has_other_pages %}
+                                            <ul class="pagination">
+                                                {% if opps.has_previous %}
+                                                    <li class="page-item">
+                                                        <a class="page-link text-dark"
+                                                           href="?page={{ meeting.previous_page_number }}"
+                                                           aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item disabled text-center"></li>
+                                                {% endif %}
+
+                                                {% for i in meeting.paginator.page_range %}
+                                                    {% if opps.number == i %}
+                                                        <li class="page-item "><a
+                                                                class="page-link bg-c-yellow text-dark"
+                                                                href="?page={{ i }}">{{ i }}</a></li>
+                                                    {% else %}
+                                                        <li class="page-item"><a class="page-link text-dark"
+                                                                                 href="?page={{ i }}">{{ i }}</a></li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if meeting.has_next %}
+                                                    <li class="page-item">
+                                                        <a class="page-link text-dark"
+                                                           href="?page={{ meeting.next_page_number }}"
+                                                           aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item disabled text-center"></li>
+                                                {% endif %}
+                                            </ul>
+                                        {% endif %}
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- sale card end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page-body end -->
+    </div>
+
+    <script src="{% static 'assets/js/jquery-3.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-toast.js' %}"></script>
+    <script>
+
+        function launchZoomMeeting(meetingId) {
+            $.ajax({
+                type: "POST",
+                url: `https://plumar.co/launch-zoom-meeting/${meetingId}`,
+                data: {},
+                success: function (response) {
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        }
+
+        // this is the id of the form
+        $("#delete_zoom_form").submit(function (e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            document.getElementById("delete_zoom_meeting_button").setAttribute("disabled", "true");
+            document.getElementById("delete_zoom_meeting_button").innerHTML = "Deleting ..."
+
+            let form = $(this);
+            let actionUrl = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: actionUrl,
+                data: form.serialize(), // serializes the form's elements.
+                success: function (response) {
+                    console.log(response)
+                    document.getElementById("delete_zoom_meeting_button").removeAttribute("disabled");
+                    document.getElementById("delete_zoom_meeting_button").innerHTML = "Delete";
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.log(error)
+                    document.getElementById("delete_zoom_meeting_button").removeAttribute("disabled");
+                    document.getElementById("delete_zoom_meeting_button").innerHTML = "Delete";
+                    document.getElementById("delete_error").style.display = 'none';
+                }
+            });
+
+        });
+    </script>
+{% endblock contents %}

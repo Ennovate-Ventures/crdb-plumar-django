@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% endblock header %}
+
+{% block contents %}
+{% include 'includes/nav.html' %}
+    <div id="main-wrapper">
+  
+        <!-- Dashboard Content Section Start -->
+        <div class="dashboard-content-section section bg_color--5">
+            <div class="container-fluid p-0">
+                <div class="row no-gutters">
+                    <div class="col-xl-2 col-lg-3">
+                        <div class="dashboard-sidebar">
+                            <div class="dashboard-menu">
+                                <ul class="nav">
+                                    <li>
+                                        <h3>Pluma LMS</h3>
+                                        <ul>
+                                            <li><a class="text-muted" href="dashboard.html"><i class="text-muted lnr lnr-chart-bars"></i> Dashboard </a></li>
+                                            <li><a class="text-muted" href="message.html"><i  class="text-muted lnr lnr-bubble"></i> Cources </a></li>
+                                            <li><a class="text-muted" href="job-alerts.html"><i class="text-muted lnr lnr-envelope"></i> Progress</a></li>
+                                            <li><a class="text-muted" href="reviews.html"><i class="text-muted lnr lnr-star"></i> Quizes </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h3>Resources</h3>
+                                        <ul>
+                                            <li><a class="text-muted" href="applications.html"><i class="text-muted lnr lnr-briefcase"></i> Videos </a></li>
+                                            <li><a class="text-muted" href="bookmarks.html"><i class=" text-muted lnr lnr-bookmark"></i> Articles </a></li>
+                                        </ul>
+                                    </li>    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-9">
+                        <div class="dashboard-main-inner">
+                            <!-- <div class="row">
+                                <div class="col-12">
+                                    <div class="page-breadcrumb-content mb-40">
+                                        <h1>LMS</h1>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="dashboard-overview">
+                                <div class="row">
+                                    <div class="col-4 mt-55">
+                                        <h1 >Find a Perfect</h1>
+                                        <h1 class="font-weight-bold" >Online Course</h1>
+                                         <form method="get">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <input type="search" name="q" class="form-control rounded-pill">
+                                                </div>
+                                                <div class="col-4">
+                                                   <button type="submit" class="btn btn-warning rounded-pill" >
+                                                       Search
+                                                       <span class="fa fa-search" ></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                         </form>
+                                        <div>
+                                            <small class="font-weight-bold" >The most popular courses</small>
+                                            <ol>
+                                                <li><small class="font-weight-bold" >Business Developement</small></li>
+                                                <li><small class="font-weight-bold" >Marketing</small></li>
+                                                <li><small class="font-weight-bold" >Product Developement</small></li>
+                                                <li><small class="font-weight-bold" >Business Management</small></li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="col-8" style=" width: 100%; height: 400px; background-repeat: no-repeat; background-size: contain; background-image:url({% static 'assets/img/fogg-clip.png' %})">
+                                      
+                                    </div>
+                                </div>
+                                <h4>Explore Categories</h4>
+                                <div class="row">
+                                    
+                                    <div class="col-2">
+                                        <div style="height: 200px; " class="bg-success" >
+                                            <img  style=" justify-self: center; height: 50px; width: 50px; border-radius: 50%;"  src="{% static 'assets/img/fledge.png' %}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Content Section End -->
+
+        <!-- Placed js at the end of the document so the pages load faster -->
+    </div>
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+    {% endblock contents %}
+
+    {% block footer %}
+    {% endblock footer %}

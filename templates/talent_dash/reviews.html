@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load social_share %}
+{% load hitcount_tags %}
+{% load static %}
+
+{% block contents %}
+
+    {% block title %}
+        <title>Plumar | Reviews</title>
+    {% endblock title %}
+
+    {% block header %}
+    {% endblock header %}
+    {% include 'includes/nav.html' %}
+
+    <!-- Dashboard Content Section Start -->
+    <div class="dashboard-content-section section bg_color--5">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-3">
+                    {% include 'talent_dash/includes/sidebar.html' %}
+                </div>
+                <div class="col-xl-10 col-lg-9">
+
+                    <div class="dashboard-main-inner">
+                        {% if not request.user.talent_set.first.qualified %}
+                            <div style="width: 100%; color: #FFF" class="alert alert-success bg-danger"><i
+                                    class="bi bi-check-circle"></i>
+                                Complete quiz to be able to match opportunities. <a href="{% url "quizzes" %}">Click
+                                    here</a>
+                            </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-breadcrumb-content mb-40">
+                                    <h1>Reviews</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-overview">
+
+                            <div class="row">
+                                <div class="col-xl-12 col-12">
+                                    <div class="job-applications mb-50">
+                                        <div class="applications-heading d-flex">
+                                            <div class="message-fields-form p-0 border-0">
+                                                <form action="#">
+                                                    <div class="message-form review-from mt-0">
+                                                        <button class="search-btn"><i class="lnr lnr-magnifier"></i>
+                                                        </button>
+                                                        <input type="text" placeholder="Search in reviews">
+                                                    </div>
+                                                </form>
+                                                <div class="mt-2">
+                                                    <span class="ml-50  font-weight-bold">
+                                                        Your current Total reviews  {% include 'includes/rating.html' %}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="job-applications-main-block">
+                                            <div class="job-applications-table">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th class="width-15">Rating</th>
+                                                        <th class="width-35">Reviews</th>
+                                                        <th class="text-left">Reviewed Time</th>
+                                                        <th class="text-center">View More</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for data in ratings %}
+                                                        <tr class="job-application-item">
+                                                            <td class="application-job">
+                                                                <h3>
+                                                                    <a href="#"><span>{{ data.rating_by.first_name }} </span></a>
+                                                                </h3>
+                                                            </td>
+
+                                                            <td class="application-job">
+                                                                <h3><a href="#">
+                                                                    <span> {{ data.rating_by.last_name }} </span></a>
+                                                                </h3>
+                                                            </td>
+
+                                                            <td class="application-rating">
+                                                                <div class="star">
+                                                                    {% include 'includes/rating_value.html' %}
+                                                                </div>
+                                                            </td>
+                                                            <td class="application-review text-left">
+                                                                    <span> 
+                                                                        {{ data.comments|truncatechars:"60"}}
+                                                                        {% if data.comments|length > 60 %}
+                                                                            <a data-bs-target="#more{{ data.id }}"
+                                                                               data-bs-toggle="modal"
+                                                                               class="text-warning font-weight-bold">More</a>
+                                                                        {% endif %}
+                                                                    </span>
+                                                            </td>
+                                                            <td class="delete-application text-left">
+                                                                <span>{{ data.rating_date|timesince }} ago</span>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a data-bs-target="#more{{ data.id }}"
+                                                                   data-bs-toggle="modal"><i style="font-size: 20px;"
+                                                                                             class="lnr lnr-eye font-weight-bold"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        {% empty %}
+                                                        <td colspan="12" class="text-center"><h5
+                                                                class="font-weight-bold">You have not been reviewed
+                                                            yet.</h5></td>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="application-pagination mb-30">
+                                                <div class="row ml-2">
+                                                    <div class="col-12">
+                                                        {% if ratings.has_other_pages %}
+                                                            <ul class="pagination">
+                                                                {% if ratings.has_previous %}
+                                                                    <li class="page-item">
+                                                                        <a class="page-link text-dark"
+                                                                           href="?page={{ ratings.previous_page_number }}"
+                                                                           aria-label="Previous">
+                                                                            <span aria-hidden="true">&laquo;</span>
+                                                                        </a>
+                                                                    </li>
+                                                                {% else %}
+                                                                    <li class="page-item disabled text-center"></li>
+                                                                {% endif %}
+
+                                                                {% for i in ratings.paginator.page_range %}
+                                                                    {% if ratings.number == i %}
+                                                                        <li class="page-item "><a
+                                                                                class="page-link bg-warning text-dark"
+                                                                                href="?page={{ i }}">{{ i }}</a></li>
+                                                                    {% else %}
+                                                                        <li class="page-item"><a
+                                                                                class="page-link text-dark"
+                                                                                href="?page={{ i }}">{{ i }}</a></li>
+                                                                    {% endif %}
+                                                                {% endfor %}
+
+                                                                {% if ratings.has_next %}
+                                                                    <li class="page-item">
+                                                                        <a class="page-link text-dark"
+                                                                           href="?page={{ ratings.next_page_number }}"
+                                                                           aria-label="Next">
+                                                                            <span aria-hidden="true">&raquo;</span>
+                                                                        </a>
+                                                                    </li>
+                                                                {% else %}
+                                                                    <li class="page-item disabled text-center"></li>
+                                                                {% endif %}
+                                                            </ul>
+                                                        {% endif %}
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard Content Section End -->
+
+    {% for data in rating %}
+        <div class="modal fade" id="more{{ data.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"><b>REVIEWED
+                            BY {{ data.rating_by.first_name }} {{ data.rating_by.last_name }}</b></h5>
+                        <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#10006;</a>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <b>Rating</b>
+                                <div class="star text-warning">
+                                    {% include 'includes/rating_value.html' %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <b>Reviewed Time</b>
+                                <div>
+                                    {{ data.rating_date|timesince }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <b>Comments</b>
+                                <div>
+                                    {{ data.comments }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+{% endblock contents %}
+
+{% block footer %}
+{% endblock footer %}
+

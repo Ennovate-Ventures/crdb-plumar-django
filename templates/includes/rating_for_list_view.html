@@ -1,0 +1,64 @@
+
+{% if data.get_rating < 1 %}
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+{% elif data.get_rating >= 1.5 and data.get_rating < 1.9  %}
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star-half"></i>
+<i class="  far fa-star"></i>
+<i class="  fr fa-star"></i>
+<i class="far fa-star"></i>
+{% elif data.get_rating < 2 %}
+<i class=" text-warning fa fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+{% elif data.get_rating >= 2.5 and data.get_rating < 2.9 %}
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star-half"></i>
+<i class="fa fa-star"></i>
+<i class="fa fa-star"></i>
+{% elif data.get_rating < 3 %}
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+{% elif data.get_rating >= 3.5 and data.get_rating < 3.9 %}
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class="text-warning fa fa-star-half"></i>
+<i class="far fa-star"></i>
+{% elif data.get_rating < 4 %}
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+{% elif data.get_rating >= 4.5 and data.get_rating < 4.9  %}
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class="text-info fa fa-star-half"></i>
+
+{% elif data.get_rating < 5 %}
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class="far fa-star"></i>
+{% elif data.get_rating >= 5 %}
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+<i class=" text-warning fa fa-star"></i>
+{% endif %}
+<span class="ml-2 mr-2 " >{{data.get_rating}} Rating </span>

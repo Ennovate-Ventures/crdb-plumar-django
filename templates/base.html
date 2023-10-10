@@ -1,0 +1,413 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% block title %}
+        <title>DevStack</title>
+    {% endblock title %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link href="{% static 'assets/img/fav.png' %}" type="image/png" rel="icon" sizes="196x196">
+    <!-- All css files are included here. -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/iconfont.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/helper.css' %}">
+    <!-- <link rel="stylesheet" href="assets/css/plugins/plugins.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <link rel="stylesheet" href="{% static 'assets/css/plugins.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <!-- Modernizr JS -->
+    <script src="{% static 'assets/js/modernizr-3.js' %}"></script>
+</head>
+<style>
+    #scrollUp {
+        background-color: #106f47;
+    }
+
+    #scrollUp:hover {
+        background-color: #106f47;
+    }
+
+    #slick-slide {
+        color: #106f47;
+    }
+</style>
+
+<body class="template-color-2">
+<div id="main-wrapper" class="bg_image-hv2 section">
+
+    {% block header %}
+        {% include 'includes/nav.html' %}
+    {% endblock header %}
+
+    {% block contents %}
+    {% endblock contents %}
+
+    {% block footer %}
+        <!--Footer section start-->
+        <footer class="footer-section section bg_color--1">
+
+            <!-- Footer Top Section Start -->
+            <div class="footer-top-section section st-border pt-120 pt-lg-100 pt-md-80 pt-sm-60 pt-xs-50 pb-80 pb-lg-60 pb-md-40 pb-sm-20 pb-xs-15">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xl-4 col-lg-3 col-md-6">
+                            <!-- Footer Widget Start -->
+                            <div class="footer-widget mb-30">
+                                <div class="footer-logo">
+                                    <a href="."><img style="width: 150px;"
+                                                     src="{% static 'assets/landing/images/p.png' %}" alt=""></a>
+                                </div>
+                                <div class="address">
+                                    <i class="lnr lnr-map-marker"></i>
+                                    <span>74 Ally Sykes Road, Mbezi Beach</span>
+                                </div>
+                                <div class="email">
+                                    <i class="lnr lnr-envelope"></i>
+                                    <span>info@DevStack.co</span>
+                                </div>
+                                <div class="phone theme-color fz-17"> +255 752 817 723</div>
+                                <div class="footer-social justify-content-start mt-35">
+                                    <a href="https://www.instagram.com/DevStackinc/"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://twitter.com/DevStackInc"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/company/DevStackinc/"><i
+                                            class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                            <!-- Footer Widget End -->
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-6">
+                            <!-- Footer Widget Start -->
+                            <div class="footer-widget mb-30">
+                                <h6 class="title">Company</h6>
+                                <div class="footer-widget-link">
+                                    <ul>
+
+                                        <li><a href="{% url 'policy' %}">Policy Privacy</a></li>
+                                        <li><a href="{% url 'terms' %}">Terms And Conditions</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Widget End -->
+                        </div>
+
+                        <div class="col-xl-2 col-lg-3 col-md-6">
+                            <!-- Footer Widget Start -->
+                            <div class="footer-widget mb-30">
+                                <h6 class="title">Quick links</h6>
+                                <div class="footer-widget-link">
+                                    <ul>
+                                        <li><a href="opportunities?q=software">Software Engineering</a></li>
+                                        <li><a href="opportunities?q=blockchain">Blockchain</a></li>
+                                        <li><a href="opportunities?q=ai">Artificial Intelligence</a></li>
+                                        <li><a href="opportunities?q=devopps">Dev opps</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Widget End -->
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <!-- Footer Widget Start -->
+                            <div class="footer-widget mb-30">
+                                <h6 class="title">Join Other Subscribers!</h6>
+                                <div class="newsletter">
+                                    <p>Get the latest updates delivered right to your inbox <strong>new jobs</strong>
+                                        and <strong>notifications</strong>.</p>
+                                    <div class="newsletter-form">
+                                        <form id="mc-form" class="mc-form">
+                                            <input type="email" placeholder="Enter Your email..." required=""
+                                                   name="EMAIL">
+                                            <button class="ht-btn small-btn" type="submit" value="submit">Subscribe
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <!-- mailchimp-alerts Start -->
+                                    <div class="mailchimp-alerts">
+                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                                    </div>
+                                    <!-- mailchimp-alerts end -->
+                                </div>
+                            </div>
+                            <!-- Footer Widget End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Top Section End -->
+
+            <!--Footer bottom start-->
+            <div class="footer-bottom section fb-60">
+                <div class="container">
+                    <div class="row no-gutters st-border pt-35 pb-35 align-items-center justify-content-between">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="copyright">
+                                <p>
+                                    &copy;
+                                    <script>
+                                        const CurrentYear = new Date().getFullYear();
+                                        document.write(CurrentYear)
+                                    </script>
+                                    <a class="text-warning" href="http://www.ennovateventures.co">Ennovateventures</a>.
+                                    All rights reserved.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="footer-nav">
+                                <nav>
+                                    <ul>
+                                        <li><a href="{% url 'opportunity' %}">Find Work</a></li>
+                                        <li><a href="{% url 'talents' %}">Talents</a></li>
+                                        <li><a href="{% url 'startups' %}">Start-ups</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Footer bottom end-->
+
+        </footer>
+        <!--Footer section end-->
+    {% endblock footer %}
+    <!-- Modal Area Strat -->
+    <div class="modal fade quick-view-modal-container" id="quick-view-modal-container" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="row no-gutters">
+
+                            <div class="col-lg-5">
+                                <div class="login-register-form-area">
+                                    <div class="login-tab-menu">
+                                        <ul class="nav">
+                                            <li><a class="active show" data-toggle="tab" href="#login">Login</a></li>
+                                            <li><a data-toggle="tab" href="#register">Register</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div id="login" class="tab-pane fade show active">
+                                            <div class="login-register-form">
+                                                <form action="{% url 'login' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <p>Login to DevStack with your registered account</p>
+
+                                                    {% if request.GET.next %}
+                                                        <input type="hidden" class="form-control" name="next"
+                                                               value="{{ request.GET.next }}">
+                                                    {% endif %}
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="single-input">
+                                                                <input type="text" placeholder="Username or Email"
+                                                                       name="username">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="single-input">
+                                                                <input type="password" placeholder="Password"
+                                                                       name="password">
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="col-12">
+                                                            <div class="checkbox-input">
+                                                                <input type="checkbox" name="login-form-remember" id="login-form-remember">
+                                                                <label for="login-form-remember">Remember me</label>
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="col-12 mb-25">
+                                                            <button type="submit" class="ht-btn">Login</button>
+                                                        </div>
+                                                        <div class="ml-4">Forgot Password? <a
+                                                                href="{% url 'password_reset' %}">click here</a></div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                        <div id="register" class="tab-pane fade">
+                                            <div class="login-register-form">
+                                                <form action="{% url 'register' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <p>Account</p>
+                                                    <div class="row row-5">
+                                                        <div class="col-12">
+                                                            <div class="single-input">
+                                                                <input type="text" placeholder="Your Username"
+                                                                       name="username">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="single-input">
+                                                                <input type="email" placeholder="Your Email Address"
+                                                                       name="email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="single-input">
+                                                                <input type="password" placeholder="Password"
+                                                                       name="password1">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="single-input">
+                                                                <input type="password" placeholder="Confirm Password"
+                                                                       name="password2">
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="col-6">
+                                                            <div class="checkbox-input">
+                                                                <input type="checkbox" name="login-form-candidate" id="login-form-candidate-one">
+                                                                <label for="login-form-candidate-one">I am a candidate</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="checkbox-input">
+                                                                <input type="checkbox" name="login-form-employer" id="login-form-employer-one">
+                                                                <label for="login-form-employer-one">I am a employer</label>
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="col-12">
+                                                            <div class="register-account">
+                                                                <input id="register-terms-conditions-one"
+                                                                       type="checkbox" class="checkbox" checked=""
+                                                                       required="">
+                                                                <label for="register-terms-conditions-one">I read and
+                                                                    agree to the <a href="{% url 'terms' %}">Terms &amp;
+                                                                        Conditions</a> and
+                                                                    <a href="{% url 'policy' %}">Privacy Policy</a>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mb-25">
+                                                            <button type="submit" class="ht-btn">Register</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="login-instruction">
+                                    <div class="login-instruction-content">
+                                        <h3 class="title">Why Login To Us</h3>
+                                        <p>It’s important for you to have an account and login in order to have full
+                                            access at DevStack. We need to know your account details in order to allow
+                                            work together</p>
+                                        <ul class="list-reasons">
+                                            <li class="reason">Be alerted to the latest opportunities</li>
+                                            <li class="reason">Apply for jobs with a single click</li>
+                                            <li class="reason">Showcase your CV to thousands of startups</li>
+                                            <li class="reason">Keep a record of all your matches</li>
+                                        </ul>
+                                        <span class="sale-text theme-color border-color">Login today &amp; Get access to tons of opportunities</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Modal Area End -->
+
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+
+    <!-- All jquery file included here -->
+    <script src="{% static 'assets/js/jquery-3.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-migrate-3.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.js' %}"></script>
+    <!-- <script src="assets/js/plugins/plugins.js"></script> -->
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+    <!-- Live Chat Script -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132749328-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-132749328-1');
+    </script>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '223900361524792');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=223900361524792&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+    {% block js %}{% endblock %}
+
+    <!--Start of Zendesk Chat Script-->
+    <!-- <script type="text/javascript">
+    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+    $.src="https://v2.zopim.com/?3kYiQe6pwvLdslIO7gS1vT0Yxk7Lh9Jf";z.t=+new Date;$.
+    type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+    </script> -->
+    <!--End of Zendesk Chat Script-->
+</div>
+
+</body>
+
+</html>

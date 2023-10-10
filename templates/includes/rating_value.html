@@ -1,0 +1,48 @@
+
+{% if data.rating_value < 1 %}
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+
+{% elif data.rating_value < 2 %}
+<i class="fa fa-star" ></i>
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+
+{% elif data.rating_value < 3 %}
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+
+{% elif data.rating_value < 4 %}
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+<i class="far fa-star" ></i>
+<i class="far fa-star" ></i>
+
+{% elif data.rating_value < 5 %}
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+<i class="far fa-star" ></i>
+{% elif data.rating_value >= 5 %}
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+<i class="fa fa-star" ></i>
+{% endif %}
+<span class="text-dark ml-2" >{{data.rating_value}}</span>
+
+
+
+
+<!--this file for displaying a value for each rating-->

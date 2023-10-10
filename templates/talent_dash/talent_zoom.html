@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Plumar | Talent Zoom</title>
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block contents %}
+    {% include 'includes/nav.html' %}
+    <!-- Dashboard Content Section Start -->
+    <div class="dashboard-content-section section bg_color--5">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-3">
+                    {% include 'talent_dash/includes/sidebar.html' %}
+                </div>
+                <div class="col-xl-10 col-lg-9">
+
+                    <div class="dashboard-main-inner">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-breadcrumb-content mb-40">
+                                    <h1>Zoom Meetings</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-overview">
+                            <div class="row">
+                                <div class="col-xl-12 col-12">
+                                    <div class="job-applications mb-50">
+                                        <div class="applications-heading d-flex">
+                                            <div class="message-fields-form p-0 border-0">
+                                                <form action="#">
+                                                    <div class="message-form review-from mt-0">
+                                                        <button class="search-btn"><i class="lnr lnr-magnifier"></i>
+                                                        </button>
+                                                        <input type="text" placeholder="Search meetings">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="bookmark-main-block">
+                                            <div class="bookmark-table">
+                                                <table class="table table-hover m-b-0 without-header">
+                                                    <thead>
+                                                    <th>Meeting ID</th>
+                                                    <th>Agenda</th>
+                                                    <th>Duration</th>
+                                                    <th>Status</th>
+                                                    <th>Password</th>
+                                                    <th>Start Time</th>
+                                                    <th>Interviewer</th>
+                                                    <th>Actions</th>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for data in meetings %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="d-inline-block align-middle">
+                                                                    <div class="d-inline-block">
+                                                                        <h6>
+                                                                            <a href="javascript:void(0)">{{ data.meeting_id }}</a>
+                                                                        </h6>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>{{ data.agenda }}</td>
+                                                            <td>{{ data.duration }} mins</td>
+                                                            <td>
+                                                                {% if data.status == 'waiting' %}
+                                                                    <span class="badge p-1 bg-secondary text-white">Waiting</span>
+                                                                {% else %}
+                                                                    <span class="badge p-1 bg-success text-white">Attended</span>
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>{{ data.password }}</td>
+                                                            <td>{{ data.start_time }}</td>
+                                                            <td>{{ data.interviewer.name.title }}</td>
+                                                            <td>
+                                                                {% if data.status == 'waiting' %}
+                                                                    <h6 class="f-w-700">
+                                                                        <p data-toggle="modal"
+                                                                           data-target="#join-meeting{{ data.id }}"
+                                                                           title="Join Meeting"
+                                                                           style="cursor: pointer; background-color: #EDA31d"
+                                                                           class="text-white badge p-2">
+                                                                            Join Meeting
+                                                                        </p>
+                                                                    </h6>
+                                                                {% endif %}
+                                                            </td>
+                                                        </tr>
+
+                                                        <div class="modal fade" id="join-meeting{{ data.id }}"
+                                                             data-backdrop="static"
+                                                             data-keyboard="false" tabindex="-1"
+                                                             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="staticBackdropLabel">Join A Meeting</h5>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal"
+                                                                                aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="card-block">
+                                                                            <p class="text-center text-bold f-w-700">
+                                                                                Meeting Password
+                                                                                : {{ data.password }}</p>
+                                                                            <p class="text-center"
+                                                                               style="font-size: 18px">
+                                                                                By proceeding your status will be
+                                                                                changed to Interviewed, if this is not
+                                                                                what you intended click 'CLOSE'
+                                                                            </p>
+                                                                            <form id="join_zoom_form"
+                                                                                  class="form-group"
+                                                                                  action="{% url 'join_zoom_meeting' data.id %}"
+                                                                                  method="POST">
+                                                                                {% csrf_token %}
+                                                                                <div class="modal-footer justify-content-start float-right">
+                                                                                    <button type="button"
+                                                                                            class="btn btn-secondary rounded-pill"
+                                                                                            data-dismiss="modal">
+                                                                                        Close
+                                                                                    </button>
+                                                                                    <button id="delete_zoom_meeting_button"
+                                                                                            type="submit"
+                                                                                            class="btn btn-success rounded-pill">
+                                                                                        Proceed
+                                                                                    </button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard Content Section End -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        function joinZoomMeeting(meetingId, zoomMeetingUrl) {
+            console.log(meetingId, zoomMeetingUrl)
+            $.ajax({
+                type: "POST",
+                url: `https://plumar.co/join-zoom-meeting/${meetingId}`,
+                data: {},
+                success: function (response) {
+                    window.location.replace(zoomMeetingUrl);
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        }
+    </script>
+
+{% endblock contents %}
+
+{% block footer %}
+{% endblock footer %}

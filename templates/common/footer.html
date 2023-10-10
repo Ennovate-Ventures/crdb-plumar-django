@@ -1,0 +1,92 @@
+{% load static %}
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="footer-newsletter">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 text-center">
+                    <h4 style="color: #141414; font-style: normal">Join Other Subscribers!</h4>
+                    <p style="font-style: normal">
+                        Get the latest updates delivered right to your inbox <span
+                            style="color: black; font-weight: bold">new jobs</span> and
+                        <span style="color: black; font-weight: bold">notifications</span>.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="email" name="email" class="form-control" required><input type="submit" value="Subscribe" style="background-color: #106f47">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-5 col-md-12 footer-info">
+                    <a href="{% url 'landing' %}" class="logo d-flex align-items-center">
+                        <img src="{% static 'assets/landing/images/p1.png' %}" alt="">
+                    </a>
+                    <p style="font-style: normal">DevStack is a startup talent platform that enables startups to find the right talents globally.</p>
+                    <div class="social-links mt-3">
+                        <a href="https://twitter.com/DevStackInc" target="_blank" class="twitter"><i
+                                class="bi bi-twitter"></i></a>
+                        <a href="https://www.instagram.com/DevStackinc/" class="instagram" target="_blank"><i
+                                class="bi bi-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/DevStackinc/" class="linkedin" target="_blank"><i
+                                class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div style="font-style: normal" class="col-lg-2 col-6 footer-links">
+                    <h4 style="color: black">Quick Links</h4>
+                    <ul>
+                        <li><i class="bi bi-chevron-right"></i> <a style="color: #444A4A"
+                                                                   href="opportunities?q=software">Software
+                            Engineering</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a style="color: #444A4A"
+                                                                   href="opportunities?q=blockchain">Blockchain</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a style="color: #444A4A" href="opportunities?q=ai">Artificial
+                            Intelligence</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a style="color: #444A4A"
+                                                                   href="opportunities?q=devopps">DevOps</a></li>
+                    </ul>
+                </div>
+
+                <div style="font-style: normal" class="col-lg-2 col-6 footer-links">
+                    <h4 style="color: black">Company</h4>
+                    <ul>
+                        <li><i class="bi bi-chevron-right"></i> <a href="{% url 'policy' %}" style="color: #444A4A">Privacy
+                            Policy</a>
+                        </li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="{% url 'terms' %}" style="color: #444A4A">Terms
+                            &AMP;
+                            Conditions</a></li>
+                    </ul>
+                </div>
+
+              <!--    <div style="font-style: normal" class="col-lg-3 col-md-12 footer-contact text-md-start">
+                    <h4 style="color: black">Contact Us</h4>
+                    <p><i class="bi bi-geo-alt-fill"></i> 74 Ally Sykes Road, Mbezi Beach</p>
+                    <p><i class="bi bi-envelope"></i><a href="mailto:info@DevStack.co" style="color: #444A4A">
+                        info@DevStack.co</a></p>
+                    <p><i class="bi bi-telephone"></i><a href="call:+255752817723" style="color: #444A4A"> +255 752 817
+                        723</a></p>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
+    <div style="font-style: normal" class="container">
+        <div class="copyright">
+            <span style="color: black">&copy; Copyright</span> <strong><span
+                style="color: #106f47">DevStack</span></strong>. <span
+                style="color: black">All Rights Reserved</span>
+        </div>
+        <div class="credits">
+        </div>
+    </div>
+</footer><!-- End Footer -->

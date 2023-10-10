@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>DevStack | Bookmarks</title>
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block contents %}
+    {% include 'includes/nav.html' %}
+    <!-- Dashboard Content Section Start -->
+    <div class="dashboard-content-section section bg_color--5">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-3">
+                    {% include 'talent_dash/includes/sidebar.html' %}
+                </div>
+                <div class="col-xl-10 col-lg-9">
+
+                    <div class="dashboard-main-inner">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-breadcrumb-content mb-40">
+                                    <h1>Bookmarks</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-overview">
+                            <div class="row">
+                                <div class="col-xl-12 col-12">
+                                    <div class="job-applications mb-50">
+                                        <div class="applications-heading d-flex">
+                                            <div class="message-fields-form p-0 border-0">
+                                                <form action="#">
+                                                    <div class="message-form review-from mt-0">
+                                                        <button class="search-btn"><i class="lnr lnr-magnifier"></i>
+                                                        </button>
+                                                        <input type="text" placeholder="Search in messages">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="bookmark-main-block">
+                                            <div class="bookmark-table">
+                                                <table class="table">
+                                                    <tbody>
+                                                    {% for data in marks %}
+                                                        <tr class="bookmark-item item{{ data.id }}">
+                                                            <td class="bookmark-job">
+                                                                <!-- Single Job Start  -->
+                                                                <div class="single-job style-two border-0 p-0 bg-transparent">
+                                                                    <div class="info-top">
+                                                                        <div class="job-image ml-0 mr-10 mr-xs-0">
+                                                                            <a href="{% url 'opp_details' data.id %}">
+                                                                                {% if data.logo %}
+                                                                                    <img src="{{ data.logo.url }}"
+                                                                                         alt="logo">
+                                                                                {% endif %}
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="job-info">
+                                                                            <div class="job-info-inner">
+                                                                                <div class="job-info-top">
+                                                                                    <div class="title-name">
+                                                                                        <h5 class="job-title">
+                                                                                            <a href="{% url 'opp_details' data.id %}">{{ data.title }}</a>
+                                                                                        </h5>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="job-meta-two flex-wrap">
+                                                                                    <div class="field-salary_from">
+                                                                                        <i class="gj-icon gj-icon-money"></i>
+                                                                                        {{ data.salary_range }} / month
+                                                                                    </div>
+                                                                                    <div class="field-datetime"><i
+                                                                                            class="lnr lnr-clock"></i>{{ data.published }}
+                                                                                    </div>
+                                                                                    <div class="field-map"><i
+                                                                                            class="lnr lnr-map-marker"></i>{{ data.location }}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Single Job End -->
+                                                            </td>
+
+                                                            <td class="delete-bookmark text-xl-right">
+
+                                                                <form method="post" action="{% url 'mark' %}">
+
+                                                                    <buttom class="save-job" id="mark"
+                                                                            value="{{ data.id }}">
+                                                                        <i id="mark{{ data.id }}" class="lnr lnr-trash"
+                                                                           style="color: red;"></i>
+                                                                        </button>
+
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        {% empty %}
+                                                        <tr class="bookmark-item">
+                                                            <td class="text-xl-center"><h5 class="font-weight-bold">You
+                                                                Don't Have Any Bookmarks Yet.</h5></td>
+                                                        </tr>
+                                                    {% endfor %}
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard Content Section End -->
+
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" ></script> -->
+    <script>
+        $('#noto').delay(5000).fadeOut('slow');
+
+
+        function updateRangeInput(elem) {
+            $(elem).next().val($(elem).val());
+        }
+
+        $(document).on('click', '#mark', function (e) {
+            e.preventDefault();
+
+            var pk = $(this).attr('value');
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "mark" %}',
+                data: {
+                    'id': pk,
+                    'csrfmiddlewaretoken': '{{csrf_token}}'
+                },
+                success: function (response) {
+                    // console.log(response)
+                    // for hidding the div onclick
+                    $(".item" + pk).hide()
+
+                },
+                errror: function (rs, e) {
+                    console.log(rs.responseText);
+                }
+            })
+        })
+    </script>
+
+{% endblock contents %}
+
+
+{% block footer %}
+{% endblock footer %}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

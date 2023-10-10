@@ -1,0 +1,194 @@
+{% extends 'dash/main.html' %}
+{% load mathfilters %}
+{% load static %}
+
+{% block contents %}
+
+<div class="pcoded-inner-content">
+    <!-- Main-body start -->
+    <div class="main-body">
+        <div class="page-wrapper">
+            <!-- Page-body start -->
+            <div class="page-body">
+              <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Followers <span class="badge badge-pill badge-warning">{{ followers.count}}</span></h5>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                    <li><i class="fa fa-trash close-card"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="row ml-3">
+                                <div class="col-md-3 threads" >
+                                    <div class="mt-3" ></div>
+                                {% for data in threads %}
+                                    {% if data.sender == request.user or data.reviever == request.user %}
+                                    <div class="d-inline-flex {% if data.id|mod:'2' == 0 %} single2 {% else %} single{% endif %}">
+                                        {% if data.sender.profile.image != request.user.profile.image %}
+                                        <img style="height: 60px; width: 60px; border-radius: 50%; border: 3px solid gray;" src="{{ data.sender.profile.image.url }}" alt="">
+                                        {% else %}
+                                        <img style="height: 60px; width: 60px; border-radius: 50%; border: 3px solid gray;" src="{{ data.receiver.profile.image.url }}" alt="">
+                                        {% endif %}
+                                        <div class="ml-2 {% if data.id|mod:'2' == 0 %} single2 {% else %} single{% endif %} ">
+                                          
+                                            {% if data.sender != request.user %}
+                                            <h6 class="mt-2 mb-n2">{{data.sender.first_name}} {{data.sender.last_name}} </h6>
+                                            {% for data in data.sender.talent_set.all %}
+                                            <span class="mt-n3" >{{ data.profession }}</span>
+                                            {% endfor %}
+                                            {% else %}
+                                            <h6 class="mt-2 mb-n2">{{data.receiver.first_name}} {{data.receiver.last_name}} </h6>
+                                            {% for data in data.receiver.talent_set.all %}
+                                            <span class="mt-n3" >{{ data.profession }}</span>
+                                            {% endfor %}
+                                            {% endif %}
+                                       </div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="mb-3" ></div>
+                                    {% endfor %}
+                                </div>
+                                
+                                <div class="col-md-9">
+                                   <div class="messages">
+                                        <!-- <div class="recieved">
+                                            <div class="recieved_msg">
+                                                <p class="">Lorem ipsum dolort odio Ullam quaerat itaque autem?</p>
+                                            </div>
+                                        </div>
+                                        <div class="sent">
+                                            <div class="sent_msg">
+                                                <p>Lorem ipsum dolort odio Ullam quaerat itaque autem?</p>
+                                            </div> -->
+                                        </div>
+                                        
+                                   </div>
+                                 
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-8">
+                                    <div style="margin-left: 40px;">
+                                        <form action="" id="chat_form" method="post" class="mt-2 mb-2" >
+                                            <div class="row mr-3">
+                                                <div class="col-md-10">
+                                                    <input type="hidden" name="thread"  value="4" id="thread">
+                                                    <input onfocus="this.style.ouline='none'" style="height: 45px; border: none; " type="text" class="write_msg form-control form-lg " name="text" placeholder="Type a message" />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button style="width: 100%; border-radius: 20px; margin-left: -20px;" class="btn btn-warning text-dark" type="submit">Send<i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                               </div>
+    
+                        </div>
+                    </div>
+                  </div>
+              </div>
+                   
+            </div>
+          
+        </div>
+    </div>
+        <!-- Page-body end -->
+</div>
+<div id="styleSelector"></div>
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    
+    function send_text(){
+        console.log('send_text works')
+        $.ajax({
+            method:'post',
+            url: "{% url 'user_message' %}",
+            data:{
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                text :$('.write_msg').val(),
+                thread:$('#thread').val()
+            },
+
+            success:function(data){
+                console.log(data)
+            },
+            error:function(error){
+                console.log(error)
+            }
+        });
+    }
+
+    $("#chat_form").on('submit', function(e){
+        e.preventDefault();
+        console.log('submit event works')
+        send_text()
+        $("#chat_form")[0].reset()
+
+         
+    });
+
+
+    function refresh() {
+    $.ajax({
+      url:"{% url 'user_message'%}" ,
+      success: function(data) {
+          $('.messages').empty()
+          $('#test').append(data);
+          console.log(data)
+          for( var i in data){
+            console.log(data[i].the_message)
+                var monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"];
+                var date = new Date(data[i].sent_on);
+                var day  = date.getDate();
+                var mnth = monthNames[date.getMonth()];
+                var year = date.getFullYear();
+                var hrs  = date.getHours();
+                var mnts = date.getMinutes();
+                var hhh = hrs > 12 ? "PM" : "AM"
+            if(data[i].user_id == "{{ request.user.id }}"){
+                $('#test').append('<li class="right" >'+data[i].the_message+'</li>');
+                $('.messages').append(
+                    '<div class="sent"><div class="sent_msg"><p>'+data[i].the_message+'</p><small class="time_date">SENT : '+hrs+':'+mnts+' '+hhh+' '+' | '+mnth+' '+day+' </small></div></div>')
+            }
+            else{
+                
+                $('.messages').append('<div class="recieved"><div class="recieved_msg"><p>'+data[i].the_message+'</p><small class="time_date">RECIEVED : '+hrs+':'+mnts+' '+hhh+' '+' | '+mnth+' '+day+' </small></div></div>');
+            }
+            
+          }
+
+
+         
+        
+      }
+    });
+};
+$(function(){
+    refresh();
+    var int = setInterval("refresh()", 1000);
+  
+});
+
+
+var div = $('#scroller')
+        var o = div.offset().top; //gets the top position of the div
+        var h = div.outerHeight(); // gets the height of the div
+
+        div.scrollTop( o - h );
+
+</script>
+{% endblock contents %}

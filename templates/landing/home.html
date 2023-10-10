@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="INSPIRO"/>
+    <meta name="description" content="DevStack">
+    <link href="{% static 'assets/img/fav.png' %}" type="image/png" rel="icon" sizes="196x196">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Document title -->
+    <title>DevStack</title>
+    <!-- Stylesheets & Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="{% static 'assets/landing/css/plugins.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/landing/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/landing/css/custom.css' %}" rel="stylesheet">
+    <!-- LOAD JQUERY LIBRARY -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+    <!-- LOADING FONTS AND ICONS -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600" rel="stylesheet" property="stylesheet"
+          type="text/css" media="all">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/landing/plugins/slider-revolution/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/landing/plugins/slider-revolution/fonts/font-awesome/css/font-awesome.css' %}">
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/landing/plugins/slider-revolution/css/settings.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/landing/plugins/slider-revolution/css/layers.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/landing/plugins/slider-revolution/css/navigation.css' %}">
+    <!-- REVOLUTION JS FILES -->
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/landing/plugins/slider-revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
+    <script type="text/javascript">
+        function setREVStartSize(e) {
+            try {
+                let i = jQuery(window).width(),
+                    t = 9999,
+                    r = 0,
+                    n = 0,
+                    l = 0,
+                    f = 0,
+                    s = 0,
+                    h = 0;
+                if (e.responsiveLevels && (jQuery.each(e.responsiveLevels, function (e, f) {
+                    f > i && (t = r = f, l = e), i > f && f > r && (r = f, n = e)
+                }), t > r && (l = n)), f = e.gridheight[l] || e.gridheight[0] || e.gridheight, s = e.gridwidth[l] || e.gridwidth[0] || e.gridwidth, h = i / s, h = h > 1 ? 1 : h, f = Math.round(h * f), "fullscreen" === e.sliderLayout) {
+                    let u = (e.c.width(), jQuery(window).height());
+                    if (void 0 !== e.fullScreenOffsetContainer) {
+                        const c = e.fullScreenOffsetContainer.split(",");
+                        if (c) jQuery.each(c, function (e, i) {
+                            u = jQuery(i).length > 0 ? u - jQuery(i).outerHeight(!0) : u
+                        }), e.fullScreenOffset.split("%").length > 1 && void 0 !== e.fullScreenOffset && e.fullScreenOffset.length > 0 ? u -= jQuery(window).height() * parseInt(e.fullScreenOffset, 0) / 100 : void 0 !== e.fullScreenOffset && e.fullScreenOffset.length > 0 && (u -= parseInt(e.fullScreenOffset, 0))
+                    }
+                    f = u
+                } else void 0 !== e.minHeight && f < e.minHeight && (f = e.minHeight);
+                e.c.closest(".rev_slider_wrapper").css({
+                    height: f
+                })
+            } catch (d) {
+                console.log("Failure at Presize of Slider:" + d)
+            }
+        };
+    </script>
+
+    <style>
+        @media only screen and (max-width: 767px) {
+            .btn1 .btn2 {
+                width: 120px;
+
+
+            }
+
+            .btn1 {
+
+                /* margin-right: 10px; */
+                margin-left: -370px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<!-- Body Inner -->
+<div class="body-inner">
+    <!-- Header -->
+    <header id="header" data-fullwidth="true" data-transparent="true" class="dark">
+        <div class="header-inner ">
+            <div class="container">
+                <!--Logo-->
+                <div id="logo">
+                    <a href="{% url 'home' %}">
+                        <span class="logo-default"><img style="width: 100px;"
+                                                        src="{% static 'assets/landing/images/p.png' %}" alt=""></span>
+                        <span class="logo-dark"><img style="width: 100px;"
+                                                     src="{% static 'assets/landing/images/p2.png' %}" alt=""></span>
+
+                    </a>
+                </div>
+                <!--End: Logo-->
+                <!-- Search -->
+                <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
+                        class="icon-x"></i></a>
+                    <form class="search-form" action="search-results-page.html" method="get">
+                        <input class="form-control" name="q" type="text" placeholder="Type & Search..."/>
+                        <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
+                    </form>
+                </div>
+                <!-- end: search -->
+
+                <!--Header Extras-->
+                <!-- <div class="header-extras">
+                    <ul>
+                        <li class="text-white">
+                            <a id="btn-search" href="#"> <i class="fa fa-search"></i></a>
+                        </li>
+                        <li>
+                            <div class="p-dropdown">
+                                <a  class="text-white" href="#"><i class="fa fa-globe"></i><span>EN</span></a>
+                                <ul class="p-dropdown-content">
+                                    <li class="text-white"><a href="#">French</a></li>
+                                    <li class="text-white"><a href="#">Spanish</a></li>
+                                    <li class="text-white"><a href="#">English</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div> -->
+                <!--end: Header Extras-->
+                <!--Navigation Resposnive Trigger-->
+                <div id="mainMenu-trigger">
+                    <a class="lines-button x"><span class="lines"></span></a>
+                </div>
+                <!--end: Navigation Resposnive Trigger-->
+
+                <!--Navigation-->
+                <div id="mainMenu">
+                    <div class="container">
+                        <nav>
+                            <ul>
+                                <li class="text-white"><a href="{% url 'home' %}">Home</a></li>
+                                <li class="text-white"><a href="#masterclass">Masterclass</a></li>
+                                <li class="text-white"><a href="{% url 'how_it_works' %}">Stack Forum</a></li>
+                                <!-- <li class="text-white"><a href="https://www.DevStackschool.com">DevStack School</a></li> -->
+                                <li class="text-white"><a style="font-size: 12px;" class="btn  btn-dark rounded-pill"
+                                                          href="#contact">Company</a></li>
+                                <!-- <li class="dropdown mega-menu-item"><a href="#">Elements</a></li>
+                                <li class="dropdown"><a href="#">Pages</a></li>
+                                <li class="dropdown mega-menu-item"><a href="#">Portfolio</a></li>
+                                <li class="dropdown mega-menu-item"><a href="#">Blog</a></li>
+                                <li class="dropdown mega-menu-item"><a href="#">Shop</a></li> -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!--end: Navigation-->
+            </div>
+        </div>
+    </header>
+    <!-- end: Header -->
+    <!-- Revolution Slider -->
+    <section id="slider">
+        <div id="rev_slider_347_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="parallaxjoy"
+             data-source="gallery"
+             style="background:linear-gradient(45deg, rgb(16, 111, 71) 0%, rgb(16, 111, 71) 100%);padding:0px;">
+            <!-- START REVOLUTION SLIDER 5.4.3.3 fullscreen mode -->
+            <div id="rev_slider_347_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.4.3.3">
+                <ul>
+                    <!-- SLIDE  -->
+                    <li data-index="rs-967" data-transition="fade" data-slotamount="default" data-hideafterloop="0"
+                        data-hideslideonmobile="off" data-easein="default" data-easeout="default"
+                        data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-title="Slide"
+                        data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6=""
+                        data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                        <!-- MAIN IMAGE -->
+                        <img src="assets/landing/plugins/slider-revolution/assets/images/transparent.png"
+                             data-bgcolor='linear-gradient(45deg, rgba(16, 111, 71) 0%, rgba(16, 111, 71) 100%)'
+                             style='background:linear-gradient(45deg, rgb(16, 111, 71) 0%, rgb(16, 111, 71) 100%);'
+                             alt="" data-bgposition="center center"
+                             data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg"
+                             data-no-retina>
+                        <!-- LAYERS -->
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption   tp-resizeme" id="slide-967-layer-25"
+                             data-x="['left','left','left','left']" data-hoffset="['21','21','21','-9']"
+                             data-y="['top','top','top','top']" data-voffset="['45','45','45','30']" data-width="none"
+                             data-height="none" data-whitespace="nowrap"
+                             data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:360deg;opacity:0;","to":"o:1;rZ:15;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 5;"><img
+                                src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_triangle_s.png' %}"
+                                onContextMenu="return false;" alt="" data-ww="['55px','55px','55px','56px']"
+                                data-hh="48px" width="111" height="96" data-no-retina></div>
+                        <!-- LAYER NR. 2 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-1" id="slide-967-layer-7"
+                             data-x="['left','left','left','left']" data-hoffset="['-146','-146','-50','-86']"
+                             data-y="['top','top','top','top']" data-voffset="['38','38','131','54']" data-width="none"
+                             data-height="none" data-whitespace="nowrap" data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":200,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:240deg;opacity:0;fb:20px;","to":"o:1;rZ:-25;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 6;"><img
+                                src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_pen.png' %}"
+                                alt="" data-ww="['530px','530px','300px','265px']"
+                                data-hh="['60px','60px','34px','30px']" width="530" height="60" data-no-retina></div>
+                        <!-- LAYER NR. 3 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme  tp-joyshadow rs-parallaxlevel-15"
+                             id="slide-967-layer-15" data-x="['center','center','center','center']"
+                             data-hoffset="['260','260','260','260']" data-y="['middle','middle','middle','middle']"
+                             data-voffset="['0','0','0','0']" data-width="2500" data-height="['500','500','400','300']"
+                             data-whitespace="nowrap" data-type="shape" data-responsive_offset="on"
+                             data-frames='[{"delay":100,"speed":750,"frame":"0","from":"sX:3;sY:3;opacity:0;","to":"o:1;rZ:45;","ease":"Power4.easeOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 7;background:linear-gradient(140deg, rgb(221, 220, 146) 0%, rgb(221, 220, 146) 100%);">
+                        </div>
+                        <!-- LAYER NR. 4 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme rs-parallaxlevel-10"
+                             id="slide-967-layer-20" data-x="['left','left','left','left']"
+                             data-hoffset="['1079','1079','587','315']" data-y="['top','top','top','top']"
+                             data-voffset="['512','512','692','471']"
+                             data-width="['100','100','100','50']" data-height="['100','100','100','50']"
+                             data-whitespace="nowrap" data-type="shape" data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:360deg;opacity:0;","to":"o:1;rZ:35;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 8;border-color:rgb(255,255,255);border-style:solid;border-width:3px 3px 3px 3px;">
+                            <div class="rs-looped rs-wave" data-speed="8" data-angle="0" data-radius="3px"
+                                 data-origin="50% 50%"></div>
+                        </div>
+                        <!-- LAYER NR. 5 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme" id="slide-967-layer-1"
+                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','-1']"
+                             data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','-3']"
+                             data-width="2500"
+                             data-height="['500','500','400','300']" data-whitespace="nowrap" data-type="shape"
+                             data-basealign="slide" data-responsive_offset="on"
+                             data-frames='[{"delay":200,"speed":750,"frame":"0","from":"sX:3;sY:3;opacity:0;","to":"o:1;rZ:-15;","ease":"Power4.easeOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 9;background-color:rgb(16, 111, 71);">
+                        </div>
+                        <!-- LAYER NR. 6 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-1" id="slide-967-layer-11"
+                             data-x="['left','left','left','left']" data-hoffset="['76','76','58','-23']"
+                             data-y="['top','top','top','top']" data-voffset="['593','593','677','503']"
+                             data-width="none"
+                             data-height="none" data-whitespace="nowrap" data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":200,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:-180deg;opacity:0;fb:20px;","to":"o:1;rZ:25;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 10;"><img
+                                src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_mouse.png' %}"
+                                onContextMenu="return false;" alt="" data-ww="['300px','300px','150px','150px']"
+                                data-hh="['400px','400px','200','200px']" width="300" height="400" data-no-retina></div>
+                        <!-- LAYER NR. 7 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-1" id="slide-967-layer-13"
+                             data-x="['left','left','left','left']" data-hoffset="['884','884','579','355']"
+                             data-y="['top','top','top','top']" data-voffset="['232','232','288','204']"
+                             data-width="none"
+                             data-height="none" data-whitespace="nowrap" data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":200,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:-180deg;opacity:0;fb:20px;","to":"o:1;rZ:15;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 11;"><img
+                                src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_eraser.png' %}"
+                                onContextMenu="return false;" alt="" data-ww="['230px','230px','20%','165px']"
+                                data-hh="['130px','130px','130px','93px']" width="230" height="130" data-no-retina>
+                        </div>
+                        <!-- LAYER NR. 8 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme rs-parallaxlevel-2"
+                             id="slide-967-layer-6" data-x="['center','center','center','center']"
+                             data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                             data-voffset="['0','0','0','0']"
+                             data-width="['700','700','560','400']" data-height="['600','600','500','500']"
+                             data-whitespace="nowrap" data-type="shape" data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.7;sY:0.7;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 12;border-color:rgb(255,255,255);border-style:solid;border-width:20px 20px 20px 20px;">
+                        </div>
+                        <!-- LAYER NR. 9 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-2" id="slide-967-layer-2"
+                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                             data-y="['middle','middle','middle','middle']" data-voffset="['-120','-120','-100','-80']"
+                             data-fontsize="['100','100','80','50']" data-lineheight="['100','100','80','50']"
+                             data-letterspacing="['10','10','10','5']" data-width="none" data-height="none"
+                             data-whitespace="nowrap" data-type="text" data-responsive_offset="on"
+                             data-frames='[{"delay":550,"split":"chars","splitdelay":0.1000000000000000055511151231257827021181583404541015625,"speed":2500,"split_direction":"random","frame":"0","from":"y:50px;sX:1;sY:1;opacity:0;fb:20px;","color":"#001536","to":"o:1;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
+                             data-paddingleft="[30,30,30,20]"
+                             style="z-index: 23; white-space: nowrap; font-size: 100px; line-height: 100px; font-weight: 600; color: #ffffff; letter-spacing: 10px;font-family:Poppins;">
+                            <b style="margin-left: 25px;"></b> AMPLIFY <br>GROWTH
+                        </div>
+                        <!-- LAYER NR. 10 -->
+
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-2" id="slide-967-layer-3"
+                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                             data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']"
+                             data-fontsize="['100','100','80','50']"
+                             data-lineheight="['100','100','80','50']" data-letterspacing="['10','10','10','5']"
+                             data-width="none" data-height="none" data-whitespace="nowrap" data-type="text"
+                             data-responsive_offset="on"
+                             data-frames='[{"delay":600,"split":"chars","splitdelay":0.1000000000000000055511151231257827021181583404541015625,"speed":2500,"split_direction":"random","frame":"0","from":"y:50px;sX:1;sY:1;opacity:0;fb:20px;","color":"#001536","to":"o:1;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
+                             data-paddingleft="[30,30,30,20]"
+                             style="z-index: 14; white-space: nowrap; font-size: 100px; margin-top: 5px; line-height: 100px; margin-top: 10px; font-weight: 600; color: #ffffff; letter-spacing: 30px;font-family:Poppins;">
+                            <p style="color: red; margin-top: 25px;"></p> WITH
+                        </div>
+                        <!-- LAYER NR. 11 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-2" id="slide-967-layer-4"
+                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                             data-y="['middle','middle','middle','middle']" data-voffset="['120','120','100','80']"
+                             data-fontsize="['100','100','80','50']"
+                             data-lineheight="['100','100','80','50']" data-letterspacing="['10','10','10','5']"
+                             data-width="none" data-height="none" data-whitespace="nowrap" data-type="text"
+                             data-responsive_offset="on"
+                             data-frames='[{"delay":650,"split":"chars","splitdelay":0.1000000000000000055511151231257827021181583404541015625,"speed":2500,"split_direction":"random","frame":"0","from":"y:50px;opacity:0;fb:20px;","color":"#001536","to":"o:1;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
+                             data-paddingleft="[30,30,30,20]"
+                             style="z-index: 19; white-space: nowrap; font-size: 100px; line-height: 100px; font-weight: 600; color: #ffffff; letter-spacing: 0px;font-family:Poppins;">
+                            DevStack
+                        </div>
+                        <!-- LAYER NR. 12 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme rs-parallaxlevel-10"
+                             id="slide-967-layer-27" data-x="['left','left','left','left']"
+                             data-hoffset="['1047','1047','715','715']" data-y="['top','top','top','top']"
+                             data-voffset="['728','728','574','574']"
+                             data-width="50" data-height="100" data-whitespace="nowrap" data-type="shape"
+                             data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:360deg;opacity:0;","to":"o:1;rZ:15;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 16;border-color:rgb(255,255,255);border-style:solid;border-width:3px 3px 3px 3px;border-radius:25px 25px 25px 25px;">
+                            <div class="rs-looped rs-wave" data-speed="5" data-angle="0" data-radius="4px"
+                                 data-origin="50% 50%"></div>
+                        </div>
+                        <!-- LAYER NR. 13 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-4" id="slide-967-layer-12"
+                             data-x="['left','left','left','left']" data-hoffset="['687','687','452','271']"
+                             data-y="['top','top','top','top']" data-voffset="['356','356','499','328']"
+                             data-width="none"
+                             data-height="none" data-whitespace="nowrap" data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":200,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:-140deg;opacity:0;fb:20px;","to":"o:1;rZ:-15;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 17;"><img
+                                src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_headphones.png' %}"
+                                onContextMenu="return false;" alt="" data-ww="['710px','710px','400px','355px']"
+                                data-hh="['630px','630px','355px','315px']" width="710" height="630" data-no-retina>
+                        </div>
+                        <!-- LAYER NR. 14 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-3" id="slide-967-layer-8"
+                             data-x="['left','left','left','left']" data-hoffset="['332','332','175','82']"
+                             data-y="['top','top','top','top']" data-voffset="['-3','-3','109','54']" data-width="none"
+                             data-height="none"
+                             data-whitespace="nowrap" data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":200,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:-180deg;opacity:0;fb:20px;","to":"o:1;rZ:-15;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 18;"><img
+                                src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_glasses.png' %}"
+                                onContextMenu="return false;" alt="" data-ww="['500px','500px','350px','250px']"
+                                data-hh="['170px','170px','119px','85px']" width="500" height="170" data-no-retina>
+                        </div>
+                        <!-- LAYER NR. 15 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme rs-parallaxlevel-10"
+                             id="slide-967-layer-21" data-x="['left','left','left','left']"
+                             data-hoffset="['1158','1158','658','416']" data-y="['top','top','top','top']"
+                             data-voffset="['19','19','334','60']"
+                             data-width="['100','100','50','50']" data-height="['100','100','50','50']"
+                             data-whitespace="nowrap" data-type="shape" data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;opacity:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 19;border-color:rgb(255,255,255);border-style:solid;border-width:3px 3px 3px 3px;border-radius:50px 50px 50px 50px;">
+                            <div class="rs-looped rs-wave" data-speed="3" data-angle="0" data-radius="4px"
+                                 data-origin="50% 50%"></div>
+                        </div>
+                        <!-- LAYER NR. 16 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-3" id="slide-967-layer-9"
+                             data-x="['left','left','left','left']" data-hoffset="['899','899','490','306']"
+                             data-y="['top','top','top','top']" data-voffset="['-136','-136','31','24']"
+                             data-width="none"
+                             data-height="none" data-whitespace="nowrap" data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":200,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:-180deg;opacity:0;fb:20px;","to":"o:1;rZ:-15;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 20;"><img
+                                src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_watch.png' %}"
+                                onContextMenu="return false;" alt="" data-ww="['320px','320px','200px','160px']"
+                                data-hh="['450px','450px','281px','225px']" width="320" height="450" data-no-retina>
+                        </div>
+                        <!-- LAYER NR. 17 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme rs-parallaxlevel-10"
+                             id="slide-967-layer-22" data-x="['left','left','left','left']"
+                             data-hoffset="['-203','-203','-4','42']" data-y="['top','top','top','top']"
+                             data-voffset="['349','349','328','360']"
+                             data-width="['100','100','100','50']" data-height="['100','100','100','50']"
+                             data-whitespace="nowrap" data-type="shape" data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;opacity:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 21;border-color:rgb(255,255,255);border-style:solid;border-width:3px 3px 3px 3px;border-radius:50px 50px 50px 50px;">
+                            <div class="rs-looped rs-wave" data-speed="6" data-angle="0" data-radius="6px"
+                                 data-origin="50% 50%"></div>
+                        </div>
+                        <!-- LAYER NR. 18 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-3" id="slide-967-layer-10"
+                             data-x="['left','left','left','left']" data-hoffset="['-294','-294','-82','-106']"
+                             data-y="['top','top','top','top']" data-voffset="['179','179','285','158']"
+                             data-width="none"
+                             data-height="none" data-whitespace="nowrap" data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":200,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:180deg;sX:1;sY:1;opacity:0;fb:20px;","to":"o:1;rZ:15;fb:0;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 22;"><img
+                                src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_phone.png' %}"
+                                onContextMenu="return false;" alt="" data-ww="['390px','390px','250px','195px']"
+                                data-hh="['620px','620px','397px','310px']" width="390" height="620" data-no-retina>
+                        </div>
+                        <!-- LAYER NR. 19 -->
+                        <a class="tp-caption btn1 rev-btn  tp-resizeme  tp-joyshadow" href="{% url 'auth' %}"
+                           data-x="['left','left','left','left']" data-hoffset="['400','400','400','400']"
+                           data-y="['bottom','bottom','bottom','bottom']" data-voffset="['20','20','130','70']"
+                           data-width="none" data-height="none" data-whitespace="nowrap" data-type="button"
+                           data-actions='' data-responsive_offset="on"
+                           data-frames='[{"delay":1500,"speed":1500,"sfxcolor":"#ffffff","sfx_effect":"blockfromleft","frame":"0","from":"z:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"200","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(255,255,255,1);bg:linear-gradient(90deg, rgba(82,82,212,1) 0%, rgba(136,136,212,1) 100%);bs:solid;bw:0 0 0 0;"}]'
+                           data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                           data-paddingright="[50,50,50,50]" data-paddingbottom="[0,0,0,0]"
+                           data-paddingleft="[50,50,50,50]"
+                           style="z-index: 23; white-space: nowrap; font-size: 20px; line-height: 80px; font-weight: 600; color: rgb(0, 0, 0); letter-spacing: 5px;font-family:Poppins;background:linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);border-color:rgba(0,0,0,1);outline:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;text-decoration: none;">HIRE</a>
+                        <!-- LAYER NR. 20 -->
+
+                        <a class="tp-caption btn2 rev-btn  tp-resizeme  tp-joyshadow" href="{% url 'post_project' %}"
+                           data-x="['center','center','center','center']" data-hoffset="['100','100','100','100']"
+                           data-y="['bottom','bottom','bottom','bottom']" data-voffset="['20','20','130','70']"
+                           data-width="none" data-height="none" data-whitespace="nowrap" data-type="button"
+                           data-actions='' data-responsive_offset="on"
+                           data-frames='[{"delay":1500,"speed":1500,"sfxcolor":"#ffffff","sfx_effect":"blockfromleft","frame":"0","from":"z:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"200","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(255,255,255,1);bg:linear-gradient(90deg, rgba(82,82,212,1) 0%, rgba(136,136,212,1) 100%);bs:solid;bw:0 0 0 0;"}]'
+                           data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                           data-paddingright="[50,50,50,50]" data-paddingbottom="[0,0,0,0]"
+                           data-paddingleft="[50,50,50,50]"
+                           style="z-index: 23; white-space: nowrap; font-size: 20px; line-height: 80px; font-weight: 600; color: rgb(0, 0, 0); letter-spacing: 5px;font-family:Poppins;background:linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);border-color:rgba(0,0,0,1);outline:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;text-decoration: none;">POST
+                            PROJECT</a>
+
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme" id="slide-967-layer-16"
+                             data-x="['left','left','center','left']" data-hoffset="['100','100','0','-226']"
+                             data-y="['bottom','bottom','bottom','bottom']" data-voffset="['50','50','30','64']"
+                             data-width="200" data-height="5" data-whitespace="nowrap"
+                             data-visibility="['on','on','on','off']" data-type="shape" data-basealign="slide"
+                             data-responsive_offset="on"
+                             data-frames='[{"delay":2500,"speed":1000,"frame":"0","from":"x:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:[-100%];y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 24;background-color:rgb(255,255,255);">
+                        </div>
+                        <!-- LAYER NR. 21 -->
+                        <div class="tp-caption   tp-resizeme tp-svg-layer" id="slide-967-layer-17"
+                             data-x="['left','left','center','left']" data-hoffset="['175','175','0','-153']"
+                             data-y="['bottom','bottom','bottom','bottom']" data-voffset="['86','86','50','91']"
+                             data-width="50"
+                             data-height="50" data-whitespace="nowrap" data-visibility="['on','on','on','off']"
+                             data-type="svg"
+                             data-actions='[{"event":"click","action":"scrollbelow","offset":"px","delay":"","speed":"1500","ease":"Power4.easeOut"}]'
+                             data-svg_src="{% static 'assets/landing/plugins/slider-revolution/assets/images/ic_arrow_downward_24px.svg' %}"
+                             data-svg_idle="sc:transparent;sw:0;sda:0;sdo:0;" data-basealign="slide"
+                             data-responsive_offset="on"
+                             data-frames='[{"delay":2500,"speed":1000,"frame":"0","from":"y:-50px;opacity:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 25; min-width: 50px; max-width: 50px; max-width: 50px; max-width: 50px; color: #ffffff;cursor:pointer;">
+                            <div class="rs-looped rs-slideloop" data-easing="Power1.easeIn" data-speed="1" data-xs="0"
+                                 data-xe="0" data-ys="-10" data-ye="10"></div>
+                        </div>
+                        <!-- LAYER NR. 22 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme rs-parallaxlevel-12"
+                             id="slide-967-layer-19" data-x="['left','left','left','left']"
+                             data-hoffset="['94','94','123','39']" data-y="['top','top','top','top']"
+                             data-voffset="['77','77','138','65']"
+                             data-width="['60','60','60','30']" data-height="['60','60','60','30']"
+                             data-whitespace="nowrap" data-type="shape" data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;opacity:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 26;border-color:rgb(255,255,255);border-style:solid;border-width:3px 3px 3px 3px;border-radius:50px 50px 50px 50px;">
+                            <div class="rs-looped rs-wave" data-speed="6" data-angle="0" data-radius="5px"
+                                 data-origin="50% 50%"></div>
+                        </div>
+                        <!-- LAYER NR. 23 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-12" id="slide-967-layer-23"
+                             data-x="['left','left','left','left']" data-hoffset="['1081','1081','657','394']"
+                             data-y="['top','top','top','top']" data-voffset="['109','109','128','298']"
+                             data-width="none"
+                             data-height="none" data-whitespace="nowrap" data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:360deg;opacity:0;","to":"o:1;rZ:25;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 27;">
+                            <div class="rs-looped rs-wave" data-speed="7" data-angle="0" data-radius="5px"
+                                 data-origin="50% 50%"><img
+                                    src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_triangle.png' %}"
+                                    alt="" data-ww="['110px','110px','110px','110px']"
+                                    data-hh="['95px','95px','95px','95px']" width="221" height="191" data-no-retina>
+                            </div>
+                        </div>
+                        <!-- LAYER NR. 24 -->
+                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-12" id="slide-967-layer-24"
+                             data-x="['left','left','left','left']" data-hoffset="['-31','-31','31','-34']"
+                             data-y="['top','top','top','top']" data-voffset="['548','548','589','494']"
+                             data-width="none"
+                             data-height="none" data-whitespace="nowrap" data-type="image" data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:360deg;opacity:0;","to":"o:1;rZ:-40;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 28;">
+                            <div class="rs-looped rs-wave" data-speed="6" data-angle="0" data-radius="6px"
+                                 data-origin="50% 50%"><img
+                                    src="{% static 'assets/landing/plugins/slider-revolution/assets/images/OBJ_triangle.png' %}"
+                                    alt="" data-ww="['110px','110px','110px','110px']"
+                                    data-hh="['95px','95px','95px','95px']" width="221" height="191" data-no-retina>
+                            </div>
+                        </div>
+                        <!-- LAYER NR. 25 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme rs-parallaxlevel-12"
+                             id="slide-967-layer-26" data-x="['left','left','left','left']"
+                             data-hoffset="['42','42','24','57']" data-y="['top','top','top','top']"
+                             data-voffset="['257','257','209','226']"
+                             data-width="['40','40','40','20']" data-height="['40','40','40','20']"
+                             data-whitespace="nowrap" data-type="shape" data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:360deg;opacity:0;","to":"o:1;rZ:45;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 29;border-color:rgb(255,255,255);border-style:solid;border-width:3px 3px 3px 3px;">
+                            <div class="rs-looped rs-wave" data-speed="5" data-angle="0" data-radius="5px"
+                                 data-origin="50% 50%"></div>
+                        </div>
+                        <!-- LAYER NR. 26 -->
+                        <div class="tp-caption tp-shape tp-shapewrapper  tp-resizeme rs-parallaxlevel-11"
+                             id="slide-967-layer-28" data-x="['left','left','left','left']"
+                             data-hoffset="['1173','1173','764','764']" data-y="['top','top','top','top']"
+                             data-voffset="['652','652','723','723']"
+                             data-width="30" data-height="30" data-whitespace="nowrap" data-type="shape"
+                             data-responsive_offset="on"
+                             data-frames='[{"delay":700,"speed":1500,"frame":"0","from":"x:center;y:middle;rZ:360deg;opacity:0;","to":"o:1;rZ:-15;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
+                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                             style="z-index: 30;border-color:rgb(255,255,255);border-style:solid;border-width:3px 3px 3px 3px;">
+                            <div class="rs-looped rs-wave" data-speed="8" data-angle="0" data-radius="8px"
+                                 data-origin="50% 50%"></div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+            </div>
+        </div>
+        <!-- END REVOLUTION SLIDER -->
+        <script type="text/javascript">
+            var revapi347,
+                tpj = jQuery;
+            tpj(document).ready(function () {
+                if (tpj("#rev_slider_347_1").revolution == undefined) {
+                    revslider_showDoubleJqueryError("#rev_slider_347_1");
+                } else {
+                    revapi347 = tpj("#rev_slider_347_1").show().revolution({
+                        sliderType: "hero",
+                        jsFileLocation: "plugins/slider-revolution/js/",
+                        sliderLayout: "fullscreen",
+                        dottedOverlay: "none",
+                        delay: 9000,
+                        responsiveLevels: [1240, 1240, 778, 480],
+                        visibilityLevels: [1240, 1240, 778, 480],
+                        gridwidth: [1240, 1240, 778, 480],
+                        gridheight: [868, 868, 960, 720],
+                        lazyType: "none",
+                        parallax: {
+                            type: "scroll",
+                            origo: "slidercenter",
+                            speed: 1000,
+                            speedbg: 0,
+                            speedls: 2000,
+                            levels: [8, 16, 24, 32, -8, -16, -24, -32, 36, 2, 4, 6, 50, -30, -20, 55],
+                        },
+                        shadow: 0,
+                        spinner: "spinner1",
+                        autoHeight: "off",
+                        fullScreenAutoWidth: "off",
+                        fullScreenAlignForce: "off",
+                        fullScreenOffsetContainer: "",
+                        fullScreenOffset: "",
+                        disableProgressBar: "on",
+                        hideThumbsOnMobile: "off",
+                        hideSliderAtLimit: 0,
+                        hideCaptionAtLimit: 0,
+                        hideAllCaptionAtLilmit: 0,
+                        debugMode: false,
+                        fallbacks: {
+                            simplifyAll: "off",
+                            disableFocusListener: false,
+                        }
+                    });
+                }
+                try {
+                    initSocialSharing("347")
+                } catch (e) {
+                }
+            }); /*ready*/
+        </script>
+    </section>
+    <!-- end: Revolution Slider-->
+
+    <style>
+        ul li {
+            color: black;
+            font-weight: 500;
+        }
+
+        .masterhead h2 {
+            margin-left: 36%;
+            margin-bottom: 40px;
+            font-size: 41px;
+            color: black;
+            border-bottom: 2px solid #daa520;
+        }
+
+        .masterclass {
+            margin-left: 3%;
+            margin-right: 10%;
+        }
+
+        .d1 {
+            border: 4px solid transparent;
+            border-radius: 10px;
+            height: 400px;
+            width: 100%;
+            display: inline-flex;
+        }
+
+        .d1-inner {
+            height: 400px;
+            width: 80%;
+            background-color: white;
+            opacity: 1;
+            margin: 0px 10px 20px 20px;
+            border-radius: 8px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: transparent;
+        }
+
+        .d1-inner2 {
+            height: 400px;
+            background-color: transparent;
+            opacity: 1;
+            border-radius: 5px;
+            margin-left: 50px;
+            margin-right: 20px;
+            margin-top: 3%;
+        }
+
+        .d1-p {
+            font-size: 35px;
+            padding: 20px;
+            color: black;
+            text-align: justify;
+        }
+
+        .masterbtn {
+            right: -60px;
+            font-size: 25px;
+            margin-left: 200px;
+            height: 140px;
+            margin-top: 5%;
+            width: 30%;
+        }
+
+        @media only screen and (max-width: 479px) {
+            .c1 {
+                margin-left: -70px;
+            }
+
+            .cmage {
+                margin-left: 60px;
+            }
+
+            .masterhead {
+                margin-left: -100px;
+                margin-bottom: -30px;
+
+            }
+
+            .d1-inner {
+                margin-top: -3%;
+                height: 200px;
+
+            }
+
+            .d1-inner2 {
+                margin-top: -400px;
+                width: 100%;
+                margin-left: 10px;
+            }
+
+            .d1-p {
+                font-size: 20px;
+                text-align: start;
+            }
+
+            .masterbtn {
+                margin-left: -330px;
+                margin-top: -50px;
+                height: 140px;
+                width: 300px;
+            }
+
+            .masterclass {
+                margin-top: 0;
+                margin-bottom: -400px;
+            }
+
+            /* #masteclass2{
+                margin-top: -80px;
+            } */
+            body {
+                overflow-x: hidden;
+            }
+        }
+
+    </style>
+    <section id="process">
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="title text-center mb-5" style="width:100%;">
+                    <h2 style="font-weight: 900;">How we are changing the</h2>
+                    <h2 style="font-weight: 900;">global economy ecosystem</h2>
+                    <h2 style="font-weight: 900;">"one talent at a time".</h2>
+                </div>
+                <div class="row" style="margin-left:100px;">
+                    <div class="col-md-4 c1">
+                        <div class="subtitle bg-secondary text-center mb-3" style="width:350px; ">
+                            <h2 style="font-weight:900;">Talent <br> Signup</h2>
+                        </div>
+                        <div style="width: 350px;">
+                            <p style="text-align:justify;">
+                                Talent signup to join DevStack
+                                network of tech talents. Verified
+                                talents will be invited to create
+                                expert account on DevStack Recruit
+                                to access job opportunities.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 c1 matched">
+                        <div class="subtitle bg-secondary  mb-3" style="width:350px;">
+                            <h2 style="text-indent:20px; font-weight: 900;">Talent Matched to </h2>
+                            <h2 style="margin-top:-20px;text-indent:120px; font-weight: 900;"> Job</h2>
+                        </div>
+                        <div style="width: 350px;">
+                            <p style="text-align:justify;">
+                                Vetted and approved talents on
+                                DevStack platform explore available
+                                tech jobs and match to suitable
+                                jobs.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 c1 text-center">
+                        <div class="subtitle bg-secondary text-center mb-3" style="width:350px;  ">
+                            <h2 style="font-weight: 900;">Talent <br> Management</h2>
+                        </div>
+                        <div style="width:350px;" class="text-center">
+                            <p style="text-align:justify;">
+                                Talent is notified and prompt to
+                                accept the offer. DevStack also provide
+                                legal and payroll management for
+                                talents recruited through DevStack.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 cmage">
+                <div style="height:450px; width: 100%; background-image: url('./static/assets/img/stud.jpg');
+                        background-size: contain; background-repeat: no-repeat;">
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!--For Startups-->
+    <!-- <section id="process" class="section-3 process offers" style="background-image:url('./static/assets/img/bgg.png'); background-size: cover; opacity: .7; " >
+                <div class="container full mb-5">
+                    <div class="row text-center intro">
+                        <div class="col-12 start">
+                           
+                            <div class="header">
+                                <h2 class="mt-2" style="height: 60px;" >
+                                    <span style="border-radius: 10px; font-weight: bolder; padding-bottom: 10px; padding-top: 10px;
+                                     border-bottom-left-radius: 50px; border-top-left-radius: 50px; border-bottom-right-radius: 50px; border-top-right-radius: 50px;" class="bg-warning font-weight-bolder">
+                                    <span style="font-weight: bolder; margin-left: 20px; margin-right: 1px;"> Ready to start your</span>
+                                    <span class="bg-dark text-white"  style=" padding-bottom: 10px; padding-top: 10px; padding-left: 10px; padding-right: 20px;  font-weight: bolder; border-bottom-right-radius: 50px; border-top-right-radius: 50px;"> <b class="ml-3 mr-3" >tech career journey</b></span>
+                                </span>
+                                    
+                                </h2>
+                            </div>
+                            <div style="height:40px;" ></div>
+                            <span class="text-max-800 text mt-4 mb-3 text-white" style=" font-size:22px; margin-top:50px;">
+                                DevStack offers a tech talents platform to explore exciting jobs in tech.<br> 
+                                If you are looking to start or grow your career in tech, then DevStack is your plug to a world of exciting tech opportunities.
+                                
+                            </span>
+                         
+                                         
+
+                            <div class="row justify-content-center text-center mt-5">
+                                <div class="col-12 col-md-6 col-lg-6 item mr-2 mb-5 ">
+                                    <div style="border: 3px solid #ffbb00; border-top-color: white ; border-radius: 10px; ">
+                                        <div class="bg-warning text-center " style=" margin-top: 20px; margin-bottom: 10px; margin-left: 40%; margin-right: 50%; height: 80px; width: 80px; border-radius: 50%;">
+                                            <a href='{% url "auth" %}' > <i style="margin-top: 30px; font-size: 20px; color: white;" class="fas fa-sign-in-alt text-whte" ></i></a>
+                                        </div>
+                                        <a href="{% url 'auth' %}" > <h5 class="font-weight-bold text-white" ><b>SIGN UP</b></h5></a>
+                                        <p   class=" mt-3 mb-3 text-center text-white" > <b class=" text-white" >Sign up here on our talent network. <br> Fill out the form and the required <br> attachments. </b></p>
+                                    </div>
+                
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6 item mb-5"  >
+                                    <div style="border: 3px solid #ffbb00; border-top-color: white ; border-radius: 10px; ">
+                                        <div class="bg-warning text-center " style=" margin-top: 20px; margin-bottom: 10px; margin-left: 40%; margin-right: 50%; height: 80px; width: 80px; border-radius: 50%;">
+                                            <a ><i style="margin-top: 30px; font-size: 20px;" class="fa fa-file text-white" ></i></a>
+                                        </div>
+                                        <a ><h5 class="font-weight-bold text-white" ><b>SKILLS AND EXPERIENCE REVIEW.</b></h5></a>
+                                        <p class="mt-3 mb-3 text-center text-white" ><b>Our team will review your skills and experience. <br> If you have the minimum requisite skills, then our team will send you a link, to create your talent account on DevStack</b></p>
+                                    </div>
+                
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6 item mb-5" >
+                                    <div style="border: 3px solid #ffbb00; border-top-color: white ; border-radius: 10px; ">
+                                        <div class="bg-warning text-center " style=" margin-top: 20px; margin-bottom: 10px; margin-left: 40%; margin-right: 50%; height: 80px; width: 80px; border-radius: 50%;">
+                                            <a  ><i style="margin-top: 30px; font-size: 20px;" class="fa fa-briefcase text-white" ></i></a>
+                                        </div>
+                                        <a  ><h5 class="font-weight-bold text-white" ><b>SIGN UP LINK</b></h5></a>
+                                        <p class="mt-3 mb-3 text-center text-white" ><b>Use the link to create your talent profile on DevStack and. <br> get started with exploring amazing. <br> tech job opportunities globally.</b></p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6 item mb-5" >
+                                    <div style="border: 3px solid #ffbb00; border-top-color: white ; border-radius: 10px; ">
+                                        <div class="bg-warning text-center " style=" margin-top: 20px; margin-bottom: 10px; margin-left: 40%; margin-right: 50%; height: 80px; width: 80px; border-radius: 50%;">
+                                            <a type="button" ><i style="margin-top: 30px; font-size: 20px;" class="fa fa-briefcase text-white" ></i></a>
+                                        </div>
+                                        <a  ><h5 class="font-weight-bold text-white" ><b>IMPROVE YOUR SKILLS</b></h5></a>
+                                        <p class="mt-3 mb-3 text-center text-white" ><b>DevStack also offers upskilling support to all our network members. So from time to time, we help our network members to improve their skills and then help them qualify to create talent accounts on DevStack.</b></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <center style="margin-top: 20px;">
+                                <a data-toggle="modal" data-target="#tnet" class="btn btn-dark btn-lg rounded-pill text-center" >Join our talent network here.</a>
+                           </center>
+                                
+                        </div>
+                    </div>
+
+                </div>
+                
+
+            </section> -->
+
+    <!-- <section id="masterclass" style=" background-repeat: no-repeat; background-size: cover; background-image: url({% static 'assets/landing/images/bg.jpg' %});">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="http://www.DevStackschool.com/user-account-2/" class="btn btn-dark bg-dark rounded-pill" > Become an Instructor</a>
+                    </div>
+                    <div class="col-md-6 mr-30">
+                        <h3 style="font-weight: bolder; font-size: 31px;" >Explore Tech Career Programs</h3>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="dropdown show">
+                            <a class="btn btn-dark dropdown-toggle rounded-pill " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Start Learning <span class="fa fa-caret-down ml-4" ></span>
+                            </a>
+                          
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <a class="dropdown-item" href="http://www.DevStackschool.com/user-account-2/">Login</a>
+                              <a class="dropdown-item" href="http://www.DevStackschool.com/user-account-2/">Register</a>
+                              <a class="dropdown-item" href="http://www.DevStackschool.com/courses/">Explore</a>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <div style="border:4px solid transparent; border-radius:10px; height:500px; width:100% ; display: inline-flex;">
+                                <div style="height: 400px; width: 80%; background-color: white; opacity: .8; margin: 20px 10px 20px 20px ; border-radius: 10px;
+                                background-size: cover; background-repeat: no-repeat; background-position: center; background-image: url({% static 'assets/img/business.jpg' %});" >
+                                 <h4 style="font-weight: bolder; text-align: center; padding-top: 10px;" ><a class="btn btn-warning rounded-pill text-dark" href="http://www.DevStackschool.com/courses/">DevStack Masterclass</a></h4>
+                                <p style="margin-left: 10px; margin-top: 10px;" >Lorem ipsum dolor, sit amet consectetur adipisicing elit. ipsam dignissimos sequi cumque?</p>
+                            </div>
+                             <button style="margin-left:70px; height:70px; margin-top:20%; width: 20%;" class="btn btn-dark  rounded-pill" >Take masterclass</button>
+                            </div>
+                        </div>
+
+
+                      
+                        
+              
+                    </div>
+                   <center style="margin-top: 20px;">
+                        <a data-toggle="modal" data-target="#staticBackdrop" class="btn btn-dark btn-lg rounded-pill text-center" >Join Our Watchlist</a>
+                   </center>
+                        
+                   
+                </div>
+            </div>
+        </section> -->
+
+    <section id="masterclass">
+        <div class="">
+            <div class="row">
+                <div class="col-md-12 ml-5 masterhead">
+                    <h2>DevStack Masterclass</h2>
+                </div>
+
+            </div>
+            <div class="row ml-4  masterclass">
+                <div class="col-md-12 ">
+                    <div class="d1">
+                        <div class="d1-inner">
+                            <!-- <h4 style="font-weight: bolder; text-align: center; padding-top: 10px;" ><a class="btn btn-dark rounded-pill text-white" href="http://www.DevStackschool.com/courses/">Fledge Community</a></h4> -->
+                            <div class="d1-inner2">
+                                <p class="d1-p">
+                                    Explore top masterclasses to improve your tech skills with DevStack. With curated
+                                    masterclasses in high-demand skills, your career is on the bright side
+                                </p>
+                            </div>
+                        </div>
+                        <button data-toggle="modal" data-target="#staticBackdrop"
+                                class="btn btn-warning masterbtn  rounded-pill">Take Masterclass
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="masterclass2" style="background-color: #f8f8f8;">
+        <div class="">
+            <div class="row">
+                <div class="col-md-12 ml-5 masterhead">
+                    <h2>Join Fledge Tech Community</h2>
+                </div>
+
+            </div>
+
+
+            <div class="row ml-4  masterclass">
+                <div class="col-md-12 mb-3">
+                    <div class="d1">
+                        <div class="d1-inner">
+                            <!-- <h4 style="font-weight: bolder; text-align: center; padding-top: 10px;" ><a class="btn btn-dark rounded-pill text-white" href="http://www.DevStackschool.com/courses/">Fledge Community</a></h4> -->
+                            <div class="d1-inner2">
+                                <p class="d1-p">
+                                    Be part of a thriving global tech community, Fledge is a global village for
+                                    passionate tech enthusiast that are helping shape businesses. Connect, ask questions
+                                    and build valuable relationships
+
+                                </p>
+                            </div>
+                        </div>
+                        <button class="btn btn-warning masterbtn  rounded-pill">Join Community</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <!-- CONTENT -->
+    <section id="contact">
+        <div class="container">
+            <div class="heading-text heading-section text-center">
+                <h2>Contacts</h2>
+                <!-- <p></p> -->
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="text-uppercase">Request A Demo</h3>
+                    <div class="m-t-30">
+                        <form action="{% url 'home' %}" role="form" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Name</label>
+                                    <input type="text" aria-required="true" name="name" class="form-control name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Email</label>
+                                    <input type="email" aria-required="true" required name="email"
+                                           class="form-control email">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Company Name</label>
+                                    <input type="text" aria-required="true" name="startup_name"
+                                           class="form-control name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Location</label>
+                                    <input type="text" aria-required="true" required name="location"
+                                           class="form-control email">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label for="subject">Profession</label>
+                                    <input type="text" name="profession" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">How do you want to engage with DevStack?</label>
+                                <select name="engagement" id="" class="form-control">
+                                    <option value="0">select your option</option>
+                                    <option value="talent">As a talent</option>
+                                    <option value="start-up">As a start-up</option>
+                                    <option value="partner">As a partner</option>
+                                    <option value="investor">As an Investor</option>
+                                </select>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="message">Attachment file<small>*</small></label>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                                <input type="file" aria-required="true" name="widget-contact-form-attachment" class="form-control required" />
+                            </div> -->
+                            <!--   <div class="form-group">
+                                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                                <div class="g-recaptcha" data-sitekey="6LddCxAUAAAAAKOg0-U6IprqOZ7vTfiMNSyQT2-M"></div>
+                            </div> -->
+                            <button style="width:100%;" class="btn btn-warning rounded-pill" type="submit"><i
+                                    class="fa fa-paper-plane"></i>&nbsp;Request Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="text-uppercase">Address & Map</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <address>
+                                <strong>74 Ally Sykes Road, Mbezi Beach.</strong><br>
+                                Ennovateventures offices<br>
+                                <abbr title="Phone">P:</abbr> +255 752 817 723
+                            </address>
+                        </div>
+                        <!-- <div class="col-lg-6">
+                            <address>
+                                <strong>Polo Office</strong><br>
+                                795 Folsom Ave, Suite 600<br>
+                                San Francisco, CA 94107<br>
+                                <abbr title="Phone">P:</h4> (123) 456-7890
+                            </address>
+                        </div> -->
+                    </div>
+                    <!-- Google Map -->
+                    <!-- Start Map -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.9478843557717!2d39.256481514905396!3d-6.776197968150284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c4d8ccb60c8cf%3A0xf1785262527a806c!2sEnnovate%20Hub!5e0!3m2!1sen!2stz!4v1626692867075!5m2!1sen!2stz"
+                            width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <!-- End Map -->
+                    <!-- end: Google Map -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"> Join our watchlist </h5>
+                    <a style="font-size: 25px; font-family: bolder;" type="button" class="close font-weight-bold"
+                       data-dismiss="modal" aria-label="Close">
+                        <span style="font-weight: 900;" aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <span class="body"></span>
+                    <form action="{% url 'watchlist' %}" role="form" method="post" id="watch">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="name">Full Name</label>
+                                <input type="text" aria-required="true" required id="name" name="name"
+                                       class="form-control name">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email">Email adress</label>
+                                <input type="email" aria-required="true" id="email" required name="email"
+                                       class="form-control email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-7">
+                                <label for="name">Profession / Working Class/ Student </label>
+                                <input type="text" aria-required="true" id="prof" required name="profession"
+                                       class="form-control name">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="email">Location</label>
+                                <input type="text" aria-required="true" id="loc" required name="location"
+                                       class="form-control email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="subject">Career Background</label>
+                                <textarea rows="5" type="text" id="career" required name="background"
+                                          class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <button id="submit" style="width:100%;" class="btn btn-warning rounded-pill" type="submit">
+                            <i class="fa fa-paper-plane"></i>&nbsp;Submit
+                            <img id="img" style="height: 30px; border-radius:20px; margin-left: 20px; display: none;"
+                                 src="{% static 'assets/img/balls.gif' %}" alt="">
+                        </button>
+                    </form>
+                </div>
+                <div style="display: none;" class="modal-footer">
+                    <button style="width: 50%; margin-right: 25%;" type="button" id="close"
+                            class="btn btn-dark rounded-pill" data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="tnet" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"> Join our Talent Network </h5>
+                    <a style="font-size: 25px; font-family: bolder;" type="button" class="close font-weight-bold"
+                       data-dismiss="modal" aria-label="Close">
+                        <span style="font-weight: 900;" aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <span class="body"></span>
+                    <form action="" role="form" method="post" id="watch">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="name">First Name</label>
+                                <input type="text" aria-required="true" required id="name" name="fname"
+                                       class="form-control name">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="name">Other Name</label>
+                                <input type="text" aria-required="true" required id="name" name="oname"
+                                       class="form-control name">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="name">Last Name</label>
+                                <input type="text" aria-required="true" required id="name" name="lname"
+                                       class="form-control name">
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="email">Email adress</label>
+                                <input type="email" aria-required="true" id="email" required name="email"
+                                       class="form-control email">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="name">LinkedIn Profile </label>
+                                <input type="text" aria-required="true" id="prof" required name="linkedin"
+                                       class="form-control name">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="email">Twitter Profile</label>
+                                <input type="text" aria-required="true" id="loc" required name="twitter"
+                                       class="form-control email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="subject">Phone Number</label>
+                                <input type="number" name="phone" id="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4>List Your Degree/certifications Below</h4>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Name of Institute</label>
+                                <input type="text" name="institute" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Course/Programme</label>
+                                <input type="text" name="institute" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Graduation Year</label>
+                                <input type="text" name="institute" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Type (Degree/Certification)</label>
+                                <input type="text" name="institute" class="form-control">
+                            </div>
+                            <center>
+                                <button class=" btn-sm btn btn-warning rounded-pill"><i class="fa fa-add-crcle"></i>Add
+                                    More
+                                </button>
+                            </center>
+                        </div>
+
+                        <div class="row">
+                            <h4>Other Projects</h4>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Name of Project</label>
+                                <input type="text" name="project_name" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Achievements</label>
+                                <input type="text" name="achievements" class="form-control">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="">Link to Projects</label>
+                                <input type="text" name="link" class="form-control">
+                            </div>
+                            <div style="text-align: center;">
+                                <button class=" btn-sm btn btn-warning rounded-pill mb-3"><i class="fa fa-add"></i>Add
+                                    More
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <h4>Contact of 2 referees that have worked with you recently </h4>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Name </label>
+                                <input type="text" name="referee_name" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Role And Organization</label>
+                                <input type="text" name="role" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Email</label>
+                                <input type="email" name="ref_email" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Phone</label>
+                                <input type="number" name="ref_phone" class="form-control">
+                            </div>
+                            <center>
+                                <button class=" btn-sm btn btn-warning rounded-pill"><i class="fa fa-plus-crcle"></i>Add
+                                    More
+                                </button>
+                            </center>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="">Attach Cv/Professional Bio </label>
+                                <input type="file" name="cv" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="">Attach Cv/Professional Bio </label>
+                                <select name="details" id="" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <button id="submit" style="width:100%;" class="btn btn-warning rounded-pill mt-3" type="submit">
+                            <i class="fa fa-paper-plane"></i>&nbsp;Submit
+                            <img id="img" style="height: 30px; border-radius:20px; margin-left: 20px; display: none;"
+                                 src="{% static 'assets/img/balls.gif' %}" alt="">
+                        </button>
+                    </form>
+                </div>
+                <div style="display: none;" class="modal-footer">
+                    <button style="width: 50%; margin-right: 25%;" type="button" id="close"
+                            class="btn btn-dark rounded-pill" data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="widget">
+                            <div class="widget-title">DevStack</div>
+                            <p class="mb-5">Crafted By Ennovateventures<br> All rights reserved. Copyright ©
+                                <script>
+                                    var CurrentYear = new Date().getFullYear()
+                                    document.write(CurrentYear)
+                                </script>
+                                .
+                            </p>
+                            <!-- <a href="https://themeforest.net/item/polo-responsive-multipurpose-html5-template/13708923" class="btn btn-inverted" target="_blank">Purchase Now</a> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="widget">
+                                    <div class="widget-title">Quick Links</div>
+                                    <ul class="list">
+                                        <li><a href="http://www.ennovateventures.co">Ennovateventures</a></li>
+                                        <li><a href="{% url 'policy' %}">Privacy Policy</a></li>
+                                        <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="widget">
+                                    <div class="widget-title">Social Medias</div>
+                                    <ul class="list">
+                                        <li><a href="https://www.instagram.com/DevStackinc/"><i
+                                                class="fab fa-instagram"></i> Instagram</a></li>
+                                        <li><a href="https://twitter.com/DevStackInc"><i class="fab fa-twitter"></i>
+                                            Twitter</a></li>
+                                        <li><a href="https://www.linkedin.com/company/DevStackinc/"><i
+                                                class="fab fa-linkedin"></i> LinkedIn</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="widget">
+                                    <div class="widget-title">Pages</div>
+                                    <ul class="list">
+                                        <li><a href="#home">Home</a></li>
+                                        <li><a href="#about">What is DevStack?</a></li>
+                                        <li><a href="#works">How it works</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-3">
+                                <div class="widget">
+                                    <div class="widget-title">Support</div>
+                                    <ul class="list">
+                                        <li><a href="#">Help Desk</a></li>
+                                        <li><a href="#">Documentation</a></li>
+                                        <li><a href="#">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="copyright-content">
+            <div class="container">
+                <div class="copyright-text text-center">&copy;
+                    <script>
+                    var CurrentYear = new Date().getFullYear()
+                    document.write(CurrentYear)
+                    </script>
+                    DevStack All Rights Reserved.<a href="https://www.ennovatehub.com" target="_blank" rel="noopener"> Ennovatehub</a> </div>
+            </div>
+        </div> -->
+    </footer>
+    <!-- end: Footer -->
+</div>
+<!-- end: Body Inner -->
+<!-- Scroll top -->
+<!-- <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a> -->
+
+<!--Plugins-->
+<script src="{% static 'assets/landing/js/plugins.js' %}"></script>
+<!--Template functions-->
+<script src="{% static 'assets/landing/js/functions.js' %}"></script>
+
+<!--Template functions-->
+<!-- <script src="{% static 'assets/landing/js/functions.js' %}"></script> -->
+<!--Google Maps files-->
+<script type='text/javascript'
+        src='//maps.googleapis.com/maps/api/js?key=AIzaSyBOksKHb9HyydVB-mcrqKUVfA_LeB79jcQ'></script>
+<script type="text/javascript" src="{% static 'assets/landing/plugins/gmap3/gmap3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/landing/plugins/gmap3/map-styles.js' %}"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+    $(document).on('submit', '#watch', function (e) {
+        e.preventDefault()
+        var url = "{% url 'watchlist' %}"
+        $.ajax({
+            method: 'post',
+            url: url,
+            data: {
+                'csrfmiddlewaretoken': '{{csrf_token}}',
+                name: $('#name').val(),
+                email: $('#email').val(),
+                prof: $('#prof').val(),
+                location: $('#loc').val(),
+                career: $('#career').val()
+            },
+            beforeSend: function () {
+                $('#img').show()
+            },
+            complete: function () {
+                $("#img").hide();
+            },
+            success: function (response) {
+                console.log(response)
+                $('.modal-title').hide()
+                $('#watch')[0].reset()
+                $('.body').css({
+                    'color': 'green',
+                    'font-weight': 'bold',
+                    'text-align': 'center'
+                }).html(response.success).show()
+                // $('.modal-footer').show()
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+
+        })
+    })
+
+
+</script>
+
+</body>
+
+</html>

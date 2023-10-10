@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Plumar | Contacts</title>
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block contents %}
+    {% include 'includes/nav.html' %}
+
+    <!-- Breadcrumb Section Start -->
+    <div class="breadcrumb-section section bg_color--5 pt-60 pt-sm-50 pt-xs-40 pb-60 pb-sm-50 pb-xs-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-breadcrumb-content">
+                        <ul class="page-breadcrumb">
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li>Contact Us</li>
+                        </ul>
+                        <h1>Contact Us</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Start -->
+
+    <!-- Contact Section Start -->
+    <div class="contact-section section bg_color--5 pb-120 pb-lg-100 pb-md-80 pb-sm-60 pb-xs-50">
+        <div class="container contact-wrapper">
+            <div class="row row-30">
+
+                <div class="col-lg-4">
+                    <!-- Map Area Start -->
+                    <div class="contact-info mb-30">
+                        <h2 class="title">Location</h2>
+                        <div class="contact-map-area">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.9478843557717!2d39.256481514905396!3d-6.776197968150284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c4d8ccb60c8cf%3A0xf1785262527a806c!2sEnnovate%20Hub!5e0!3m2!1sen!2stz!4v1626692867075!5m2!1sen!2stz"
+                                    width="100%" height="380" style="border:0;" allowfullscreen=""
+                                    loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <!-- Map Area End -->
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Contact info Start -->
+                    <div class="contact-info mb-30">
+                        <h2 class="title">Contact info</h2>
+                        <div class="contact-information">
+                            <div class="info">
+                                <span class="title">Email:</span>
+                                <span class="text">info@plumar.co</span>
+                            </div>
+                            <div class="info">
+                                <span class="title">Phone:</span>
+                                <span class="text phone">+255 752 817 723</span>
+                            </div>
+                            <div class="info">
+                                <span class="title">Address:</span>
+                                <span class="text"><small><b>74 Ally Sykes Road, Mbezi Beach</b></small></span>
+                            </div>
+                            <div class="info">
+                                <span class="title">Follow us:</span>
+                                <ul class="social-icon">
+                                    <!-- <li><a class="facebook" href="#"><i class="fab fa-facebook"></i></a></li> -->
+                                    <li><a class="youtube" href="https://www.instagram.com/plumarinc/"><i
+                                            class="fab fa-instagram"></i></a></li>
+                                    <li><a class="twitter" href="https://twitter.com/PlumarInc"><i
+                                            class="fab fa-twitter"></i></a></li>
+                                    <li><a class="linkedin" href="https://www.linkedin.com/company/plumarinc/"><i
+                                            class="fab fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Contact info End -->
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Contact info Start -->
+                    <div class="contact-info mb-30">
+                        <h2 class="title">Contact form</h2>
+                        <div class="contact-form">
+                            <form action="assets/php/contact-mail.php" id="contact-form" method="post">
+                                <p>Please send us a message by filling out the form below and we will get back with
+                                    you</p>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="single-input">
+                                            <input type="text" placeholder="Your Name *" name="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="single-input">
+                                            <input type="email" placeholder="Email *" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="single-input">
+                                            <textarea name="message" placeholder="Message"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-40">
+                                        <button class="ht-btn">Send</button>
+                                        <p class="form-messege"></p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Contact info End -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section End -->
+{% endblock contents %}

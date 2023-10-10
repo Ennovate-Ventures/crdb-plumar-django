@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Plumar | 404 Error</title>
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block contents %}
+{% include 'includes/nav.html' %}
+    <!--Error section start-->
+    <div class="error-section section bg_color--5 pt-70 pt-lg-50 pt-md-30 pt-sm-10 pt-xs-0 pb-120 pb-lg-100 pb-md-80 pb-sm-60 pb-xs-50">
+        <div class="container">
+            <div class="col-12">
+                <div class="error-404 not-found">
+                    <div class="text-404" style="background-image:url({% static 'assets/img/404.png' %});"></div>
+                    <div class="text-label-404">
+                        <h1>oops !!! 404 page not found </h1>
+                    </div>
+                    <div class="home-link">
+                        <span>We can't find the page you're locking for. You can either </span><a class="text-dark" href="{% url 'home' %}">
+                            return to the previous page, visit our home page </a><span>
+                    or follow us on our social media and shoot us a message </span>
+                    </div>
+                    <div class="search-404">
+                        <a style="font-size: 25px;" href="#"><i class="fab fa-facebook text-primary"></i></a>
+                        <a style="font-size: 25px;" href="#"><i class="fab fa-instagram ml-4 text-danger"></i></a>
+                        <a style="font-size: 25px;" href="#"><i class="fab fa-linkedin ml-4 text-primary"></i></a>
+                        <a style="font-size: 25px;" href="#"><i class="fab fa-twitter ml-4 text-primary"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Error section end-->
+{% endblock contents %}

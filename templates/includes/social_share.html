@@ -1,0 +1,15 @@
+{% load social_share %}
+
+<li class="bg-warning">
+    <a onMouseOver="this.style.background='#fcc102';" style="border-color: #fcc102;" class="text-dark"
+       href="#">
+        <i class="bi bi-share text-dark"></i>
+        <span class="text-dark">Share</span>
+    </a>
+    <ul id="social-icons" class="social-share candidate-share bg-white rounded-pill" style="width: 350px;">
+        <li class="mb-2">{% post_to_linkedin object_or_url 'btnz' %}</li>
+        <li class="mb-2">{% post_to_twitter "{{data.title}}. Check it out!" object_or_url ' Share' "bi bi-twitter badge bg-primary text-white btnz" %}</li>
+        <li class="mb-2">{% post_to_facebook object_or_url " Share" "bi bi-facebook badge bg-primary text-white btnz " %}</li>
+        <li class="mb-2">{% post_to_whatsapp object_or_url " Share" "bi bi-whatsapp badge bg-success text-white btnz" %}</li>
+    </ul>
+</li>

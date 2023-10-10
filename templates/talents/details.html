@@ -1,0 +1,504 @@
+{% extends 'base.html' %}
+{% load social_share %}
+{% load hitcount_tags %}
+{% load static %}
+
+{% block contents %}
+
+{% block title %}
+    <title>DevStack | {{ data.user.username }}</title>
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+{% include 'includes/nav.html' %}
+
+        <!-- Breadcrumb Section Start -->
+        <div class="breadcrumb-section section bg_color--5 pt-60 pt-sm-50 pt-xs-40 pb-60 pb-sm-50 pb-xs-40">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-breadcrumb-content mb-40">
+                            <ul class="page-breadcrumb">
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li><a href="{% url 'talents' %}">Talents Package</a></li>
+                                <li> {{ data.user.first_name }} {{ data.user.last_name }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <div class="candidate-head-info">
+                            <div class="candidate-logo">
+                            <img style="height: 90px; width: 90px;" src="{{ data.user.profile.image.url }}" alt="">
+                            </div>
+                            <div class="candidate-content">
+                                <h1 class="candidate-name">{{ data.user.first_name }} {{ data.user.last_name }} <i class="fas fa-check-circle"></i></h1>
+                                {% include 'includes/rating.html' %}
+                                <ul class="candidate-meta">
+                                    <li class="candidate-headline">{{data.profession}}</li>
+                                    <li class="view-candidate"><i class="lnr lnr-eye"></i>
+                                        {% get_hit_count for data %} Views
+                                    </li>
+                                    <li class="date-publish">
+                                        <i class="lnr lnr-clock"></i>
+                                        Member since: <label class="theme-color">{{ data.user.date_joined|date:"M. d, Y" }}</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="sidebar-wrapper-three">
+                            <div class="common-sidebar-widget sidebar-three mb-0 pb-0">
+                                <div class="sidebar-job-share">
+                                    <div class="job-share candidate-action">
+                                        <ul>
+                                            <!-- <li><a href="#"><i class="lnr lnr-heart"></i> <span class="text">Save </span></a></li> -->
+                                            {% include 'includes/social_share.html' %}
+                                            <!-- <li><a style="border-color: #000;" href="#"><i class="lnr lnr-warning text-warning"></i> <span class="text-warning">Report </span></a></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb Section Start -->
+
+        <!-- Job Details Section Start -->
+        <div class="job-details-section section pt-120 pt-lg-100 pt-md-80 pt-sm-50 pt-xs-40 pb-120 pb-lg-100 pb-md-80 pb-sm-60 pb-xs-50">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 order-lg-2 order-2 mt-sm-60 mt-xs-50">
+                        <div class="sidebar-wrapper-three">
+                            <div class="common-sidebar-widget sidebar-three">
+                                <h2 class="sidebar-title">Candidate Information</h2>
+                                <div class="sidebar-meta">
+                                    <div class="row no-gutters">
+
+                                        <div class="col-lg-12">
+                                            <!-- Single Meta Field Start -->
+                                            <div class="single-meta-field">
+                                                <div class="field-label">
+                                                    <i class="lnr lnr-tag  text-warning"></i>
+                                                    <span>Category </span>
+                                                </div>
+                                                <div class="field-value text-dark">{{ data.category }}</div>
+                                            </div>
+                                            <!-- Single Meta Field Start -->
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <!-- Single Meta Field Start -->
+                                            <div class="single-meta-field">
+                                                <div class="field-label">
+                                                    <i class="lnr lnr-graduation-hat  text-warning"></i>
+                                                    <span>Experience </span>
+                                                </div>
+                                                <div class="field-value text-dark"><a class="text-dark" href="#">{{ data.years_of_experience }}</a></div>
+                                            </div>
+                                            <!-- Single Meta Field Start -->
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <!-- Single Meta Field Start -->
+                                            <div class="single-meta-field">
+                                                <div class="field-label">
+                                                    <i class="lnr lnr-gift text-warning "></i>
+                                                    <span>Date of Birth </span>
+                                                </div>
+                                                <div class="field-value text-dark">{{ data.dob|date:"M. d, Y" }}</div>
+                                            </div>
+                                            <!-- Single Meta Field Start -->
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <!-- Single Meta Field Start -->
+                                            <div class="single-meta-field">
+                                                <div class="field-label">
+                                                    <i class="lnr lnr-users text-warning"></i>
+                                                    <span>Gender </span>
+                                                </div>
+                                                <div class="field-value text-dark"><a class="text-dark" href="#">{{data.gender}}</a></div>
+                                            </div>
+                                            <!-- Single Meta Field Start -->
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <!-- Single Meta Field Start -->
+                                            <!-- <div class="single-meta-field">
+                                                <div class="field-label">
+                                                    <i class="lnr lnr-diamond"></i>
+                                                    <span>Marital status </span>
+                                                </div>
+                                                <div class="field-value">Alone</div>
+                                            </div> -->
+                                            <!-- Single Meta Field Start -->
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <!-- Single Meta Field Start -->
+                                            <div class="single-meta-field">
+                                                <div class="field-label">
+                                                    <i class="lnr lnr-flag text-warning"></i>
+                                                    <span>Language(s)</span>
+                                                </div>
+                                                <div class="field-value text-dark">{{ data.languages }}</div>
+                                            </div>
+                                            <!-- Single Meta Field Start -->
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <!-- Single Meta Field Start -->
+                                            <div class="single-meta-field">
+                                                <div class="field-label">
+                                                    <i class="lnr lnr-layers text-warning"></i>
+                                                    <span>Salary Expectation </span>
+                                                </div>
+                                                <div class="field-value salary text-dark">{{data.salary_expectation}} / Month</div>
+                                            </div>
+                                            <!-- Single Meta Field Start -->
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <!-- Single Meta Field Start -->
+                                            <div class="single-meta-field">
+                                                <div class="field-label">
+                                                    <i class="lnr lnr-briefcase text-warning "></i>
+                                                    <span>Type </span>
+                                                </div>
+                                                <div class="field-value"><a class="fw-600 text-dark" href="#">{{ data.prefered_work_type }}</a></div>
+                                            </div>
+                                            <!-- Single Meta Field Start -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="common-sidebar-widget sidebar-three">
+                                <h2 class="sidebar-title">Contact Candidate</h2>
+                                <div class="sidebar-contact">
+                                    <div class="candidate-widget-wrap">
+                                        <div class="candidate-info">
+                                            <ul class="info-fields">
+                                                <li class="field-email">
+                                                    <span class="field-title">Email: </span>
+                                                    <a href="#">{{ data.user.email }}</a>
+                                                </li>
+                                                <li class="field-phone-number"><span class="field-title">Phone: </span>{{ data.phone }}</li>
+                                                <li class="field-website theme-color">
+                                                    <span class="field-title">Website: </span>
+                                                    <a href="#"></a>
+                                                </li>
+                                                <li class="field-location"><span class="field-title">Location: </span>{{ data.location }}</li>
+                                                <li class="field-social">
+                                                    <span class="field-title">Social profiles: </span>
+                                                    <div class="social-all">
+                                                        <a class="facebook" href="#"><i class="fab fa-facebook"></i></a>
+                                                        <a class="twitter" href="#"><i class="fab fa-twitter"></i></a>
+                                                        <a class="linkedin" href="{{data.linkedIn}}"><i class="fab fa-linkedin"></i></a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="candidate-contact-form">
+                                            <h3 class="title">Contact Form</h3>
+                                            <p class="form-description">Send messages directly to candidate. Your email will be shown to the recipient. </p>
+                                            <div class="contact-form-area">
+                                                <form action="assets/php/contact-mail.php" id="contact-form" method="post">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="single-input">
+                                                                <input type="text" placeholder="Your Name *" name="name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="single-input">
+                                                                <input type="email" placeholder="Email *" name="email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="single-input">
+                                                                <textarea name="message" placeholder="Message"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mb-40"><button class="ht-btn">Send</button></div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="common-sidebar-widget sidebar-three">
+                                <h2 class="sidebar-title">Similar Candidates</h2>
+                                <div class="sidebar-job">
+                                    <div class="row">
+                                        {% for data in talents %}
+                                        <div class="col-lg-12">
+                                            <!-- Single Job Start  -->
+                                            <div class="single-job style-two">
+                                                <div class="info-top">
+                                                    <div class="job-image candidates-image-two">
+                                                        <a href="{% url 'talent_details' data.slug %}">
+                                                            <img style="height: 40px; width: 40px;" src="{{ data.user.profile.image.url }}" alt="logo">
+                                                        </a>
+                                                    </div>
+                                                    <div class="job-info">
+                                                        <div class="job-info-inner">
+                                                            <div class="job-info-top">
+                                                                <div class="title-name">
+                                                                    <h5 class="job-title">
+                                                                        <a href="{% url 'talent_details' data.slug %}">
+                                                                            {{ data.user.first_name }} {{ data.user.last_name }}
+                                                                        </a>
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                            <div class="job-meta-three flex-wrap">
+                                                                <div class="field-profession"><i class="lnr lnr-briefcase theme-color"></i>{{ data.profession }}</div>
+                                                                <div class="field-hour-rate"><i class="lnr lnr-layers"></i>
+                                                                    <span class="label">Salary</span>{{ data.salary_expectation }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Single Job End -->
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 order-lg-1 order-1 pr-55 pr-md-15 pr-sm-15 pr-xs-15">
+
+                        <div class="candidate-main-content">
+
+                            <div class="field-description">
+                                <h3>Profile</h3>
+                                <p>{{ data.about }}</p>
+                            </div>
+
+                            <div class="field-experience">
+                                <h3>Work Experience</h3>
+
+                                <div class="experience-wrap">
+                                    {% for data in data.get_experience %}
+                                    <div class="experience-item">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4">
+                                                <div class="content-left">
+                                                    <h5 class="company-name theme-color">{{ data.company_name }}</h5>
+                                                    <span class="date">{{data.start_date|date:'m/Y'}} - 
+                                                        {% if data.finish_date %}
+                                                            {{data.finish_date|date:'m/Y'}}
+                                                        {% elif data.still_working == 'Yes' %}
+                                                            Present
+                                                        {% elif data.still_working == 'No' and data.finish_date == None %}
+                                                           <small>End Date Not Added</small>
+                                                        {% else %}
+                                                        {{data.finish_date|date:'m/Y'}}
+                                                        {% endif %}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8">
+                                                <div class="content-right">
+                                                    <h5 class="position-company bottom">{{ data.position }}</h5>
+                                                    <p>{{ data.details }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="field-education">
+                                <h3>Education</h3>
+                                <div class="education-wrap">
+                                    {% for data in data.get_education %}
+                                    <div class="education-item">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4">
+                                                <div class="content-left">
+                                                    <h5 class="speciality-school theme-color">{{ data.speciality }}</h5>
+                                                    <span class="date">{{data.start_date|date:'m/Y'}} – {{data.end_date|date:'m/Y'}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8">
+                                                <div class="content-right">
+                                                    <h5 class="school-name bottom">{{ data.school_name }}</h5>
+                                                    <p>{{ data.details }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="field-award">
+                                <h3>Awards</h3>
+                                <div class="award-wrap">
+                                    {% for data in data.get_award %}
+                                    <div class="award-item">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4">
+                                                <div class="content-left">
+                                                    <h5 class="speciality-school theme-color">{{ data.name }}</h5>
+                                                    <span class="date">{{data.awarded_on|date:"Y"}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8">
+                                                <div class="content-right">
+                                                    <p>{{ data.details }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="field-skills">
+                                <h3>Skills</h3>
+                                <ul class="skill-tag">
+                                    {% for data in data.get_skills %}
+                                    <li><a href="#">{{ data.skill }}</a></li>
+                                    {% endfor%}
+                                </ul>
+                            </div>
+                            <!-- <div class="field-portfolio">
+                                <h3>Portfolio</h3>
+                                <ul class="portfolio-list">
+                                    <li><a href="#"><img src="assets/images/portfolio/portfolio1.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="assets/images/portfolio/portfolio2.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="assets/images/portfolio/portfolio3.jpg" alt=""></a></li>
+                                </ul>
+                            </div> -->
+                            {% if request.user.profile.user_type == 'startup' %}
+                            <div class="mb-3">
+                                <button class="btn btn-warning font-weight-bold " data-bs-target="#rate" data-bs-toggle="modal" >
+                                    Review A Talent
+                                </button>
+                            </div>
+                            {% endif %}
+                            <div class="review-area">
+                               {% for data in rating|slice:'2'  %}
+                                <div class="review-container">
+                                    <h3 class="title">Latest Reviews</h3>
+                                    <div class="review-content">
+                                        <div class="review-avatar">
+                                            <img src="{{ data.rating_by.profile.image.url }}" alt="">
+                                        </div>
+                                        <div class="review-details">
+                                            <div class="review-title">
+                                                <h3 class="title">{{ data.rating_by.username }}</h3>
+                                                <div class="rate-content">       
+                                                    <div class="star">
+                                                        {% include 'includes/rating_value.html'%}
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="meta">
+                                                <ul>
+                                                    <!-- <li>
+                                                        <span class="review-by">By: </span>
+                                                        <span class="review-name theme-color">Employer Emplyer </span>
+                                                    </li> -->
+                                                    <li>
+                                                        <i class="lnr lnr-clock"></i>
+                                                        <span>{{ data.rating_date|timesince }} ago</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="review-des">
+                                                <p>{{data.comments}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Job Details Section End -->
+    </div>
+
+
+
+    <div class="modal fade" id="rate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Review A Talent</h5>
+              <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#10006;</a>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'rate' data.slug %}" method="POST" class="form-group" >
+                    {% csrf_token %}
+                      <div class="form-group">
+                        <fieldset class="rating">
+                            <legend>Select Stars</legend>
+                          
+                            <input id="demo-1" type="radio" name="ratings" value="1"> 
+                            <label for="demo-1">1 star</label>
+                            <input id="demo-2" type="radio" name="ratings" value="2">
+                            <label for="demo-2">2 stars</label>
+                            <input id="demo-3" type="radio" name="ratings" value="3">
+                            <label for="demo-3">3 stars</label>
+                            <input id="demo-4" type="radio" name="ratings" value="4">
+                            <label for="demo-4">4 stars</label>
+                            <input id="demo-5" type="radio" name="ratings" value="5">
+                            <label for="demo-5">5 stars</label>
+                            
+                            <div class="stars">
+                                <label for="demo-1" aria-label="1 star" title="1 star"></label>
+                                <label for="demo-2" aria-label="2 stars" title="2 stars"></label>
+                                <label for="demo-3" aria-label="3 stars" title="3 stars"></label>
+                                <label for="demo-4" aria-label="4 stars" title="4 stars"></label>
+                                <label for="demo-5" aria-label="5 stars" title="5 stars"></label>   
+                            </div>
+                            
+                        </fieldset>
+                      </div>
+                      
+                      <input type="hidden" value="{{data.id}}" name="rating_for">
+                  
+                      <div class="form-group">
+                        <label for="">Comments</label>
+                        <textarea class="form-control" name="comments" id="" cols="20" rows="5"></textarea>
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <button  style="width: 100%;" type="submit" class="btn btn-warning">Submit You Review</button>
+                      </div>
+                  </form>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+
+
+
+    
+      
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" ></script>
+
+    {% endblock contents %}

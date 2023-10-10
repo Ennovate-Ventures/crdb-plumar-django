@@ -1,0 +1,63 @@
+{% if rates < 1 %}
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+{% elif rates >= 1.5 and rates < 1.9 %}
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star-half"></i>
+    <i class="  bi bi-star"></i>
+    <i class="  fr fa-star"></i>
+    <i class="bi bi-star"></i>
+{% elif rates < 2 %}
+    <i class=" text-warning fa fa-star"></i>
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+{% elif rates >= 2.5 and rates < 2.9 %}
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star-half"></i>
+    <i class="fa fa-star"></i>
+    <i class="fa fa-star"></i>
+{% elif rates < 3 %}
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+{% elif rates >= 3.5 and rates < 3.9 %}
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class="text-warning fa fa-star-half"></i>
+    <i class="bi bi-star"></i>
+{% elif rates < 4 %}
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class="bi bi-star"></i>
+    <i class="bi bi-star"></i>
+{% elif rates >= 4.5 and rates < 4.9 %}
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class="text-info fa fa-star-half"></i>
+
+{% elif rates < 5 %}
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class="bi bi-star"></i>
+{% elif rates >= 5 %}
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+    <i class=" text-warning fa fa-star"></i>
+{% endif %}
+<span class="ml-2 mr-2 ">{{ rates }} Rating </span>

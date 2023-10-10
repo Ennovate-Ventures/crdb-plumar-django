@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>DevStack | Talent Dashboard</title>
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block contents %}
+    {% include 'includes/nav.html' %}
+    <!-- Dashboard Content Section Start -->
+    <div class="dashboard-content-section section bg_color--5">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-3">
+                    {% include 'talent_dash/includes/sidebar.html' %}
+                </div>
+                <div class="col-xl-10 col-lg-9">
+                    <div class="dashboard-main-inner">
+                        <div class="row">
+                            {% if not request.user.talent_set.first.qualified %}
+                                <div style="width: 100%; color: #FFF" class="alert alert-success bg-danger"><i
+                                        class="bi bi-check-circle"></i>
+                                    Complete quiz to be able to match opportunities. <a href="{% url "quizzes" %}">Click here</a>
+                                </div>
+                            {% endif %}
+                            {% if not request.user.profile.completed %}
+                                <div style="width: 100%; color: #FFF" class="alert alert-success bg-info"><i
+                                        class="bi bi-check-circle"></i>
+                                    Complete your profile <a style="color: #106f47" href="{% url "profile" %}">Click here</a>
+                                </div>
+                            {% endif %}
+                            <div class="col-4">
+                                <div class="page-breadcrumb-content mb-40">
+                                    <h1>Dashboard</h1>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="">
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            {% if message.tags == 'success' %}
+                                                <div id="noto" class="alert alert-success bg-success"><i
+                                                        class="bi bi-check-circle"></i>
+                                                    {{ message }}
+                                                </div>
+                                            {% endif %}
+                                            {% if message.tags == 'error' %}
+                                                <div id="noto"
+                                                     class="alert alert-danger bg-danger alert-dismissible fade show ">
+                                                    <span class="text-white">{{ message }}</span>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-overview">
+                            <div class="row">
+                                <div class="col-xl-8 col-12">
+                                    <div class="submited-applications mb-50">
+                                        <div class="applications-heading">
+                                            <h3>Already Matched</h3>
+                                        </div>
+                                        <div class="applications-main-block">
+                                            <div class="applications-table">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="width-20">Matched opportunity</th>
+                                                        <th class="width-15">Employer</th>
+                                                        <th class="width-12">Status</th>
+                                                        <th class="width-30 text-center">Applied Date</th>
+                                                        <th class="width-23 text-center">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for data in match %}
+                                                        <tr class="application-item">
+                                                            <td class="application-job">
+                                                                {% for data in data.opportunity.all %}
+                                                                    <h3>
+                                                                        <a href="{% url 'opp_details' data.id %}">{{ data.title }}</a>
+                                                                    </h3>
+                                                                {% endfor %}
+                                                            </td>
+
+                                                            <td class="application-employer">
+                                                                <a class="dotted"
+                                                                   href="#">{{ data.startup.username.title }}</a>
+                                                            </td>
+
+                                                            <td class="status">
+                                                                <span class="pending">{{ data.status.title }}</span>
+                                                            </td>
+
+                                                            <td class="application-created text-xl-center ">
+                                                                <span> {{ data.matched_on|date:"M, d Y" }} </span>
+                                                            </td>
+
+                                                            <td class="view-application text-xl-center">
+                                                                <a data-bs-target="#delete{{ data.id }}"
+                                                                   data-bs-toggle="modal" style="font-size: 20px;"
+                                                                   class="view-application"><i
+                                                                        class="lnr lnr-trash text-dark"></i></a>
+
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="application-pagination mb-30">
+                                                <div class="row">
+                                                    <div class="col-12 ml-10">
+                                                        <nav aria-label="Page navigation example">
+                                                            {% if match.has_other_pages %}
+                                                                <ul class="pagination">
+                                                                    {% if match.has_previous %}
+                                                                        <li class="page-item">
+                                                                            <a class="page-link text-dark"
+                                                                               href="?page={{ match.previous_page_number }}"
+                                                                               aria-label="Previous">
+                                                                                <span aria-hidden="true">&laquo;</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    {% else %}
+                                                                        <li class="page-item disabled text-center"></li>
+                                                                    {% endif %}
+
+                                                                    {% for i in match.paginator.page_range %}
+                                                                        {% if match.number == i %}
+                                                                            <li class="page-item "><a
+                                                                                    class="page-link bg-warning text-dark"
+                                                                                    href="?page={{ i }}">{{ i }}</a>
+                                                                            </li>
+                                                                        {% else %}
+                                                                            <li class="page-item"><a
+                                                                                    class="page-link text-dark"
+                                                                                    href="?page={{ i }}">{{ i }}</a>
+                                                                            </li>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+
+                                                                    {% if match.has_next %}
+                                                                        <li class="page-item">
+                                                                            <a class="page-link text-dark"
+                                                                               href="?page={{ match.next_page_number }}"
+                                                                               aria-label="Next">
+                                                                                <span aria-hidden="true">&raquo;</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    {% else %}
+                                                                        <li class="page-item disabled text-center"></li>
+                                                                    {% endif %}
+                                                                </ul>
+                                                            {% endif %}
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-12">
+                                    <div class="notifications-applications mb-20 mb-sm-80 mb-xs-80">
+                                        <div class="notifications-heading">
+                                            <h3>Notifications</h3>
+                                        </div>
+                                        <div class="notifications-main-block">
+                                            <div class="notification-listing">
+                                                <div class="empty">
+                                                    <h3>There are no notifications</h3>
+                                                    <p>Your latest notifications will be displayed here</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard Content Section End -->
+    </div>
+
+
+    {% for data in match %}
+        <div class="modal fade" id="delete{{ data.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Delete A match</h5>
+                        <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#10006;</a>
+                    </div>
+                    <div class="modal-body">
+                <span class="text-danger font-weight-bold">
+                    Are you sure you want to delete this match?
+                </span>
+                    </div>
+                    <div class="ml-4 mt-3 mb-20">
+                        <a href="{% url 'delete_match' data.id %}" class="btn btn-danger text-white">Delete</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+        <script>
+            $('#noto').delay(5000).fadeOut('slow');
+        </script>
+
+    {% endfor %}
+
+
+
+{% endblock contents %}
+
+
+{% block footer %}
+{% endblock footer %}

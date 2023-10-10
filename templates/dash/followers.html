@@ -1,0 +1,141 @@
+{% extends 'dash/main.html' %}
+
+{% load static %}
+
+{% block contents %}
+
+<div class="pcoded-inner-content">
+    <!-- Main-body start -->
+    <div class="main-body">
+        <div class="page-wrapper">
+            <!-- Page-body start -->
+            <div class="page-body">
+              <div class="row">
+                  <div class="col-md-7">
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <h5>Followers <span class="badge badge-pill badge-warning">{{ followers.count}}</span></h5>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                    <li><i class="fa fa-trash close-card"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="table-responsive">
+                                <table class="table table-hover m-b-0" >
+                                    <thead  >
+                                        <th class="font-weight-bold" >Name</th>
+                                        <th class="font-weight-bold">Registered As</th>
+                                        <th class="font-weight-bold" >Rating Average</th>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in follows %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-inline-block align-middle">
+                                                    <img src="{{ data.profile.image.url }}" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                    <div class="d-inline-block">
+                                                        <h6>
+                                                            {% if data.profile.user_type == 'talent' %}
+                                                            {% for data in data.talent_set.all %}
+                                                            <a href="{% url 'talent_details' data.slug %}" >
+                                                                {% endfor %}
+                                                                {% if data.first_name and data.last_name %}
+                                                                    {{ data.first_name }} {{ data.last_name }}
+                                                                {% else %}
+                                                                    {{data.username}}
+                                                                {% endif %}
+                                                            </a>
+                                                            {% elif data.profile.user_type == 'startup' %}
+                                                                {% for data in data.startup_set.all %}
+                                                                    <a href="{% url 'startup_details' data.id %}" >
+                                                                {% endfor %}
+                                                                {% if data.first_name and data.last_name %}
+                                                                    {{ data.first_name }} {{ data.last_name }}
+                                                                {% else %}
+                                                                    {{data.username}}
+                                                                {% endif %}
+                                                                    </a>
+                                                            {% endif %}
+                                                        </h6>
+                                                        <p class="text-muted m-b-0">
+                                                            {% if data.profile.user_type == 'talent' %}
+                                                            {% for data in data.talent_set.all %}
+                                                                {{data.profession}}
+                                                            {% endfor %}
+                                                        {% elif  data.profile.user_type == 'startup' %}
+                                                            {% for data in data.startup_set.all %}
+                                                                 {{ data.category }}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{data.profile.user_type|capfirst}}</td>
+                                            {% if data.profile.user_type == 'talent' %}
+                                                {% for data in data.talent_set.all %}
+                                                    <td> {% include 'includes/rating_for_list_view.html' %}</td>
+                                                {% endfor %}
+                                            {% elif  data.profile.user_type == 'startup' %}
+                                                {% for data in data.startup_set.all %}
+                                                    <td> {% include 'includes/rating_for_list_view.html' %}</td>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                  
+                                </table>
+                                <nav aria-label="Page navigation example" class="ml-3">
+                                    {% if follows.has_other_pages %}
+                                        <ul class="pagination">
+                                            {% if follows.has_previous %}
+                                                <li class="page-item">
+                                                    <a class="page-link text-dark" href="?page={{ follows.previous_page_number }}" aria-label="Previous">
+                                                    <span aria-hidden="true">prev</span>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                            <li class="page-item disabled text-center"></li>
+                                            {% endif %}
+            
+                                            {% for i in follows.paginator.page_range %}
+                                                {% if follows.number == i %}
+                                                    <li class="page-item "><a class="page-link bg-warning text-dark" href="?page={{i}}">{{ i }}</a></li>
+                                                {% else %}
+                                                    <li class="page-item"><a class="page-link text-dark" href="?page={{i}}">{{ i }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+            
+                                            {% if follows.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link text-dark" href="?page={{ follows.next_page_number }}" aria-label="Next">
+                                                    <span aria-hidden="true">Next</span>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                            <li class="page-item disabled text-center"></li>
+                                            {% endif %}
+                                        </ul>
+                                    {% endif %}
+                                  </nav>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+                   
+            </div>
+          
+        </div>
+    </div>
+        <!-- Page-body end -->
+</div>
+<div id="styleSelector"></div>  
+{% endblock contents %}

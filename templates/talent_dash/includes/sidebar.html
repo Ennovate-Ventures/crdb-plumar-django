@@ -1,0 +1,56 @@
+<div class="dashboard-sidebar">
+    <div class="dashboard-menu">
+        <ul class="nav" style="margin-bottom: 0; margin-top: 0;">
+            <li style="margin-bottom: 0; margin-top: 0;">
+                <h3 class="font-weight-bolder text-dark">{{ request.user.username }}</h3>
+                <ul>
+                    <li><a class="font-weight-bold" href="{% url 'talent_dash' %}"><i class="lnr lnr-chart-bars"></i>
+                        Dashboard </a></li>
+{#                    <li><a class="font-weight-bold" href="{% url 'user_message' %}"><i class="lnr lnr-bubble"></i>#}
+{#                        Messages </a></li>#}
+                    <li><a class="font-weight-bold" href="{% url 'reviews' %}"><i class="lnr lnr-star"></i> Reviews </a>
+                    </li>
+                    <li><a class="font-weight-bold" href="{% url 'quizzes' %}"><i class="lnr lnr-question-circle"></i>
+                        Quiz </a>
+                    </li>
+                </ul>
+            </li>
+            <li style="margin-bottom: 0; margin-top: 0;">
+                <h3 style="margin-bottom: -10px; margin-top: 0;">Jobs</h3>
+                <ul>
+                    <li><a class="font-weight-bold" href="{% url 'alerts' %}"><i class="lnr lnr-envelope"></i> Job
+                        Alerts </a></li>
+                    <li><a class="font-weight-bold" href="{% url 'bookmarks' %}"><i class="lnr lnr-bookmark"></i>
+                        Bookmarks </a></li>
+                    <li><a class="font-weight-bold" href="{% url 'talent_zoom' %}"><i class="lnr lnr-camera-video"></i>
+                    Zoom </a></li>
+                </ul>
+            </li>
+            <li style="margin-bottom:0px; margin-top: 0;">
+                <h3 style="margin-bottom: -10px; margin-top: 0;">Account</h3>
+                <ul>
+                    <li><a class="font-weight-bold" href="{% url 'profile' %}"><i class="lnr lnr-user"></i> Profile </a>
+                    </li>
+                    <li><a class="font-weight-bold" href="{% url 'experience' %}"><i class="lnr lnr-briefcase"></i>
+                        Experience </a></li>
+                    <li><a class="font-weight-bold" href="{% url 'education' %}"><i class="lnr lnr-graduation-hat"></i>
+                        Education</a></li>
+                    <li><a class="font-weight-bold" href="{% url 'skills' %}"><i class="lnr lnr-user"></i> Skills </a>
+                    </li>
+                    <li><a class="font-weight-bold" href="{% url 'cv_preview' %}"><i class="lnr lnr-file-empty"></i> CV
+                        Preview
+                    </a>
+                    </li>
+                    <li><a class="font-weight-bold" href="{% url 'logout' %}"><i class="lnr lnr-exit-up"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+
+
+
+

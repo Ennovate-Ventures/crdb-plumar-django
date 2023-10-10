@@ -1,0 +1,260 @@
+{% extends 'dash/main.html' %}
+
+{% load static %}
+
+{% block contents %}
+    <style>
+        details > summary {
+            cursor: pointer;
+            list-style: none;
+        }
+
+    </style>
+    <!-- Page-header end -->
+    <div class="pcoded-inner-content">
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-body start -->
+                <div class="page-body">
+                    <div class="row">
+                        <!--  project and team member start -->
+                        <div class="col-xl-9 col-md-12">
+                            <div style="width: 50%;" class="text-center">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.tags == 'success' %}
+                                            <div id="noto" class="alert alert-success bg-success"><i
+                                                    class="bi bi-check-circle"></i>
+                                                <span class="font-weight-bold text-white "> {{ message }}</span>
+                                            </div>
+                                        {% endif %}
+                                        {% if message.tags == 'error' %}
+                                            <div id="noto"
+                                                 class="alert alert-danger bg-danger alert-dismissible fade show ">
+                                                <span class="text-white font-weight-bold">{{ message }}</span>
+                                            </div>
+                                        {% endif %}
+                                        {% if message.tags == 'info' %}
+                                            <div id="noto"
+                                                 class="alert alert-info bg-info alert-dismissible fade show ">
+                                                <span class="text-white font-weight-bold">{{ message }}</span>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Talent Matching List</h5>
+                                    <div class="text-center">
+                                        <form method="get">
+                                            <select onchange="this.form.submit()" name="q" class="form-control">
+                                                <option value="0">Filter by Opportunity</option>
+                                                {% for data in opportunities %}
+                                                    <option value="{{ data.title }}">{{ data.title }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </form>
+                                    </div>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                            <!-- <li><i class="fa fa-trash close-card"></i></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Matched For</th>
+                                                <th>Matched On</th>
+                                                <th>Experience</th>
+                                                {#                                                <th>Rating Average</th>#}
+                                                <th class="text-center"> Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for data in match %}
+                                                <tr>
+                                                    <td style="width: 190px">
+                                                        <div class="d-inline-block align-middle">
+                                                            <img src="{{ data.user.profile.image.url }}"
+                                                                 alt="user image"
+                                                                 class="img-radius img-40 align-top m-r-15">
+                                                            <div class="d-inline-block">
+                                                                <h6>
+                                                                    {% if data.user.first_name and data.user.last_name %}
+                                                                        {{ data.user.first_name }}
+                                                                        {{ data.user.last_name }}
+                                                                        <i class="fa fa-check-circle text-success"></i>
+                                                                    {% else %}
+                                                                        {{ data.user.username }}
+                                                                    {% endif %}
+                                                                </h6>
+                                                                <p class="text-muted m-b-0">{{ data.talent.profession }}</p>
+                                                                <p class="text-white m-b-0">
+                                                                    <span style="border-radius: 4px; padding: 1px"
+                                                                          class="badge-success">
+                                                                        {{ data.talent.profession_level.title }}
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    {% for data in data.opportunity.all %}
+                                                        <td>
+                                                            <div style="width: 150px;"><p>{{ data.title }}</p></div>
+                                                        </td>
+                                                    {% endfor %}
+                                                    <td>{{ data.matched_on|date:"M, d. y"}}</td>
+                                                    <td>{{ data.talent.years_of_experience }}</td>
+                                                    <td>
+                                                        {% if data.status == 'reviewing' %}
+                                                            <span style="font-size: 12px;"
+                                                                  class="badge badge-secondary">{{ data.status|capfirst }}</span>
+                                                        {% elif data.status == 'interviewed' %}
+                                                            <span style="font-size: 12px;"
+                                                                  class="badge badge-warning">{{ data.status|capfirst }}</span>
+                                                        {% elif data.status == 'shortlisted' %}
+                                                            <span style="font-size: 12px;"
+                                                                  class="badge badge-warning">{{ data.status|capfirst }}</span>
+                                                        {% elif data.status == 'rejected' %}
+                                                            <span style="font-size: 12px;"
+                                                                  class="badge badge-danger">{{ data.status|capfirst }}</span>
+                                                        {% elif data.status == 'offergiven' %}
+                                                            <span style="font-size: 12px;"
+                                                                  class="badge badge-success">{{ data.status|capfirst }}</span>
+                                                        {% endif %}
+
+                                                    </td>
+                                                    <td>
+                                                        <div style="display: inline-flex;">
+                                                            <a data-toggle="modal" data-target="#ats{{ data.id }}">
+                                                                <span class=" badge badge-dark">ATS</span>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {% empty %}
+                                                <td colspan="12">
+                                                    <h5 class="text-center">You don't have any matches yet..
+                                                        {% if request.GET.q %} for {{ request.GET.q }}{% endif %}</h5>
+                                                </td>
+
+                                            {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                        <nav aria-label="Page navigation example" class="ml-3">
+                                            {% if match.has_other_pages %}
+                                                <ul class="pagination">
+                                                    {% if match.has_previous %}
+                                                        <li class="page-item">
+                                                            <a class="page-link text-dark"
+                                                               href="?page={{ match.previous_page_number }}"
+                                                               aria-label="Previous">
+                                                                <span aria-hidden="true">prev</span>
+                                                            </a>
+                                                        </li>
+                                                    {% else %}
+                                                        <li class="page-item disabled text-center"></li>
+                                                    {% endif %}
+
+                                                    {% for i in match.paginator.page_range %}
+                                                        {% if match.number == i %}
+                                                            <li class="page-item "><a
+                                                                    class="page-link bg-warning text-dark"
+                                                                    href="?page={{ i }}">{{ i }}</a></li>
+                                                        {% else %}
+                                                            <li class="page-item"><a class="page-link text-dark"
+                                                                                     href="?page={{ i }}">{{ i }}</a>
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+
+                                                    {% if match.has_next %}
+                                                        <li class="page-item">
+                                                            <a class="page-link text-dark"
+                                                               href="?page={{ match.next_page_number }}"
+                                                               aria-label="Next">
+                                                                <span aria-hidden="true">Next</span>
+                                                            </a>
+                                                        </li>
+                                                    {% else %}
+                                                        <li class="page-item disabled text-center"></li>
+                                                    {% endif %}
+                                                </ul>
+                                            {% endif %}
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    <h5>Opportunities Matching Summary</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                            <!-- <li><i class="fa fa-trash close-card"></i></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% for data in opportunities %}
+                                    <div class="card-block">
+                                        <div class="align-middle ">
+                                            {% if data.logo %}
+                                                <img style="height: 50px; width: 50px;" src="{{ data.logo.url }}" alt=""
+                                                     class="img-radius img-40 align-top m-r-15">
+                                            {% else %}
+                                                <span> <i class="fas fa-briefcase"></i></span>
+                                            {% endif %}
+                                            <div class="d-inline-block">
+                                                <h6>{{ data.title }}</h6>
+                                                <p class="text-muted m-b-0 font-weight-bold">
+                                                    <span class="badge badge-warning">{{ data.matches_set.all.count }}</span>
+                                                    {% if data.matches_set.all.count == 1 %}
+                                                        <span class="ml-2">Match total currently</span>
+                                                    {% else %}
+                                                        <span class="ml-2">Matches total currently</span>
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!--  project and team member end -->
+
+
+                        {% include 'dash/includes/modals.html' %}
+
+
+                    </div>
+                </div>
+                <!-- Page-body end -->
+            </div>
+            <div id="styleSelector"></div>
+        </div>
+    </div>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $('#noto').delay(5000).fadeOut('slow');
+    </script>
+
+{% endblock contents %}

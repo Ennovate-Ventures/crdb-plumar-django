@@ -1,0 +1,172 @@
+{% load static %}
+<!--Header section start-->
+<header class="black-logo-version header-sticky sticky-white d-none d-lg-block">
+    <div class="main-header">
+        <div class="container-fluid pl-50 pl-lg-15 pl-md-15 pr-0">
+            <div class="row align-items-center no-gutters">
+
+                <!--Logo start-->
+                <div class="col-xl-2 col-lg-2 col-12">
+                    <div class="logo">
+                        <a href="{% url 'landing' %}"><img style="width: 120px;"
+                            src="{% static 'assets/landing/images/p.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <!--Logo end-->
+
+                <!--Menu start-->
+                <div class="col-xl-7 col-lg-7 col-12">
+                    <nav class="main-menu">
+                        <ul>
+                            <li><a href="{% url 'opportunity' %}">Opportunities </a></li>
+                            <li><a href="{% url 'startups' %}">Company</a></li>
+                            <li><a href="{% url 'post_project' %}">Post Project </a></li>
+                        </ul>
+                        </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--Menu end-->
+
+                <!-- Cart & Search Area Start -->
+                <div class="col-xl-3 col-lg-3 col-12 mr-40">
+                    <div class="header-btn-action d-flex justify-content-center">
+                        <!-- Example single danger button -->
+                        {% if request.user.is_authenticated %}
+                            <a onmouseover="this.style.color='#000'" class="btn btn-warning ml-3 font-weight-bold " href="{% url 'logout' %}">Logout</a>
+                        {% else %}
+                            <div class="btn-group ml-3">
+                                <a class="btn btn-warning font-weight-bold" href="{% url 'register' %}">Hire</a>
+                                <div class="dropdown-menu"></div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- Cart & Search Area End -->
+        </div>
+
+    </div>
+    </div>
+</header>
+<!--Header section end-->
+
+<!--Header Mobile section start-->
+<header class="header-mobile bg_color--2 d-block d-lg-none bg-warning">
+    <div class="header-bottom menu-right">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header-mobile-navigation d-block d-lg-none">
+                        <div class="row align-items-center">
+                            <div class="col-3 col-md-3">
+                                <div class="mobile-navigation text-right">
+                                    <div class="header-icon-wrapper">
+                                        <ul class="icon-list justify-content-start">
+                                            <li class="popup-mobile-click">
+                                                <a href="javascript:void(0)"><i class="lnr lnr-menu"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6">
+                                <div class="header-logo text-center">
+                                    <a href="{% url 'landing' %}">
+                                        <img style="width: 100px;" src="{% static 'assets/landing/images/p2.png' %}"
+                                             class="img-fluid" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-3 col-md-3">
+                                <div class="mobile-navigation text-right">
+                                    <div class="header-icon-wrapper">
+                                        <ul class="icon-list justify-content-end">
+                                            <li>
+                                                <div class="header-cart-icon">
+                                                    <a href="#" class="header-search-toggle"><i
+                                                            class="lnr lnr-magnifier"></i></a>
+                                                </div>
+                                                <div class="header-search-form">
+                                                    <form action="#">
+                                                        <input type="text" placeholder="Type and hit enter">
+                                                        <button><i class="lnr lnr-magnifier"></i></button>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+<!--Header Mobile section end-->
+
+<!-- Start Popup Menu -->
+<div class="popup-mobile-manu popup-mobile-visiable bg">
+    <div class="inner">
+        <div class="mobileheader bg-c-yellow">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img style="width: 100px;" src="{% static 'assets/landing/images/p2.png' %}" alt="Multipurpose">
+                </a>
+            </div>
+            <a class="mobile-close" href="#"></a>
+        </div>
+        <div class="menu-content">
+            <ul class="menulist object-custom-menu">
+                <li class=""><a href="{% url 'opportunity' %}"><span>Opportunities</span></a></li>
+                <li class=""><a href="{% url 'talents' %}"><span>Talents</span></a></li>
+                <li class=""><a href="{% url 'startups' %}"><span>Start-ups</span></a></li>
+                <li class=""><a href="#"><span>Blog</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Popup Menu -->
+
+<!-- Bottom Navbar Mobile Start -->
+<div class="bottom-navbar-mobile section d-block d-lg-none">
+    <nav class="bg-warning">
+        <ul class="list-actions">
+            <li>
+                <a class="toggle-btn " href="{% url 'home' %}">
+                    <span><i class="lnr lnr-home"></i></span>
+                    <span class="text">Home</span>
+                </a>
+            </li>
+            <li>
+                <a class="toggle-btn" href="{% url 'opportunity' %}">
+                    <span><i class="lnr lnr-list"></i></span>
+                    <span class="text">Opportunities</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'talents' %}">
+                    <span><i class="lnr lnr-heart"></i></span>
+                    <span class="text">Talents</span>
+                </a>
+            </li>
+            <li>
+                <a class="toggle-btn-two toggle-btn-js" href="{% url 'startups' %}">
+                    <span><i class="lnr lnr-alarm"></i></span>
+                    <span class="text">Start-ups</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'auth' %}">
+                    <span><i class="lnr lnr-user"></i></span>
+                    <span class="text">Sign In</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Bottom Navbar Mobile End -->
+

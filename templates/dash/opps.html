@@ -1,0 +1,661 @@
+{% extends 'dash/main.html' %}
+
+{% load static %}
+{% block head %}
+    <style>
+        .form-control {
+            border-radius: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block contents %}
+    <!-- Page-header end -->
+    <div class="pcoded-inner-content">
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-body start -->
+                <div class="page-body">
+                    <div class="row">
+
+                        <!--  sale analytics start -->
+                        <div class="col-xl-8 col-md-12">
+
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Opportunities <span
+                                            class="badge badge-pill badge-warning">{{ opportunities_count }}</span></h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                            <li><i class="fa fa-trash close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover m-b-0 without-header">
+                                            <thead>
+                                            <th>Title</th>
+                                            <th>Sector</th>
+                                            <th>Status</th>
+                                            <th>Published</th>
+                                            <th>Deadline</th>
+                                            <th>Actions</th>
+                                            </thead>
+                                            <tbody>
+                                            {% for data in opps %}
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-inline-block align-middle">
+                                                            <!-- <img src="{% static 'assets/dash/assets/images/avatar-4.jpg' %}" alt="user image" class="img-radius img-40 align-top m-r-15"> -->
+                                                            <div class="d-inline-block">
+                                                                <h6><a data-toggle="modal"
+                                                                       data-target="#staticBackdrop2{{ data.id }}">{{ data.title }}</a>
+                                                                </h6>
+                                                                <!-- <p class="text-muted m-b-0">Sales executive , NY</p> -->
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="f-w-700 mr-2">{{ data.sector }}</h6>
+                                                    </td>
+                                                    <td>
+                                                        {% if data.status == 'Active' %}
+                                                            <span class="badge badge-pill badge-success">{{ data.status }}</span>
+                                                        {% else %}
+                                                            <span class="badge badge-pill badge-danger">{{ data.status }}</span>
+                                                        {% endif %}
+                                                    <td>
+                                                        <h6 class="f-w-700">{{ data.date_published|date:"M,d,Y" }}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="f-w-700">{{ data.deadline|date:"M,d,Y" }}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="f-w-700">
+                                                            <a data-toggle="modal" data-target="#edit{{ data.id }}"><i
+                                                                    class="fas fa-pencil-alt"></i></a>
+                                                            <a data-toggle="modal" data-target="#delete{{ data.id }}">
+                                                                <i class="fas fa-trash ml-3"></i></a></i>
+                                                        </h6>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <nav aria-label="Page navigation example">
+                                        {% if opps.has_other_pages %}
+                                            <ul class="pagination">
+                                                {% if opps.has_previous %}
+                                                    <li class="page-item">
+                                                        <a class="page-link text-dark"
+                                                           href="?page={{ opps.previous_page_number }}"
+                                                           aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item disabled text-center"></li>
+                                                {% endif %}
+
+                                                {% for i in opps.paginator.page_range %}
+                                                    {% if opps.number == i %}
+                                                        <li class="page-item "><a
+                                                                class="page-link bg-c-yellow text-dark"
+                                                                href="?page={{ i }}">{{ i }}</a></li>
+                                                    {% else %}
+                                                        <li class="page-item"><a class="page-link text-dark"
+                                                                                 href="?page={{ i }}">{{ i }}</a></li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if opps.has_next %}
+                                                    <li class="page-item">
+                                                        <a class="page-link text-dark"
+                                                           href="?page={{ opps.next_page_number }}" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item disabled text-center"></li>
+                                                {% endif %}
+                                            </ul>
+                                        {% endif %}
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-12">
+                            <div class="row">
+                                <!-- sale card start -->
+
+                                <div class="col-md-6">
+                                    <div class="card bg-c-red total-card bg-dark">
+                                        <div class="card-block">
+                                            <div class="text-left">
+                                                <h4 class="text-warning font-weight-bold">{{ is_expired }}</h4>
+                                                <p class="m-0 text-warning font-weight-bold">Expired Opportunities</p>
+                                            </div>
+                                            <span class="label bg-c-red value-badges">{{ percent_exp }}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-c-green total-card bg-warning">
+                                        <div class="card-block">
+                                            <div class="text-left text-dark font-weight-bold">
+                                                <h4 class="text-dark font-weight-bold">{{ active }}</h4>
+                                                <p class="m-0 text-dark font-weight-bold">Active Opportunities</p>
+                                            </div>
+                                            <span class="label bg-c-green value-badges">{{ percent_active }}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card text-center order-visitor-card">
+                                        {# if package.posted_opportunity != 0 and package.verified == True #}
+                                        <a data-toggle="modal" data-target="#staticBackdrop"
+                                           style=" text-transform: uppercase; font-weight: bolder; background-color: #ffb444;"
+                                           class="btn  btn-lg text-dark ">Add An Opportunity</a>
+                                        {# elif package.posted_opportunity == 0 or package.verified == False  or package == None #}
+                                        <!-- <a data-toggle="modal" data-target="#not-paid" style=" text-transform: uppercase; font-weight: bolder; background-color: #ffb444;" class="btn  btn-lg text-dark ">Add An Opportunity</a> -->
+                                        {# endif #}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- sale card end -->
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Post An Opportunity</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card-block">
+                                    <form class="form-group" action="{% url 'opps' %}" method="POST"
+                                          enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="title">Title</label>
+                                                <input type="text" name="title" class="form-control">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="title">Deadline</label>
+                                                <input type="date" name="deadline" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="title">Category</label>
+                                                <select name="category" id="" class="form-control">
+                                                    <option value="0"> select category</option>
+                                                    <option value="full time">Full Time</option>
+                                                    <option value="remote">Remote</option>
+                                                    <option value="contractual">Contractual</option>
+                                                    <option value="internship">Internship</option>
+                                                    <option value="voluntering">Voluntering</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="title">Salary Range</label>
+                                                <select name="salary_range" id="" class="form-control">
+                                                    <option value="0"> select range</option>
+                                                    <option value="0 - 500k">0 -500k</option>
+                                                    <option value="500k - 1M">500k - 1M</option>
+                                                    <option value="1M - 3M">1M - 3M</option>
+                                                    <option value="3M - 5M">3M - 5M</option>
+                                                    <option value="5M - 8M">5M - 8M</option>
+                                                    <option value="8M And More">8M And More</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="title">Logo</label>
+                                                <input type="file" name="logo" class="form-control">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="title">Experience</label>
+                                                <input type="text" name="experience" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="title">Location</label>
+                                                <input type="text" name="location" class="form-control">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="title">Sector</label>
+                                                {{ form.sector }}
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <label class="font-weight-bold" for="title">Description</label>
+                                                <textarea class="form-control" name="description" id="default"
+                                                          cols="30"
+                                                          rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <label class="font-weight-bold" for="title">Skills Required</label>
+                                                <textarea class="form-control" name="skills_required" id="dark"
+                                                          cols="30" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <label class="font-weight-bold" for="title">Duties And
+                                                    responsibilities</label>
+                                                <textarea class="form-control" name="duties_and_responsibilities"
+                                                          id="dark2" cols="30" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <div style="width: 100%;">
+                                                <button type="submit" style="width: 80%; border-radius: 50px"
+                                                        class=" text-dark font-weight-bold btn btn-warning btn-lg rounded-pill">
+                                                    Add New Opportunity
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal -->
+                {% for data in opps %}
+                    <div class="modal fade" id="staticBackdrop2{{ data.id }}" data-backdrop="static"
+                         data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-muted font-weight-bold"
+                                        id="staticBackdropLabel">{{ data.title|capfirst }}</h5>
+                                    {% if data.status == 'Active' %}
+                                        <span class="badge badge-pill badge-success ml-3 mt-2">{{ data.status }}</span>
+                                    {% else %}
+                                        <span class="badge badge-pill badge-danger ml-3 mt-2">{{ data.status }}</span>
+                                    {% endif %}
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h4 class="text-muted font-weight-bold">Published</h4>
+                                                <span class="font-weight-bold">{{ data.date_published|date:"d, M, Y" }}</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h4 class="text-muted font-weight-bold">Deadline</h4>
+                                                <span class="font-weight-bold">{{ data.deadline|date:"d, M, Y" }}</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h4 class="text-muted font-weight-bold">Talents</h4>
+                                                <span class=" badge badge-pill badge-success font-weight-bold">
+                           {{ data.matches_set.count }} Match{{ data.matches_set.count|pluralize:"es"}}
+                        </span>
+                                            </div>
+                                            <div class="mb-3"></div>
+                                            <hr>
+                                        </div>
+                                        <div class="row ml-1 mr-1 mt-3">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <h4 class="text-muted font-weight-bold">Description</h4>
+                                                    <p>
+                                                        {{ data.description|safe }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row ml-1 mr-1 mt-3">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <h4 class="text-muted font-weight-bold">Skills Required</h4>
+                                                    {% if data.skills_required %}
+                                                        <div class="ml-4">{{ data.skills_required|safe }}</div>
+                                                    {% else %}
+                                                        <p class="text-danger">Skills Required has not been added</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row ml-2 mr-2">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <h4 class="text-muted font-weight-bold">Duties And
+                                                        Responsibilities</h4>
+                                                    {% if data.duties_and_responsibilities %}
+                                                        <div class="ml-4">
+                                                            {{ data.duties_and_responsibilities|safe }}
+                                                        </div>
+                                                    {% else %}
+                                                        <p class="text-danger">Duties And Responsibilities has not been
+                                                            added</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3"></div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-start">
+                                    <!-- <a type="button" class=" btn btn-warning text-dark font-weight-bold rounded-pill" href="#">Update Opportunity</a> -->
+                                    <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+                <!-- Modal -->
+                {% for data in opps %}
+                    <div class="modal fade" id="edit{{ data.id }}" data-backdrop="static" data-keyboard="false"
+                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-muted font-weight-bold" id="staticBackdropLabel">
+                                        Edit {{ data.title|capfirst }}</h5>
+                                    {% if data.status == 'Active' %}
+                                        <span class="badge badge-pill badge-success ml-3 mt-2">{{ data.status }}</span>
+                                    {% else %}
+                                        <span class="badge badge-pill badge-danger ml-3 mt-2">{{ data.status }}</span>
+                                    {% endif %}
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-block">
+                                        <form class="form-group" action="{% url 'edit_opportunity' data.id %}"
+                                              method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="row mt-3">
+
+                                                <div class="col-md-6">
+                                                    <label class="font-weight-bold" for="title">Title</label>
+                                                    <input type="text" name="title" value="{{ data.title }}"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="font-weight-bold" for="title">Deadline</label>
+                                                    <input type="date" name="deadline"
+                                                           value="{{ data.deadline|date:'Y-m-d' }}"
+                                                           class="form-control">
+                                                </div>
+
+
+                                                <input type="hidden" name="startup_name"
+                                                       value="{{ data.startup_name.id }}" class="form-control">
+
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div class="col-md-6">
+                                                    <label class="font-weight-bold" for="title">Category</label>
+                                                    <select name="category" id="" class="form-control">
+                                                        <option class="font-weight-bold text-success"
+                                                                value="{{ data.category }}">{{ data.category|capfirst }}</option>
+                                                        <option value="full time">Full Time</option>
+                                                        <option value="remote">Remote</option>
+                                                        <option value="remote">Remote</option>
+                                                        <option value="contractual">Contractual</option>
+                                                        <option value="internship">Internship</option>
+                                                        <option value="voluntering">Voluntering</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="font-weight-bold" for="title">Salary Range</label>
+                                                    <select name="salary_range" id="" class="form-control">
+                                                        <option class="font-weight-bold text-success"
+                                                                value="{{ data.salary_range }}">
+                                                            <b>{{ data.salary_range|capfirst }}</b></option>
+                                                        <option value="Voluntering">Voluntering</option>
+                                                        <option value="0 - 500k">0 -500k</option>
+                                                        <option value="500k - 1M">500k - 1M</option>
+                                                        <option value="1M - 3M">1M - 3M</option>
+                                                        <option value="3M - 5M">3M - 5M</option>
+                                                        <option value="5M - 8M">5M - 8M</option>
+                                                        <option value="8M And More">8M And More</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div class="col-md-6">
+                                                    <label class="font-weight-bold" for="title">Logo</label>
+                                                    <input type="file" name="logo" class="form-control">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="font-weight-bold" for="title">Experience</label>
+                                                    <input type="text" name="experience" value="{{ data.experience }}"
+                                                           class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div class="col-md-6">
+                                                    <label class="font-weight-bold" for="title">Location</label>
+                                                    <input type="text" name="location" value="{{ data.location }}"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="font-weight-bold" for="title">Sector</label>
+                                                    <input type="text" class="form-control" name="sector"
+                                                           value="{{ data.sector }}">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <label class="font-weight-bold" for="title">Description</label>
+                                                    <textarea class="form-control" name="description" id="default"
+                                                              cols="30" rows="5">{{ data.description|safe }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <label class="font-weight-bold" for="title">Skills Required</label>
+                                                    <textarea class="form-control" name="skills_required" id="dark"
+                                                              cols="30" rows="5">{{ data.skills_required }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <label class="font-weight-bold" for="title">Duties And
+                                                        responsibilities</label>
+                                                    <textarea class="form-control" name="duties_and_responsibilities"
+                                                              id="dark2" cols="30"
+                                                              rows="5">{{ data.duties_and_responsibilities }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="text-center mt-4">
+                                                <div style="width: 100%;">
+                                                    <button type="submit" style="width: 50%;"
+                                                            class=" text-dark font-weight-bold btn btn-warning btn-lg">
+                                                        Update Opportunity
+                                                    </button>
+                                                    <button type="button" style="width: 20%;"
+                                                            class="btn btn-secondary btn-lg ml-4" data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+                <!-- Modal -->
+                {% for data in opps %}
+                    <div class="modal fade" id="delete{{ data.id }}" data-backdrop="static" data-keyboard="false"
+                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-muted font-weight-bold" id="staticBackdropLabel">
+                                        Delete {{ data.title|capfirst }}</h5>
+                                    {% if data.status == 'Active' %}
+                                        <span class="badge badge-pill badge-success ml-3 mt-2">{{ data.status }}</span>
+                                    {% else %}
+                                        <span class="badge badge-pill badge-danger ml-3 mt-2">{{ data.status }}</span>
+                                    {% endif %}
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-block font-weight-bold text-danger">
+                                        Are sure you want to delete this Opportunity?
+                                    </div>
+                                    <div class="text-start mt-4">
+                                        <div style="width: 100%;">
+                                            <a href="{% url 'delete' data.id %}" style="width: 30%;"
+                                               class=" text-white font-weight-bold btn btn-danger">Delete Now</a>
+                                            <button type="button" style="width: 20%;" class="btn btn-secondary  ml-4"
+                                                    data-dismiss="modal">Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+                <div class="modal fade" id="not-paid" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-muted font-weight-bold" id="staticBackdropLabel">Pay To Post
+                                    An Opportunity</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card-block font-weight-bold text-muted">
+                                    {% if package == None %}
+                                        You have not Paid for any Package package yet <br>
+                                        Click <span class="text-dark font-weight-bolder">Continue to Payment</span>
+                                        button below to pay and start listing your packages
+                                    {% elif package.posted_opportunity == 0 %}
+                                        You latest package payment has expired <br>
+                                        Click <span class="text-dark font-weight-bolder">Continue to Payment</span>
+                                        button below to update payment and continue listing your packages
+                                    {% else %}
+                                        You have not Paid for any Package package yet <br>
+                                        Click <span class="text-dark font-weight-bolder">Continue to Payment</span>
+                                        button below to pay and start listing your packages
+                                    {% endif %}
+                                </div>
+                                <div class="text-start mt-4">
+                                    <div style="width: 100%;">
+                                        <a href="{% url 'packs' %}" style="width: 60%;"
+                                           class=" text-dark font-weight-bold btn btn-warning">Continue to Payment</a>
+                                        <button type="button" style="width: 20%;" class="btn btn-secondary  ml-4"
+                                                data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--  sale analytics end -->
+
+                <!-- Project statustic start -->
+                <!-- <div class="col-xl-12">
+                    <div class="card proj-progress-card">
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-xl-3 col-md-6">
+                                    <h6>Published Project</h6>
+                                    <h5 class="m-b-30 f-w-700">532<span class="text-c-green m-l-10">+1.69%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-c-red" style="width:25%"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <h6>Completed Task</h6>
+                                    <h5 class="m-b-30 f-w-700">4,569<span class="text-c-red m-l-10">-0.5%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-c-blue" style="width:65%"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <h6>Successfull Task</h6>
+                                    <h5 class="m-b-30 f-w-700">89%<span class="text-c-green m-l-10">+0.99%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-c-green" style="width:85%"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <h6>Ongoing Project</h6>
+                                    <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-c-yellow" style="width:45%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- Project statustic end -->
+            </div>
+        </div>
+        <!-- Page-body end -->
+    </div>
+    <div id="styleSelector"></div>
+    </div>
+    </div>
+{% endblock contents %}
