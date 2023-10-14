@@ -28,7 +28,7 @@ SECRET_KEY = 't&m_xf9-3oxel_sxfj$8*$l3v(xg@8x-or3v=y7^pxx21yoc7t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["plumar.co", "www.plumar.co", "172.105.47.46", "157.230.178.31", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["forumapi.plumarschool.com","178.79.166.194", "172.105.47.46", "157.230.178.31", "127.0.0.1", "localhost"]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://157.230.178.31',
@@ -198,7 +198,7 @@ DATABASES: Dict[str, dict] = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": 'plumar',
         "HOST": "localhost",
-        "PASSWORD": 'root',
+        "PASSWORD": 'Plumar141',
         "USER": 'postgres',
         "PORT": 5432,
     }
