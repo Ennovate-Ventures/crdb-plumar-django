@@ -26,9 +26,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't&m_xf9-3oxel_sxfj$8*$l3v(xg@8x-or3v=y7^pxx21yoc7t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["forumapi.plumarschool.com","178.79.166.194", "172.105.47.46", "157.230.178.31", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["forumapi.plumarschool.com","developers.plumarschool.com", "178.79.166.194", "127.0.0.1", "localhost"]
+
 
 CSRF_TRUSTED_ORIGINS = [
     'http://157.230.178.31',
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
     'dashboard',
     'userauth',
     'talents',
+    'posts',
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
